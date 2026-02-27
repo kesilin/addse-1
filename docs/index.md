@@ -1,6 +1,6 @@
 # addse
 
-Code for "Absorbing Discrete Diffusion for Speech Enhancement".
+Code for ["Absorbing Discrete Diffusion for Speech Enhancement"](https://arxiv.org/abs/2602.22417).
 
 ---
 
@@ -26,10 +26,10 @@ Code for "Absorbing Discrete Diffusion for Speech Enhancement".
 
 ### Training data
 
-You must first download the following datasets:
+The following datasets are used:
 
-- **Speech**: EARS, LibriSpeech, VCTK, DNS, MLS_URGENT_2025_track1
-- **Noise**: WHAM_48kHz, DEMAND, FSD50K, DNS, FMA_medium
+- **Speech**: [EARS](https://github.com/facebookresearch/ears_dataset), [LibriSpeech](https://www.openslr.org/12), [VCTK](https://datashare.ed.ac.uk/handle/10283/3443), [DNS5](https://github.com/microsoft/DNS-Challenge/blob/master/download-dns-challenge-5-headset-training.sh), [MLS_URGENT_2025_track1](https://huggingface.co/datasets/kohei0209/mls_hq_urgent_track1)
+- **Noise**: [WHAM_48kHz](http://wham.whisper.ai/), [DEMAND](https://zenodo.org/records/1227121), [FSD50K](https://zenodo.org/records/4060432), [DNS](https://github.com/microsoft/DNS-Challenge/blob/master/download-dns-challenge-5-headset-training.sh), [FMA_medium](https://github.com/mdeff/fma)
 
 Place each dataset under `data/external/`. Then run the following scripts:
 
@@ -44,19 +44,19 @@ Alternatively, update the two shell scripts to use your own speech and noise dat
 
 ### Validation data
 
-Validation data is directly streamed from HuggingFace. No need to prepare anything.
+Validation data is directly streamed from Hugging Face. No need to prepare anything.
 
 Alternatively, update the configuration files in `configs/` to use your own `litdata`-optimized validation data.
 
 ### Evaluation data
 
-You must download the Clarity speech dataset to `data/external/Clarity/`. Then run:
+Download the [Clarity speech dataset](https://salford.figshare.com/articles/dataset/Dataset_of_British_English_speech_recordings_for_psychoacoustics_and_speech_processing_research/16918180) to `data/external/Clarity/`. Then run:
 
 ```bash
 uv run addse ldopt data/external/Clarity/ data/chunks/clarity/ --num-workers 4
 ```
 
-The remaining evaluation data is directly streamed from HuggingFace.
+The remaining evaluation data is directly streamed from Hugging Face.
 
 Alternatively, update the configuration files in `configs/` to use your own `litdata`-optimized evaluation data.
 
@@ -70,7 +70,7 @@ uv run addse train configs/<model_name>.yaml
 
 Checkpoints and metrics are written to `logs/<model_name>/`.
 
-You can also use the `--wandb` option to log metrics to W&B, and the `--log_model` option to additionally upload checkpoints to W&B, after configuring a `.env` with your credentials.
+You can use the `--wandb` option to log metrics to W&B, and the `--log_model` option to additionally upload checkpoints to W&B, after configuring a `.env` with your credentials.
 
 ## Evaluation
 
@@ -88,4 +88,11 @@ Will be released soon.
 
 ## Citation
 
-Paper coming soon.
+```bibtex
+@article{gonzalez2026absorbing,
+  title={Absorbing Discrete Diffusion for Speech Enhancement},
+  author={Gonzalez, Philippe},
+  journal={arXiv preprint arXiv:2602.22417},
+  year={2026}
+}
+```

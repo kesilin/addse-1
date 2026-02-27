@@ -1,6 +1,6 @@
 # addse
 
-Code for "Absorbing Discrete Diffusion for Speech Enhancement".
+Code for ["Absorbing Discrete Diffusion for Speech Enhancement"](https://arxiv.org/abs/2602.22417).
 
 ---
 
@@ -88,4 +88,11 @@ Will be released soon.
 
 ## Citation
 
-Paper coming soon.
+```bibtex
+@article{gonzalez2026absorbing,
+  title={Absorbing Discrete Diffusion for Speech Enhancement},
+  author={Gonzalez, Philippe},
+  journal={arXiv preprint arXiv:2602.22417},
+  year={2026}
+}
+```
