@@ -2,6 +2,8 @@
 
 Code for ["Absorbing Discrete Diffusion for Speech Enhancement"](https://arxiv.org/abs/2602.22417).
 
+![addse.gif](assets/addse.gif)
+
 ---
 
 [**Documentation**](https://addse.philgzl.com/)
@@ -91,7 +93,7 @@ wget https://huggingface.co/philgzl/addse/resolve/main/nac.ckpt
 wget https://huggingface.co/philgzl/addse/resolve/main/addse-m.ckpt
 ```
 
-Example code to run inference with the neural audio codec:
+Example code to encode and decode audio with the neural audio codec:
 
 ```python
 import soundfile as sf
@@ -142,7 +144,7 @@ x_rec = lm.generator.decode(codes).squeeze(0)
 x_rec = x_rec * rms
 ```
 
-Example code to run inference with ADDSE:
+Example code to enhance speech with ADDSE:
 
 ```python
 import soundfile as sf
