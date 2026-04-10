@@ -8,9 +8,21 @@ import numpy as np
 import soundfile as sf
 import soxr
 import torch
-import utmosv2
-from discrete_speech_metrics import SpeechBERTScore as SBS
-from mel_cepstral_distance import compare_audio_arrays as mel_cepstral_distance
+
+try:
+    import utmosv2
+except ImportError:
+    utmosv2 = None
+
+try:
+    from discrete_speech_metrics import SpeechBERTScore as SBS
+except ImportError:
+    SBS = None
+
+try:
+    from mel_cepstral_distance import compare_audio_arrays as mel_cepstral_distance
+except ImportError:
+    mel_cepstral_distance = None
 from pesq import BufferTooShortError, NoUtterancesError, pesq
 from pystoi import stoi
 from torchmetrics.functional.audio import (

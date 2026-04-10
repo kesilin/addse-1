@@ -14,6 +14,7 @@ import soundfile as sf
 import soxr
 import torch
 from hydra import compose, initialize_config_dir
+from hydra.core.global_hydra import GlobalHydra
 from hydra.utils import instantiate
 from omegaconf import DictConfig
 
@@ -329,6 +330,8 @@ def load_hydra_config(path: str, overrides: list[str] | None = None) -> tuple[Di
     """Load a Hydra configuration file."""
     config_dir, config_name = os.path.split(os.path.abspath(path))
     config_name, _ = os.path.splitext(config_name)
+    if GlobalHydra.instance().is_initialized():
+        GlobalHydra.instance().clear()
     initialize_config_dir(config_dir=config_dir, version_base=None)
     return compose(config_name=config_name, overrides=overrides or []), config_name
 
