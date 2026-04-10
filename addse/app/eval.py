@@ -139,7 +139,7 @@ def eval(
 
             lm: BaseLightningModule = instantiate(cfg.lm)
             lm.to(device)
-            lm.load_state_dict(torch.load(ckpt, map_location=device)["state_dict"])
+            lm.load_state_dict(torch.load(ckpt, map_location=device)["state_dict"], strict=False)
             lm.eval()
 
             iterate_and_compute_metrics(

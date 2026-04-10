@@ -1,0 +1,109 @@
+seed: 42
+name: nac-timit800
+fs: 16000
+train_segment_length: 1.0
+val_segment_length: 5.0
+max_dynamic_range: 25.0
+num_workers: 4
+
+lm:
+  _target_: addse.lightning.NACLightningModule
+  generator:
+    _target_: addse.models.NAC
+  discriminator:
+    - _target_: addse.models.MSSTFTDiscriminator
+    - _target_: addse.models.MPDiscriminator
+  reconstruction_loss:
+    _target_: addse.losses.MSMelSpecLoss
+  adversarial_loss_weight: 1.0
+  feature_loss_weight: 1.0
+  reconstruction_loss_weight: 15.0
+  codebook_loss_weight: 1.0
+  commitment_loss_weight: 0.25
+  generator_optimizer:
+    _target_: torch.optim.Adam
+    _partial_: true
+    lr: 1.0e-4
+  discriminator_optimizer:
+    _target_: torch.optim.Adam
+    _partial_: true
+    lr: 1.0e-4
+  debug_sample: [0, 0]
+
+dm:
+  _target_: addse.lightning.DataModule
+  train_dataset:
+    _target_: addse.data.DynamicMixingDataset
+    _partial_: true
+    length: 800
+    resume: true
+    reset_rngs: false
+    speech_dataset:
+      _target_: addse.data.AudioStreamingDataset
+      input_dir: data/chunks/timit_all/
+      fs: ${fs}
+      segment_length: ${train_segment_length}
+      max_dynamic_range: ${max_dynamic_range}
+      seed: ${seed}
+    noise_dataset:
+      _target_: addse.data.AudioStreamingDataset
+      input_dir: data/chunks/noise_all/
+      fs: ${fs}
+      segment_length: ${train_segment_length}
+      max_dynamic_range: ${max_dynamic_range}
+      seed: ${seed}
+  val_dataset:
+    _target_: addse.data.DynamicMixingDataset
+    _partial_: true
+    length: 100
+    resume: false
+    reset_rngs: true
+    speech_dataset:
+      _target_: addse.data.AudioStreamingDataset
+      input_dir: data/chunks/timit_all/
+      fs: ${fs}
+      segment_length: ${val_segment_length}
+      max_dynamic_range: ${max_dynamic_range}
+      seed: ${seed}
+      shuffle: true
+    noise_dataset:
+      _target_: addse.data.AudioStreamingDataset
+      input_dir: data/chunks/noise_all/
+      fs: ${fs}
+      segment_length: ${val_segment_length}
+      max_dynamic_range: ${max_dynamic_range}
+      seed: ${seed}
+      shuffle: true
+  train_dataloader:
+    _target_: addse.data.AudioStreamingDataLoader
+    _partial_: true
+    batch_size: 16
+    num_workers: ${num_workers}
+    shuffle: true
+  val_dataloader:
+    _target_: addse.data.AudioStreamingDataLoader
+    _partial_: true
+    batch_size: 8
+    num_workers: ${num_workers}
+    shuffle: false
+
+trainer:
+  _target_: lightning.Trainer
+  limit_train_batches: 50
+  limit_val_batches: 10
+  max_epochs: 1
+  callbacks:
+    - _target_: lightning.pytorch.callbacks.ModelCheckpoint
+      monitor: val_recon_loss
+      save_top_k: 1
+      mode: min
+      filename: "{epoch:02d}-{val_recon_loss:.2f}"
+    - _target_: lightning.pytorch.callbacks.ModelCheckpoint
+      save_last: true
+    - _target_: lightning.pytorch.callbacks.TQDMProgressBar
+      refresh_rate: 1
+      leave: true
+    - _target_: addse.callbacks.TimerCallback
+    - _target_: addse.callbacks.GPUMemoryCallback
+
+eval: null

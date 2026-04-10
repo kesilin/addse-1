@@ -1,0 +1,149 @@
+name: addse-s-mydata-layered-ft
+seed: 42
+fs: 16000
+train_segment_length: 4.0
+val_segment_length: 4.0
+max_dynamic_range: 25.0
+num_workers: 4
+
+lm:
+  _target_: addse.lightning.ADDSELightningModule
+  nac_cfg: configs/nac.yaml
+  nac_ckpt: logs/nac/checkpoints/last.ckpt
+  model:
+    _target_: addse.models.ADDSERQDiT
+    input_channels: 1024
+    output_channels: 1024
+    num_codebooks: 4
+    hidden_dim: 192
+    num_layers: 12
+    num_heads: 12
+    max_seq_len: 1024
+    conditional: true
+    time_independent: true
+  num_steps: 128
+  block_size: 200
+  discrete_layered_training: true
+  discrete_front_books: 3
+  discrete_front_weight: 1.0
+  discrete_post_weight: 1.2
+  discrete_post_mask_ratio: 0.7
+  discrete_target_front_entropy: 1.2
+  discrete_target_post_entropy: 1.8
+  discrete_ce_weight: 1.0
+  optimizer:
+    _target_: torch.optim.AdamW
+    _partial_: true
+    lr: 2.0e-5
+    eps: 1.0e-7
+  debug_sample: [0, 0]
+
+dm:
+  _target_: addse.lightning.DataModule
+  train_dataset:
+    _target_: addse.data.DynamicMixingDataset
+    _partial_: true
+    length: .inf
+    resume: true
+    reset_rngs: false
+    snr_range: [0.0, 10.0]
+    rms_range: [0.0, 0.0]
+    speech_dataset:
+      _target_: addse.data.AudioStreamingDataset
+      input_dir: data/chunks/bigspeech/
+      fs: ${fs}
+      segment_length: ${train_segment_length}
+      max_dynamic_range: ${max_dynamic_range}
+      seed: ${seed}
+    noise_dataset:
+      _target_: addse.data.AudioStreamingDataset
+      input_dir: data/chunks/bignoise/
+      fs: ${fs}
+      segment_length: ${train_segment_length}
+      max_dynamic_range: ${max_dynamic_range}
+      seed: ${seed}
+  val_dataset:
+    _target_: addse.data.DynamicMixingDataset
+    _partial_: true
+    length: 80
+    resume: false
+    reset_rngs: true
+    snr_range: [0.0, 10.0]
+    rms_range: [0.0, 0.0]
+    speech_dataset:
+      _target_: addse.data.AudioStreamingDataset
+      input_dir: data/chunks/bigspeech/
+      fs: ${fs}
+      segment_length: ${val_segment_length}
+      max_dynamic_range: ${max_dynamic_range}
+      seed: ${seed}
+      shuffle: true
+    noise_dataset:
+      _target_: addse.data.AudioStreamingDataset
+      input_dir: data/chunks/bignoise/
+      fs: ${fs}
+      segment_length: ${val_segment_length}
+      max_dynamic_range: ${max_dynamic_range}
+      seed: ${seed}
+      shuffle: true
+  train_dataloader:
+    _target_: addse.data.AudioStreamingDataLoader
+    _partial_: true
+    batch_size: 8
+    num_workers: ${num_workers}
+    shuffle: true
+  val_dataloader:
+    _target_: addse.data.AudioStreamingDataLoader
+    _partial_: true
+    batch_size: 1
+    num_workers: ${num_workers}
+    shuffle: false
+
+trainer:
+  _target_: lightning.Trainer
+  accelerator: gpu
+  devices: 1
+  limit_train_batches: 120
+  limit_val_batches: 2
+  max_epochs: 1
+  gradient_clip_val: 1.0
+  precision: 16-mixed
+
+extra_callbacks:
+  - _target_: addse.callbacks.EMAWeightAveraging
+    decay: 0.999
+
+eval:
+  dsets:
+    mydata-snr0-10:
+      _target_: addse.data.DynamicMixingDataset
+      length: 100
+      resume: false
+      reset_rngs: true
+      snr_range: [0.0, 10.0]
+      rms_range: [0.0, 0.0]
+      speech_dataset:
+        _target_: addse.data.AudioStreamingDataset
+        input_dir: data/chunks/bigspeech/
+        fs: ${fs}
+        segment_length: 4.0
+        shuffle: false
+      noise_dataset:
+        _target_: addse.data.AudioStreamingDataset
+        input_dir: data/chunks/bignoise/
+        fs: ${fs}
+        segment_length: 4.0
+        shuffle: false
+  metrics:
+    sdr:
+      _target_: addse.metrics.SDRMetric
+      scale_invariant: false
+    pesq:
+      _target_: addse.metrics.PESQMetric
+      fs: ${fs}
+
+auto_eval:
+  enabled: true
+  output_db: logs/addse-s-mydata-layered-ft/auto_eval.db
+  overwrite: true
+  num_examples: 100

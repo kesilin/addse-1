@@ -1,0 +1,49 @@
+seed: 42
+fs: 16000
+
+lm:
+  _target_: addse.lightning.ADDSELightningModule
+  nac_cfg: configs/nac.yaml
+  nac_ckpt: logs/nac/checkpoints/last.ckpt
+  model:
+    _target_: addse.models.ADDSERQDiT
+    input_channels: 1024
+    output_channels: 1024
+    num_codebooks: 4
+    hidden_dim: 192
+    num_layers: 12
+    num_heads: 12
+    max_seq_len: 1024
+    conditional: true
+    time_independent: true
+  num_steps: 128
+  block_size: 200
+
+eval:
+  dsets:
+    mydata-snr0-10:
+      _target_: addse.data.DynamicMixingDataset
+      length: 1000
+      resume: false
+      reset_rngs: true
+      snr_range: [0.0, 10.0]
+      rms_range: [0.0, 0.0]
+      speech_dataset:
+        _target_: addse.data.AudioStreamingDataset
+        input_dir: data/chunks/bigspeech/
+        fs: ${fs}
+        segment_length: 4.0
+        shuffle: true
+      noise_dataset:
+        _target_: addse.data.AudioStreamingDataset
+        input_dir: data/chunks/bignoise/
+        fs: ${fs}
+        segment_length: 4.0
+        shuffle: true
+  metrics:
+    sdr:
+      _target_: addse.metrics.SDRMetric
+      scale_invariant: false
+    pesq:
+      _target_: addse.metrics.PESQMetric
+      fs: ${fs}

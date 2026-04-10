@@ -575,6 +575,14 @@ class ADDSELightningModule(BaseLightningModule, ConfigureOptimizersMixin):
         model: ADDSERQDiT,
         num_steps: int,
         block_size: int,
+        discrete_layered_training: bool = False,
+        discrete_front_books: int = 3,
+        discrete_front_weight: float = 1.0,
+        discrete_post_weight: float = 1.0,
+        discrete_post_mask_ratio: float = 1.0,
+        discrete_target_front_entropy: float = 1.2,
+        discrete_target_post_entropy: float = 1.8,
+        discrete_ce_weight: float = 1.0,
         optimizer: Callable[[Iterator[nn.Parameter]], Optimizer] = Adam,
         lr_scheduler: Mapping[str, Any] | None = None,
         val_metrics: Mapping[str, BaseMetric] | None = None,
@@ -588,6 +596,14 @@ class ADDSELightningModule(BaseLightningModule, ConfigureOptimizersMixin):
         self.model = model
         self.num_steps = num_steps
         self.block_size = block_size
+        self.discrete_layered_training = discrete_layered_training
+        self.discrete_front_books = discrete_front_books
+        self.discrete_front_weight = discrete_front_weight
+        self.discrete_post_weight = discrete_post_weight
+        self.discrete_post_mask_ratio = discrete_post_mask_ratio
+        self.discrete_target_front_entropy = discrete_target_front_entropy
+        self.discrete_target_post_entropy = discrete_target_post_entropy
+        self.discrete_ce_weight = discrete_ce_weight
         self.optimizer = optimizer
         self.lr_scheduler = lr_scheduler
         self.val_metrics = val_metrics
@@ -611,7 +627,8 @@ class ADDSELightningModule(BaseLightningModule, ConfigureOptimizersMixin):
         xy_tok, xy_q = self.nac.encode(torch.cat([x, y]), no_sum=True, domain="q")
         x_tok, y_tok = xy_tok.chunk(2)
         x_q, y_q = xy_q.chunk(2)
-        loss = {"loss": self.loss(x_q, y_q, y_tok)}
+        loss_val, loss_stats = self.loss(x_q, y_q, y_tok, return_stats=True)
+        loss = {"loss": loss_val, **loss_stats}
         if metrics or stage == "val" and self.debug_sample is not None and batch_idx == self.debug_sample[0]:
             y_hat_tok = self.solve(x_tok, x_q, self.num_steps)
             assert isinstance(y_hat_tok, Tensor)
@@ -626,7 +643,7 @@ class ADDSELightningModule(BaseLightningModule, ConfigureOptimizersMixin):
             return loss, metric_vals, debug_samples
         return loss, {}, {}
 
-    def loss(self, x_q: Tensor, y_q: Tensor, y_tok: Tensor) -> Tensor:
+    def loss(self, x_q: Tensor, y_q: Tensor, y_tok: Tensor, return_stats: bool = False) -> Tensor | tuple[Tensor, dict[str, Tensor]]:
         r"""Compute the $\lambda$-denoising cross-entropy loss.
 
         Args:
@@ -641,10 +658,72 @@ class ADDSELightningModule(BaseLightningModule, ConfigureOptimizersMixin):
         mask = torch.rand(y_tok.shape, device=y_tok.device) < lambd[:, None, None]  # (B, K, L)
         y_lambda_q = y_q.masked_fill(mask[:, None], 0)  # (B, C, K, L)
         log_score = self.log_score(y_lambda_q, x_q)  # (B, K, L, V)
-        loss = torch.zeros(y_tok.shape, device=y_tok.device, dtype=log_score.dtype)  # (B, K, L)
-        loss[mask] = torch.gather(log_score[mask], -1, y_tok[mask][:, None]).squeeze(-1)  # (N,)
-        loss = -loss.mean(dim=(-1, -2)) / lambd  # (B,)
-        return loss.mean()
+        gathered = torch.gather(log_score, -1, y_tok[..., None]).squeeze(-1)  # (B, K, L)
+        neg_loglike = -gathered
+
+        base_loss = torch.zeros(y_tok.shape, device=y_tok.device, dtype=log_score.dtype)  # (B, K, L)
+        base_loss[mask] = gathered[mask]
+        base_loss = -(base_loss.mean(dim=(-1, -2)) / lambd).mean()
+
+        probs_detached = log_score.detach().exp()
+        token_entropy = -(probs_detached * log_score.detach()).sum(dim=-1)
+        front_books = max(1, min(int(self.discrete_front_books), y_tok.shape[1]))
+        front_entropy = token_entropy[:, :front_books, :].mean()
+        post_entropy = (
+            token_entropy[:, front_books:, :].mean()
+            if y_tok.shape[1] > front_books
+            else front_entropy.new_zeros(())
+        )
+
+        total_loss = base_loss
+        post_mask_ratio_eff = torch.tensor(1.0, device=y_tok.device, dtype=log_score.dtype)
+        front_w_eff = torch.tensor(float(self.discrete_front_weight), device=y_tok.device, dtype=log_score.dtype)
+        post_w_eff = torch.tensor(float(self.discrete_post_weight), device=y_tok.device, dtype=log_score.dtype)
+        front_ce = base_loss.detach()
+        post_ce = base_loss.detach()
+
+        if self.discrete_layered_training and y_tok.shape[1] > front_books:
+            mask_front = mask[:, :front_books, :]
+            mask_post = mask[:, front_books:, :]
+
+            if self.discrete_post_mask_ratio < 1.0:
+                keep = torch.rand(mask_post.shape, device=mask_post.device) < max(0.0, min(1.0, self.discrete_post_mask_ratio))
+                mask_post = mask_post & keep
+
+            mask_front_f = mask_front.float()
+            mask_post_f = mask_post.float()
+            front_ce = (neg_loglike[:, :front_books, :] * mask_front_f).sum() / (mask_front_f.sum() + 1e-8)
+            post_ce = (neg_loglike[:, front_books:, :] * mask_post_f).sum() / (mask_post_f.sum() + 1e-8)
+
+            front_w_eff = torch.tensor(
+                float(self.discrete_front_weight) * (1.2 if float(front_entropy.detach().item()) > self.discrete_target_front_entropy else 1.0),
+                device=y_tok.device,
+                dtype=log_score.dtype,
+            )
+            post_w_eff = torch.tensor(
+                float(self.discrete_post_weight) * (1.2 if float(post_entropy.detach().item()) < self.discrete_target_post_entropy else 1.0),
+                device=y_tok.device,
+                dtype=log_score.dtype,
+            )
+            total_loss = front_w_eff * front_ce + post_w_eff * post_ce
+            post_mask_ratio_eff = mask_post_f.mean()
+
+        if self.discrete_ce_weight != 1.0:
+            total_loss = total_loss * self.discrete_ce_weight
+
+        stats = {
+            "ce_base": base_loss.detach(),
+            "discrete_front_ce": front_ce.detach(),
+            "discrete_post_ce": post_ce.detach(),
+            "discrete_front_entropy": front_entropy.detach(),
+            "discrete_post_entropy": post_entropy.detach(),
+            "discrete_front_weight_eff": front_w_eff.detach(),
+            "discrete_post_weight_eff": post_w_eff.detach(),
+            "discrete_post_mask_ratio_eff": post_mask_ratio_eff.detach(),
+        }
+        if return_stats:
+            return total_loss, stats
+        return total_loss
 
     @torch.no_grad()
     def solve(

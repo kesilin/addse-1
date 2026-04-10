@@ -6,6 +6,7 @@ import shutil
 import warnings
 from typing import Annotated, Any
 
+import torch
 import typer
 from dotenv import load_dotenv
 from hydra.utils import instantiate
@@ -27,6 +28,10 @@ def train(
     overrides: Annotated[list[str] | None, typer.Argument(help="Overrides for the config file.")] = None,
     overwrite: Annotated[bool, typer.Option(help="Whether to overwrite existing log directory.")] = False,
     resume: Annotated[bool, typer.Option(help="Whether to resume training from the last checkpoint.")] = False,
+    init_ckpt: Annotated[
+        str | None,
+        typer.Option(help="Path to pretrained checkpoint to initialize model weights before training."),
+    ] = None,
     debug: Annotated[bool, typer.Option(help="Whether to set logging level to DEBUG.")] = False,
     select: Annotated[str | None, typer.Option(help="Name of sweep configuration to train.")] = None,
     wandb: Annotated[bool, typer.Option(help="Whether to log to Weights & Biases.")] = False,
@@ -121,15 +126,18 @@ def train(
 
         with open_dict(cfg):
             cfg.trainer.setdefault("logger", default_loggers)
+            checkpoint_monitor = cfg.get("checkpoint_monitor", "val_loss")
+            checkpoint_mode = cfg.get("checkpoint_mode", "min")
+            checkpoint_filename = cfg.get("checkpoint_filename", f"{{epoch:02d}}-{{{checkpoint_monitor}:.2f}}")
             cfg.trainer.setdefault(
                 "callbacks",
                 [
                     {
                         "_target_": "lightning.pytorch.callbacks.ModelCheckpoint",
-                        "monitor": "val_loss",
+                        "monitor": checkpoint_monitor,
                         "save_top_k": 1,
-                        "mode": "min",
-                        "filename": "{epoch:02d}-{val_loss:.2f}",
+                        "mode": checkpoint_mode,
+                        "filename": checkpoint_filename,
                     },
                     {
                         "_target_": "lightning.pytorch.callbacks.ModelCheckpoint",
@@ -156,6 +164,20 @@ def train(
         seed_all(cfg.seed)
 
         lm: BaseLightningModule = instantiate(cfg.lm)
+        if init_ckpt is not None:
+            if not os.path.exists(init_ckpt):
+                raise FileNotFoundError(f"Checkpoint file does not exist: {init_ckpt}")
+            ckpt = torch.load(init_ckpt, map_location="cpu")
+            state_dict = ckpt["state_dict"] if isinstance(ckpt, dict) and "state_dict" in ckpt else ckpt
+            if not isinstance(state_dict, dict):
+                raise ValueError(f"Unsupported checkpoint format in {init_ckpt}.")
+            missing, unexpected = lm.load_state_dict(state_dict, strict=False)
+            logger.info(
+                "Initialized model from %s (missing=%d, unexpected=%d)",
+                init_ckpt,
+                len(missing),
+                len(unexpected),
+            )
         dm: DataModule = instantiate(cfg.dm)
         trainer: Trainer = instantiate(cfg.trainer)
 
@@ -184,4 +206,50 @@ def train(
 
         ckpt_callback = trainer.checkpoint_callback
         ckpt_path = None if ckpt_callback is None else getattr(ckpt_callback, "best_model_path", None)
-        trainer.test(lm, dm, None if ckpt_path == "" else ckpt_path)
+        ckpt_path = None if ckpt_path == "" else ckpt_path
+        has_test_data = getattr(dm, "test_dset", None) is not None and getattr(dm, "test_dataloader_fn", None) is not None
+        if has_test_data:
+            trainer.test(lm, dm, ckpt_path)
+        else:
+            logger.info("Skipping trainer.test because no test dataset/dataloader is configured.")
+
+        auto_eval_cfg = cfg.get("auto_eval")
+        auto_eval_enabled = bool(auto_eval_cfg) if isinstance(auto_eval_cfg, bool) else bool(auto_eval_cfg.get("enabled", False)) if auto_eval_cfg else False
+        if auto_eval_enabled:
+            from .eval import eval as eval_command
+
+            eval_overrides = overrides
+            eval_select = name if base_cfg.get("sweep") is not None else None
+            eval_output_db = os.path.join("logs", name, "auto_eval.db")
+            if isinstance(auto_eval_cfg, DictConfig):
+                eval_output_db = str(auto_eval_cfg.get("output_db", eval_output_db))
+                eval_overwrite = bool(auto_eval_cfg.get("overwrite", True))
+                eval_num_examples = auto_eval_cfg.get("num_examples")
+                eval_compute_loss = bool(auto_eval_cfg.get("compute_loss", False))
+                eval_return_nfe = bool(auto_eval_cfg.get("return_nfe", False))
+                eval_clean_input = bool(auto_eval_cfg.get("clean_input", False))
+                eval_no_metrics = bool(auto_eval_cfg.get("no_metrics", False))
+            else:
+                eval_overwrite = True
+                eval_num_examples = None
+                eval_compute_loss = False
+                eval_return_nfe = False
+                eval_clean_input = False
+                eval_no_metrics = False
+
+            if ckpt_path is None:
+                logger.warning("Skipping auto-eval because no best checkpoint was found.")
+            else:
+                eval_command(
+                    config_file,
+                    ckpt_path,
+                    overrides=eval_overrides,
+                    select=eval_select,
+                    output_db=eval_output_db,
+                    overwrite=eval_overwrite,
+                    num_examples=eval_num_examples,
+                    clean_input=eval_clean_input,
+                    return_nfe=eval_return_nfe,
+                    compute_loss=eval_compute_loss,
+                    no_metrics=eval_no_metrics,
+                )
