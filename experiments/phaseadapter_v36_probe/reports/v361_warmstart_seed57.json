@@ -1,0 +1,618 @@
+{
+  "meta": {
+    "device": "cuda",
+    "config": {
+      "seed": 57,
+      "fs": 16000,
+      "segment_length": 4.0,
+      "speech_dir": "data/chunks/bigspeech/",
+      "noise_dir": "data/chunks/bignoise/",
+      "layered_cfg": "configs/addse-s-mydata-layered-ft-pesq20.yaml",
+      "layered_ckpt": "logs/ft-pesq20-3layer/checkpoints/epoch=09-val_pesq=1.494.ckpt",
+      "phase_cnn_ckpt": "experiments/phase_branch2/weights/phase_cnn_branch2.pt",
+      "train_batch_size": 2,
+      "train_steps": 20,
+      "eval_examples": 10,
+      "solve_steps": 4,
+      "num_workers": 0,
+      "lr": 0.00012,
+      "weight_decay": 0.0001,
+      "frame_length": 512,
+      "hop_length": 256,
+      "n_fft": 512,
+      "snr_min": 0.0,
+      "snr_max": 10.0,
+      "adapter_hidden": 256,
+      "fixed_inject_indices": [
+        11,
+        9,
+        7
+      ],
+      "ce_weight": 0.35,
+      "phase_weight": 0.25,
+      "if_weight_low": 0.08,
+      "if_weight_high": 0.16,
+      "ce_gate_threshold": 8.8,
+      "phase_warmup_steps": 0,
+      "eval_every_steps": 0,
+      "acoustic_lr_scale": 1.5,
+      "skip_zero_step_eval": false,
+      "warm_start_unfreeze_nac_conv_blocks": 1,
+      "warm_start_unfreeze_nac_io": true,
+      "warm_start_unfreeze_dit_last_blocks": 2,
+      "report_json": "experiments/phaseadapter_v36_probe/reports/v361_warmstart_seed57.json",
+      "variants": [
+        {
+          "name": "temporal_adalnzero",
+          "temporal_adapter": true,
+          "adapter_scale": 0.08
+        }
+      ]
+    },
+    "note": "V3.6.1 AdaLN-Zero deep integration probe (fixed 7/9/11 + static vs temporal adapter)"
+  },
+  "rows": [
+    {
+      "variant": {
+        "name": "temporal_adalnzero",
+        "temporal_adapter": true,
+        "adapter_scale": 0.08
+      },
+      "inject_block_indices": [
+        11,
+        9,
+        7
+      ],
+      "trainable_params": 26341698,
+      "avg_step_seconds": 21.512333009995928,
+      "zero_step_baseline": {
+        "pesq": 1.0415143728256226,
+        "estoi": 0.204719463262016,
+        "sdr": -4.20149365067482,
+        "phase_rmse": 1.812892198562622,
+        "eval_examples": 10.0
+      },
+      "zero_step_adapter": {
+        "pesq": 1.0398639917373658,
+        "estoi": 0.21848845519683086,
+        "sdr": -3.897451639175415,
+        "phase_rmse": 1.8126387000083923,
+        "eval_examples": 10.0
+      },
+      "after_probe_adapter": {
+        "pesq": 1.061026406288147,
+        "estoi": 0.2567987931523886,
+        "sdr": -3.725029543042183,
+        "phase_rmse": 1.8098787665367126,
+        "eval_examples": 10.0
+      },
+      "phase_correction_gain_vs_zero_adapter": 0.0027599334716796875,
+      "zero_step_pesq_drop_vs_baseline": -0.0016503810882568803,
+      "losses": [
+        {
+          "step": 1,
+          "ce": 8.772570610046387,
+          "phase": 1.5604817867279053,
+          "if": 1.5395839214324951,
+          "phase_weight_eff": 0.25,
+          "if_weight_eff": 0.16,
+          "total": 3.7068536281585693
+        },
+        {
+          "step": 2,
+          "ce": 9.610193252563477,
+          "phase": 1.5601201057434082,
+          "if": 1.548460841178894,
+          "phase_weight_eff": 0.25,
+          "if_weight_eff": 0.08,
+          "total": 3.877474546432495
+        },
+        {
+          "step": 3,
+          "ce": 9.257475852966309,
+          "phase": 1.5649089813232422,
+          "if": 1.5493643283843994,
+          "phase_weight_eff": 0.25,
+          "if_weight_eff": 0.08,
+          "total": 3.7552928924560547
+        },
+        {
+          "step": 4,
+          "ce": 8.438902854919434,
+          "phase": 1.5596824884414673,
+          "if": 1.542306900024414,
+          "phase_weight_eff": 0.25,
+          "if_weight_eff": 0.16,
+          "total": 3.590305805206299
+        },
+        {
+          "step": 5,
+          "ce": 7.9937744140625,
+          "phase": 1.5617749691009521,
+          "if": 1.5435669422149658,
+          "phase_weight_eff": 0.25,
+          "if_weight_eff": 0.16,
+          "total": 3.4352355003356934
+        },
+        {
+          "step": 6,
+          "ce": 8.334613800048828,
+          "phase": 1.5649086236953735,
+          "if": 1.5407028198242188,
+          "phase_weight_eff": 0.25,
+          "if_weight_eff": 0.16,
+          "total": 3.554854393005371
+        },
+        {
+          "step": 7,
+          "ce": 8.615649223327637,
+          "phase": 1.5706994533538818,
+          "if": 1.5457651615142822,
+          "phase_weight_eff": 0.25,
+          "if_weight_eff": 0.16,
+          "total": 3.6554744243621826
+        },
+        {
+          "step": 8,
+          "ce": 8.126494407653809,
+          "phase": 1.5570687055587769,
+          "if": 1.5358670949935913,
+          "phase_weight_eff": 0.25,
+          "if_weight_eff": 0.16,
+          "total": 3.479279041290283
+        },
+        {
+          "step": 9,
+          "ce": 7.872302055358887,
+          "phase": 1.5545117855072021,
+          "if": 1.548842430114746,
+          "phase_weight_eff": 0.25,
+          "if_weight_eff": 0.16,
+          "total": 3.3917486667633057
+        },
+        {
+          "step": 10,
+          "ce": 7.682155132293701,
+          "phase": 1.563599705696106,
+          "if": 1.540960669517517,
+          "phase_weight_eff": 0.25,
+          "if_weight_eff": 0.16,
+          "total": 3.3262078762054443
+        },
+        {
+          "step": 11,
+          "ce": 7.649547576904297,
+          "phase": 1.5643081665039062,
+          "if": 1.5467374324798584,
+          "phase_weight_eff": 0.25,
+          "if_weight_eff": 0.16,
+          "total": 3.31589674949646
+        },
+        {
+          "step": 12,
+          "ce": 7.615766525268555,
+          "phase": 1.5619679689407349,
+          "if": 1.5478910207748413,
+          "phase_weight_eff": 0.25,
+          "if_weight_eff": 0.16,
+          "total": 3.3036727905273438
+        },
+        {
+          "step": 13,
+          "ce": 7.370194911956787,
+          "phase": 1.5593622922897339,
+          "if": 1.538374662399292,
+          "phase_weight_eff": 0.25,
+          "if_weight_eff": 0.16,
+          "total": 3.2155487537384033
+        },
+        {
+          "step": 14,
+          "ce": 7.354578971862793,
+          "phase": 1.5619375705718994,
+          "if": 1.542030930519104,
+          "phase_weight_eff": 0.25,
+          "if_weight_eff": 0.16,
+          "total": 3.2113118171691895
+        },
+        {
+          "step": 15,
+          "ce": 7.249068737030029,
+          "phase": 1.5595097541809082,
+          "if": 1.5389988422393799,
+          "phase_weight_eff": 0.25,
+          "if_weight_eff": 0.16,
+          "total": 3.1732914447784424
+        },
+        {
+          "step": 16,
+          "ce": 7.2640557289123535,
+          "phase": 1.5702544450759888,
+          "if": 1.5376702547073364,
+          "phase_weight_eff": 0.25,
+          "if_weight_eff": 0.16,
+          "total": 3.1810102462768555
+        },
+        {
+          "step": 17,
+          "ce": 7.029283046722412,
+          "phase": 1.560580849647522,
+          "if": 1.5361294746398926,
+          "phase_weight_eff": 0.25,
+          "if_weight_eff": 0.16,
+          "total": 3.096174955368042
+        },
+        {
+          "step": 18,
+          "ce": 6.979860782623291,
+          "phase": 1.5681815147399902,
+          "if": 1.5455899238586426,
+          "phase_weight_eff": 0.25,
+          "if_weight_eff": 0.16,
+          "total": 3.0822911262512207
+        },
+        {
+          "step": 19,
+          "ce": 7.093074798583984,
+          "phase": 1.55976402759552,
+          "if": 1.5399506092071533,
+          "phase_weight_eff": 0.25,
+          "if_weight_eff": 0.16,
+          "total": 3.1189091205596924
+        },
+        {
+          "step": 20,
+          "ce": 7.0220208168029785,
+          "phase": 1.5558531284332275,
+          "if": 1.529929518699646,
+          "phase_weight_eff": 0.25,
+          "if_weight_eff": 0.16,
+          "total": 3.091459035873413
+        }
+      ],
+      "grad_probe": [
+        {
+          "step": 1,
+          "ada_zero_grad_norm_by_block": [
+            [
+              11,
+              0.2067495882511139
+            ],
+            [
+              9,
+              0.11030840873718262
+            ],
+            [
+              7,
+              0.08145014941692352
+            ]
+          ]
+        },
+        {
+          "step": 2,
+          "ada_zero_grad_norm_by_block": [
+            [
+              11,
+              0.19973857700824738
+            ],
+            [
+              9,
+              0.10115282237529755
+            ],
+            [
+              7,
+              0.08307837694883347
+            ]
+          ]
+        },
+        {
+          "step": 3,
+          "ada_zero_grad_norm_by_block": [
+            [
+              11,
+              0.21906457841396332
+            ],
+            [
+              9,
+              0.10843171924352646
+            ],
+            [
+              7,
+              0.07958927750587463
+            ]
+          ]
+        },
+        {
+          "step": 4,
+          "ada_zero_grad_norm_by_block": [
+            [
+              11,
+              0.18705351650714874
+            ],
+            [
+              9,
+              0.09979616105556488
+            ],
+            [
+              7,
+              0.07070454210042953
+            ]
+          ]
+        },
+        {
+          "step": 5,
+          "ada_zero_grad_norm_by_block": [
+            [
+              11,
+              0.1800035983324051
+            ],
+            [
+              9,
+              0.09601365029811859
+            ],
+            [
+              7,
+              0.07146202027797699
+            ]
+          ]
+        },
+        {
+          "step": 6,
+          "ada_zero_grad_norm_by_block": [
+            [
+              11,
+              0.20643264055252075
+            ],
+            [
+              9,
+              0.1091790571808815
+            ],
+            [
+              7,
+              0.08249738067388535
+            ]
+          ]
+        },
+        {
+          "step": 7,
+          "ada_zero_grad_norm_by_block": [
+            [
+              11,
+              0.1876685470342636
+            ],
+            [
+              9,
+              0.09648445248603821
+            ],
+            [
+              7,
+              0.072624571621418
+            ]
+          ]
+        },
+        {
+          "step": 8,
+          "ada_zero_grad_norm_by_block": [
+            [
+              11,
+              0.19010841846466064
+            ],
+            [
+              9,
+              0.09330523759126663
+            ],
+            [
+              7,
+              0.07754649221897125
+            ]
+          ]
+        },
+        {
+          "step": 9,
+          "ada_zero_grad_norm_by_block": [
+            [
+              11,
+              0.1626286804676056
+            ],
+            [
+              9,
+              0.08190930634737015
+            ],
+            [
+              7,
+              0.05955039709806442
+            ]
+          ]
+        },
+        {
+          "step": 10,
+          "ada_zero_grad_norm_by_block": [
+            [
+              11,
+              0.16547608375549316
+            ],
+            [
+              9,
+              0.08447524160146713
+            ],
+            [
+              7,
+              0.06807423382997513
+            ]
+          ]
+        },
+        {
+          "step": 11,
+          "ada_zero_grad_norm_by_block": [
+            [
+              11,
+              0.14073669910430908
+            ],
+            [
+              9,
+              0.07061725854873657
+            ],
+            [
+              7,
+              0.04915618896484375
+            ]
+          ]
+        },
+        {
+          "step": 12,
+          "ada_zero_grad_norm_by_block": [
+            [
+              11,
+              0.15416182577610016
+            ],
+            [
+              9,
+              0.08033423125743866
+            ],
+            [
+              7,
+              0.05723272264003754
+            ]
+          ]
+        },
+        {
+          "step": 13,
+          "ada_zero_grad_norm_by_block": [
+            [
+              11,
+              0.1572699099779129
+            ],
+            [
+              9,
+              0.08210527151823044
+            ],
+            [
+              7,
+              0.06970616430044174
+            ]
+          ]
+        },
+        {
+          "step": 14,
+          "ada_zero_grad_norm_by_block": [
+            [
+              11,
+              0.12144500017166138
+            ],
+            [
+              9,
+              0.06331555545330048
+            ],
+            [
+              7,
+              0.0473325289785862
+            ]
+          ]
+        },
+        {
+          "step": 15,
+          "ada_zero_grad_norm_by_block": [
+            [
+              11,
+              0.12051902711391449
+            ],
+            [
+              9,
+              0.0626559853553772
+            ],
+            [
+              7,
+              0.05400427430868149
+            ]
+          ]
+        },
+        {
+          "step": 16,
+          "ada_zero_grad_norm_by_block": [
+            [
+              11,
+              0.11949249356985092
+            ],
+            [
+              9,
+              0.06161143258213997
+            ],
+            [
+              7,
+              0.05081493407487869
+            ]
+          ]
+        },
+        {
+          "step": 17,
+          "ada_zero_grad_norm_by_block": [
+            [
+              11,
+              0.1126079186797142
+            ],
+            [
+              9,
+              0.06025378033518791
+            ],
+            [
+              7,
+              0.042284827679395676
+            ]
+          ]
+        },
+        {
+          "step": 18,
+          "ada_zero_grad_norm_by_block": [
+            [
+              11,
+              0.11416762322187424
+            ],
+            [
+              9,
+              0.0634600967168808
+            ],
+            [
+              7,
+              0.0487930104136467
+            ]
+          ]
+        },
+        {
+          "step": 19,
+          "ada_zero_grad_norm_by_block": [
+            [
+              11,
+              0.10965428501367569
+            ],
+            [
+              9,
+              0.05649241805076599
+            ],
+            [
+              7,
+              0.047292646020650864
+            ]
+          ]
+        },
+        {
+          "step": 20,
+          "ada_zero_grad_norm_by_block": [
+            [
+              11,
+              0.10091369599103928
+            ],
+            [
+              9,
+              0.049154043197631836
+            ],
+            [
+              7,
+              0.03942035511136055
+            ]
+          ]
+        }
+      ],
+      "eval_curve": []
+    }
+  ]
+}

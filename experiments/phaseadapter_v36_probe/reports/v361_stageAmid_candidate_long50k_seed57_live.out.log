@@ -1,0 +1,435 @@
+[run_probe] variant=temporal_adalnzero ckpt=logs/ft-pesq20-3layer/checkpoints/epoch=09-val_pesq=1.494.ckpt train_steps=50000 eval_examples=200
+[temporal_adalnzero] zero-step baseline eval start (n=200)
+[temporal_adalnzero/zero_base] progress 10/200
+[temporal_adalnzero/zero_base] progress 20/200
+[temporal_adalnzero/zero_base] progress 30/200
+[temporal_adalnzero/zero_base] progress 40/200
+[temporal_adalnzero/zero_base] progress 50/200
+[temporal_adalnzero/zero_base] progress 60/200
+[temporal_adalnzero/zero_base] progress 70/200
+[temporal_adalnzero/zero_base] progress 80/200
+[temporal_adalnzero/zero_base] progress 90/200
+[temporal_adalnzero/zero_base] progress 100/200
+[temporal_adalnzero/zero_base] progress 110/200
+[temporal_adalnzero/zero_base] progress 120/200
+[temporal_adalnzero/zero_base] progress 130/200
+[temporal_adalnzero/zero_base] progress 140/200
+[temporal_adalnzero/zero_base] progress 150/200
+[temporal_adalnzero/zero_base] progress 160/200
+[temporal_adalnzero/zero_base] progress 170/200
+[temporal_adalnzero/zero_base] progress 180/200
+[temporal_adalnzero/zero_base] progress 190/200
+[temporal_adalnzero/zero_base] progress 200/200
+[temporal_adalnzero] zero-step adapter eval start (n=200)
+[temporal_adalnzero/zero_adpt] progress 10/200
+[temporal_adalnzero/zero_adpt] progress 20/200
+[temporal_adalnzero/zero_adpt] progress 30/200
+[temporal_adalnzero/zero_adpt] progress 40/200
+[temporal_adalnzero/zero_adpt] progress 50/200
+[temporal_adalnzero/zero_adpt] progress 60/200
+[temporal_adalnzero/zero_adpt] progress 70/200
+[temporal_adalnzero/zero_adpt] progress 80/200
+[temporal_adalnzero/zero_adpt] progress 90/200
+[temporal_adalnzero/zero_adpt] progress 100/200
+[temporal_adalnzero/zero_adpt] progress 110/200
+[temporal_adalnzero/zero_adpt] progress 120/200
+[temporal_adalnzero/zero_adpt] progress 130/200
+[temporal_adalnzero/zero_adpt] progress 140/200
+[temporal_adalnzero/zero_adpt] progress 150/200
+[temporal_adalnzero/zero_adpt] progress 160/200
+[temporal_adalnzero/zero_adpt] progress 170/200
+[temporal_adalnzero/zero_adpt] progress 180/200
+[temporal_adalnzero/zero_adpt] progress 190/200
+[temporal_adalnzero/zero_adpt] progress 200/200
+[temporal_adalnzero] step=1/50000 total=6.9951 ce=8.7439 phase=1.5528 if=1.5408 w_phase=0.000 w_if=0.000
+[temporal_adalnzero] step=20/50000 total=5.7504 ce=7.1880 phase=1.5562 if=1.5313 w_phase=0.000 w_if=0.000
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@20 n=8 pesq=1.0615 estoi=0.2872 sdr=-3.2044 prmse=1.8109
+[temporal_adalnzero] step=40/50000 total=5.2438 ce=6.5548 phase=1.5523 if=1.5251 w_phase=0.000 w_if=0.000
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@40 n=8 pesq=1.0800 estoi=0.2826 sdr=-2.6319 prmse=1.8123
+[temporal_adalnzero] step=60/50000 total=4.9621 ce=6.2027 phase=1.5532 if=1.5267 w_phase=0.000 w_if=0.000
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@60 n=8 pesq=1.0911 estoi=0.2955 sdr=-2.7762 prmse=1.8111
+[temporal_adalnzero] step=80/50000 total=4.6825 ce=5.8532 phase=1.5518 if=1.5295 w_phase=0.000 w_if=0.000
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@80 n=8 pesq=1.0887 estoi=0.3221 sdr=-2.2449 prmse=1.8100
+[temporal_adalnzero] step=100/50000 total=5.0154 ce=6.2692 phase=1.5672 if=1.5386 w_phase=0.000 w_if=0.000
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@100 n=8 pesq=1.1355 estoi=0.3320 sdr=-2.5103 prmse=1.8062
+[temporal_adalnzero] step=120/50000 total=4.5508 ce=5.6884 phase=1.5330 if=1.5057 w_phase=0.000 w_if=0.000
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@120 n=8 pesq=1.1234 estoi=0.3233 sdr=-3.0992 prmse=1.8062
+[temporal_adalnzero] step=140/50000 total=4.2033 ce=5.2541 phase=1.5114 if=1.4714 w_phase=0.000 w_if=0.000
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@140 n=8 pesq=1.0712 estoi=0.2650 sdr=-1.3550 prmse=1.8056
+[temporal_adalnzero] step=160/50000 total=4.6713 ce=5.8392 phase=1.5378 if=1.5101 w_phase=0.000 w_if=0.000
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@160 n=8 pesq=1.1018 estoi=0.3278 sdr=-2.3732 prmse=1.8016
+[temporal_adalnzero] step=180/50000 total=4.8512 ce=6.0640 phase=1.5347 if=1.5146 w_phase=0.000 w_if=0.000
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@180 n=8 pesq=1.0835 estoi=0.3305 sdr=-1.8499 prmse=1.8025
+[temporal_adalnzero] step=200/50000 total=4.8050 ce=6.0063 phase=1.5459 if=1.5116 w_phase=0.000 w_if=0.000
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@200 n=8 pesq=1.0886 estoi=0.3321 sdr=-1.8881 prmse=1.8033
+[temporal_adalnzero] step=220/50000 total=4.0303 ce=5.0378 phase=1.5143 if=1.4685 w_phase=0.000 w_if=0.000
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@220 n=8 pesq=1.0963 estoi=0.3447 sdr=-2.3778 prmse=1.7997
+[temporal_adalnzero] step=240/50000 total=4.3531 ce=5.4414 phase=1.5251 if=1.4909 w_phase=0.000 w_if=0.000
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@240 n=8 pesq=1.0836 estoi=0.3480 sdr=-1.3724 prmse=1.7984
+[temporal_adalnzero] step=260/50000 total=4.4030 ce=5.5038 phase=1.5207 if=1.4931 w_phase=0.000 w_if=0.000
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@260 n=8 pesq=1.1074 estoi=0.3656 sdr=-1.8015 prmse=1.7983
+[temporal_adalnzero] step=280/50000 total=4.6691 ce=5.8364 phase=1.5349 if=1.5032 w_phase=0.000 w_if=0.000
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@280 n=8 pesq=1.0993 estoi=0.3808 sdr=-1.8315 prmse=1.7966
+[temporal_adalnzero] step=300/50000 total=4.4037 ce=5.5046 phase=1.5027 if=1.4606 w_phase=0.000 w_if=0.000
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@300 n=8 pesq=1.1048 estoi=0.3923 sdr=-1.7736 prmse=1.7986
+[temporal_adalnzero] step=320/50000 total=4.7514 ce=5.9393 phase=1.5445 if=1.5093 w_phase=0.000 w_if=0.000
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@320 n=8 pesq=1.1062 estoi=0.3837 sdr=-2.2132 prmse=1.7997
+[temporal_adalnzero] step=340/50000 total=4.4903 ce=5.6129 phase=1.5079 if=1.4754 w_phase=0.000 w_if=0.000
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@340 n=8 pesq=1.2000 estoi=0.4080 sdr=-1.9127 prmse=1.8019
+[temporal_adalnzero] step=360/50000 total=4.3923 ce=5.4903 phase=1.4997 if=1.4639 w_phase=0.000 w_if=0.000
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@360 n=8 pesq=1.1386 estoi=0.4529 sdr=-1.8464 prmse=1.7936
+[temporal_adalnzero] step=380/50000 total=4.5592 ce=5.6990 phase=1.5295 if=1.4923 w_phase=0.000 w_if=0.000
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@380 n=8 pesq=1.1267 estoi=0.4446 sdr=-2.1322 prmse=1.7955
+[temporal_adalnzero] step=400/50000 total=4.3040 ce=5.3800 phase=1.5076 if=1.4718 w_phase=0.000 w_if=0.000
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@400 n=8 pesq=1.1172 estoi=0.4425 sdr=-1.7815 prmse=1.7957
+[temporal_adalnzero] step=420/50000 total=4.5469 ce=5.6836 phase=1.5359 if=1.5103 w_phase=0.000 w_if=0.000
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@420 n=8 pesq=1.1461 estoi=0.4385 sdr=-1.6169 prmse=1.7935
+[temporal_adalnzero] step=440/50000 total=4.3011 ce=5.3763 phase=1.5163 if=1.4840 w_phase=0.000 w_if=0.000
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@440 n=8 pesq=1.1486 estoi=0.4595 sdr=-1.5660 prmse=1.7924
+[temporal_adalnzero] step=460/50000 total=3.8354 ce=4.7943 phase=1.4856 if=1.4418 w_phase=0.000 w_if=0.000
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@460 n=8 pesq=1.1853 estoi=0.4860 sdr=-1.4508 prmse=1.7927
+[temporal_adalnzero] step=480/50000 total=4.4271 ce=5.5339 phase=1.5066 if=1.4782 w_phase=0.000 w_if=0.000
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@480 n=8 pesq=1.1910 estoi=0.5053 sdr=-0.7758 prmse=1.7889
+[temporal_adalnzero] step=500/50000 total=4.5348 ce=5.6685 phase=1.5125 if=1.4806 w_phase=0.000 w_if=0.000
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@500 n=8 pesq=1.1815 estoi=0.4932 sdr=-1.3090 prmse=1.7878
+[temporal_adalnzero] step=520/50000 total=4.4080 ce=5.5100 phase=1.4929 if=1.4701 w_phase=0.000 w_if=0.000
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@520 n=8 pesq=1.1807 estoi=0.5056 sdr=-1.1815 prmse=1.7881
+[temporal_adalnzero] step=540/50000 total=4.3906 ce=5.4882 phase=1.5058 if=1.4836 w_phase=0.000 w_if=0.000
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@540 n=8 pesq=1.2071 estoi=0.5228 sdr=-0.9270 prmse=1.7905
+[temporal_adalnzero] step=560/50000 total=4.2047 ce=5.2558 phase=1.5003 if=1.4535 w_phase=0.000 w_if=0.000
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@560 n=8 pesq=1.1973 estoi=0.5108 sdr=-1.3327 prmse=1.7906
+[temporal_adalnzero] step=580/50000 total=4.2630 ce=5.3288 phase=1.4851 if=1.4584 w_phase=0.000 w_if=0.000
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@580 n=8 pesq=1.1997 estoi=0.4810 sdr=-0.8969 prmse=1.7901
+[temporal_adalnzero] step=600/50000 total=4.5378 ce=5.6723 phase=1.4985 if=1.4680 w_phase=0.000 w_if=0.000
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@600 n=8 pesq=1.1921 estoi=0.5139 sdr=-0.9169 prmse=1.7893
+[temporal_adalnzero] step=620/50000 total=4.6479 ce=5.5113 phase=1.5019 if=1.4788 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@620 n=8 pesq=1.2194 estoi=0.5323 sdr=-1.7390 prmse=1.7910
+[temporal_adalnzero] step=640/50000 total=4.5386 ce=5.3745 phase=1.5061 if=1.4735 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@640 n=8 pesq=1.1966 estoi=0.5242 sdr=-1.8171 prmse=1.7906
+[temporal_adalnzero] step=660/50000 total=4.5927 ce=5.4397 phase=1.5211 if=1.4803 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@660 n=8 pesq=1.2306 estoi=0.5465 sdr=-1.0960 prmse=1.7855
+[temporal_adalnzero] step=680/50000 total=4.6543 ce=5.5175 phase=1.5136 if=1.4812 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@680 n=8 pesq=1.2278 estoi=0.5165 sdr=-0.9155 prmse=1.7901
+[temporal_adalnzero] step=700/50000 total=4.8164 ce=5.7175 phase=1.5273 if=1.4945 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@700 n=8 pesq=1.2265 estoi=0.5278 sdr=-0.9266 prmse=1.7862
+[temporal_adalnzero] step=720/50000 total=4.4528 ce=5.2658 phase=1.5106 if=1.4838 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@720 n=8 pesq=1.2803 estoi=0.5568 sdr=-1.0839 prmse=1.7857
+[temporal_adalnzero] step=740/50000 total=4.7755 ce=5.6719 phase=1.5043 if=1.4590 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@740 n=8 pesq=1.2562 estoi=0.5446 sdr=-0.9991 prmse=1.7871
+[temporal_adalnzero] step=760/50000 total=4.6964 ce=5.5703 phase=1.5137 if=1.4810 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@760 n=8 pesq=1.2738 estoi=0.5479 sdr=-1.0926 prmse=1.7842
+[temporal_adalnzero] step=780/50000 total=3.8232 ce=4.4856 phase=1.4844 if=1.4383 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@780 n=8 pesq=1.3115 estoi=0.5490 sdr=-0.6926 prmse=1.7902
+[temporal_adalnzero] step=800/50000 total=4.5928 ce=5.4435 phase=1.5010 if=1.4656 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@800 n=8 pesq=1.3049 estoi=0.5640 sdr=0.0248 prmse=1.7846
+[temporal_adalnzero] step=820/50000 total=4.6927 ce=5.5663 phase=1.5037 if=1.4879 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@820 n=8 pesq=1.3232 estoi=0.5773 sdr=-0.5562 prmse=1.7832
+[temporal_adalnzero] step=840/50000 total=4.8430 ce=5.7506 phase=1.5245 if=1.5010 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@840 n=8 pesq=1.2411 estoi=0.5519 sdr=-0.4660 prmse=1.7850
+[temporal_adalnzero] step=860/50000 total=4.6303 ce=5.4870 phase=1.5179 if=1.4817 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@860 n=8 pesq=1.2321 estoi=0.5281 sdr=-0.6232 prmse=1.7843
+[temporal_adalnzero] step=880/50000 total=4.7603 ce=5.6472 phase=1.5302 if=1.4926 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@880 n=8 pesq=1.2519 estoi=0.5600 sdr=-1.0358 prmse=1.7825
+[temporal_adalnzero] step=900/50000 total=3.8982 ce=4.5818 phase=1.4708 if=1.4281 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@900 n=8 pesq=1.3396 estoi=0.5802 sdr=-0.9332 prmse=1.7903
+[temporal_adalnzero] step=920/50000 total=4.6331 ce=5.4929 phase=1.5080 if=1.4665 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@920 n=8 pesq=1.3057 estoi=0.5549 sdr=-0.7081 prmse=1.7875
+[temporal_adalnzero] step=940/50000 total=4.5756 ce=5.4217 phase=1.4954 if=1.4785 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@940 n=8 pesq=1.3352 estoi=0.5731 sdr=-0.4333 prmse=1.7855
+[temporal_adalnzero] step=960/50000 total=4.8375 ce=5.7445 phase=1.5258 if=1.4891 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@960 n=8 pesq=1.2981 estoi=0.5673 sdr=-1.1078 prmse=1.7859
+[temporal_adalnzero] step=980/50000 total=4.2424 ce=5.0078 phase=1.4914 if=1.4502 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@980 n=8 pesq=1.2878 estoi=0.5463 sdr=-0.5473 prmse=1.7880
+[temporal_adalnzero] step=1000/50000 total=4.3619 ce=5.1538 phase=1.5033 if=1.4756 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@1000 n=8 pesq=1.2786 estoi=0.5420 sdr=-0.5506 prmse=1.7900
+[temporal_adalnzero] step=1020/50000 total=4.2988 ce=5.0777 phase=1.4941 if=1.4539 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@1020 n=8 pesq=1.3334 estoi=0.5653 sdr=-0.7089 prmse=1.7840
+[temporal_adalnzero] step=1040/50000 total=4.6270 ce=5.4828 phase=1.5133 if=1.4898 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@1040 n=8 pesq=1.2676 estoi=0.5654 sdr=-0.3604 prmse=1.7889
+[temporal_adalnzero] step=1060/50000 total=4.5042 ce=5.3325 phase=1.5012 if=1.4684 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@1060 n=8 pesq=1.2835 estoi=0.5592 sdr=-0.7094 prmse=1.7848
+[temporal_adalnzero] step=1080/50000 total=4.7740 ce=5.6685 phase=1.5085 if=1.4733 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@1080 n=8 pesq=1.2781 estoi=0.5311 sdr=-0.3791 prmse=1.7869
+[temporal_adalnzero] step=1100/50000 total=4.7378 ce=5.6208 phase=1.5182 if=1.4882 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@1100 n=8 pesq=1.3352 estoi=0.5696 sdr=-0.5389 prmse=1.7867
+[temporal_adalnzero] step=1120/50000 total=3.7652 ce=4.4154 phase=1.4700 if=1.4310 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@1120 n=8 pesq=1.2808 estoi=0.5668 sdr=0.0156 prmse=1.7847
+[temporal_adalnzero] step=1140/50000 total=4.0993 ce=4.8242 phase=1.5137 if=1.4771 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@1140 n=8 pesq=1.3384 estoi=0.5811 sdr=-0.2307 prmse=1.7859
+[temporal_adalnzero] step=1160/50000 total=4.5703 ce=5.4138 phase=1.5043 if=1.4805 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@1160 n=8 pesq=1.3519 estoi=0.5694 sdr=-0.0158 prmse=1.7861
+[temporal_adalnzero] step=1180/50000 total=4.4827 ce=5.3031 phase=1.5102 if=1.4861 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@1180 n=8 pesq=1.3970 estoi=0.5716 sdr=-0.3131 prmse=1.7848
+[temporal_adalnzero] step=1200/50000 total=4.5995 ce=5.4509 phase=1.5026 if=1.4744 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@1200 n=8 pesq=1.3340 estoi=0.5468 sdr=-0.1327 prmse=1.7829
+[temporal_adalnzero] step=1220/50000 total=4.5254 ce=5.3582 phase=1.5035 if=1.4737 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@1220 n=8 pesq=1.2952 estoi=0.5758 sdr=-1.1232 prmse=1.7864
+[temporal_adalnzero] step=1240/50000 total=4.5859 ce=5.4332 phase=1.5081 if=1.4760 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@1240 n=8 pesq=1.3262 estoi=0.5718 sdr=-0.4790 prmse=1.7877
+[temporal_adalnzero] step=1260/50000 total=4.8660 ce=5.7803 phase=1.5183 if=1.5002 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@1260 n=8 pesq=1.3254 estoi=0.5773 sdr=-0.5337 prmse=1.7831
+[temporal_adalnzero] step=1280/50000 total=4.2403 ce=5.0045 phase=1.4878 if=1.4661 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@1280 n=8 pesq=1.2944 estoi=0.5478 sdr=-0.6491 prmse=1.7906
+[temporal_adalnzero] step=1300/50000 total=4.4795 ce=5.2991 phase=1.5154 if=1.4786 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@1300 n=8 pesq=1.3338 estoi=0.5597 sdr=-0.8314 prmse=1.7875
+[temporal_adalnzero] step=1320/50000 total=4.3330 ce=5.1197 phase=1.4979 if=1.4572 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@1320 n=8 pesq=1.3308 estoi=0.5737 sdr=-0.9005 prmse=1.7849
+[temporal_adalnzero] step=1340/50000 total=3.9419 ce=4.6341 phase=1.4768 if=1.4483 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@1340 n=8 pesq=1.3659 estoi=0.5602 sdr=-0.3889 prmse=1.7873
+[temporal_adalnzero] step=1360/50000 total=4.7402 ce=5.6230 phase=1.5225 if=1.4932 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@1360 n=8 pesq=1.4035 estoi=0.5748 sdr=-0.4215 prmse=1.7846
+[temporal_adalnzero] step=1380/50000 total=4.3134 ce=5.0957 phase=1.4943 if=1.4572 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@1380 n=8 pesq=1.2885 estoi=0.5532 sdr=-0.2144 prmse=1.7863
+[temporal_adalnzero] step=1400/50000 total=4.0859 ce=4.8159 phase=1.4676 if=1.4408 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@1400 n=8 pesq=1.3629 estoi=0.5783 sdr=-0.5539 prmse=1.7866
+[temporal_adalnzero] step=1420/50000 total=4.6082 ce=5.4608 phase=1.5061 if=1.4830 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@1420 n=8 pesq=1.3175 estoi=0.5666 sdr=-0.7923 prmse=1.7845
+[temporal_adalnzero] step=1440/50000 total=4.5671 ce=5.4105 phase=1.5039 if=1.4714 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@1440 n=8 pesq=1.3426 estoi=0.5852 sdr=-0.5697 prmse=1.7824
+[temporal_adalnzero] step=1460/50000 total=4.5853 ce=5.4380 phase=1.4788 if=1.4504 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@1460 n=8 pesq=1.3325 estoi=0.5642 sdr=-0.8985 prmse=1.7851
+[temporal_adalnzero] step=1480/50000 total=3.8620 ce=4.5296 phase=1.5055 if=1.4641 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@1480 n=8 pesq=1.3630 estoi=0.5909 sdr=-0.3356 prmse=1.7861
+[temporal_adalnzero] step=1500/50000 total=4.6266 ce=5.4843 phase=1.5025 if=1.4819 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@1500 n=8 pesq=1.3555 estoi=0.5818 sdr=-0.3941 prmse=1.7842
+[temporal_adalnzero] step=1520/50000 total=4.7148 ce=5.5920 phase=1.5165 if=1.4914 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@1520 n=8 pesq=1.3392 estoi=0.5732 sdr=-0.1772 prmse=1.7837
+[temporal_adalnzero] step=1540/50000 total=4.7632 ce=5.6513 phase=1.5194 if=1.5037 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@1540 n=8 pesq=1.2783 estoi=0.5453 sdr=-0.0764 prmse=1.7878
+[temporal_adalnzero] step=1560/50000 total=4.4199 ce=5.2289 phase=1.4891 if=1.4642 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@1560 n=8 pesq=1.3127 estoi=0.5516 sdr=-0.2123 prmse=1.7812
+[temporal_adalnzero] step=1580/50000 total=4.4660 ce=5.2853 phase=1.4936 if=1.4734 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@1580 n=8 pesq=1.3494 estoi=0.5853 sdr=-0.7457 prmse=1.7848
+[temporal_adalnzero] step=1600/50000 total=4.4300 ce=5.2413 phase=1.4906 if=1.4650 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@1600 n=8 pesq=1.3765 estoi=0.5892 sdr=-0.2240 prmse=1.7875
+[temporal_adalnzero] step=1620/50000 total=4.2437 ce=5.0104 phase=1.4793 if=1.4573 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@1620 n=8 pesq=1.3156 estoi=0.5538 sdr=-0.4675 prmse=1.7854
+[temporal_adalnzero] step=1640/50000 total=4.2544 ce=5.0217 phase=1.4989 if=1.4523 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@1640 n=8 pesq=1.3306 estoi=0.5793 sdr=-0.2383 prmse=1.7853
+[temporal_adalnzero] step=1660/50000 total=4.3031 ce=5.0806 phase=1.5053 if=1.4678 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@1660 n=8 pesq=1.3062 estoi=0.5530 sdr=-0.2861 prmse=1.7902
+[temporal_adalnzero] step=1680/50000 total=3.8369 ce=4.4991 phase=1.5002 if=1.4606 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@1680 n=8 pesq=1.3327 estoi=0.5610 sdr=-1.1106 prmse=1.7878
+[temporal_adalnzero] step=1700/50000 total=3.8565 ce=4.5304 phase=1.4631 if=1.4318 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@1700 n=8 pesq=1.3512 estoi=0.5606 sdr=-0.1590 prmse=1.7826
+[temporal_adalnzero] step=1720/50000 total=4.3152 ce=5.0971 phase=1.4968 if=1.4634 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@1720 n=8 pesq=1.3628 estoi=0.5787 sdr=-0.6152 prmse=1.7861
+[temporal_adalnzero] step=1740/50000 total=4.4497 ce=5.2664 phase=1.4911 if=1.4578 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@1740 n=8 pesq=1.3600 estoi=0.5726 sdr=-0.8141 prmse=1.7832
+[temporal_adalnzero] step=1760/50000 total=4.8766 ce=5.7915 phase=1.5306 if=1.5054 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@1760 n=8 pesq=1.3391 estoi=0.5642 sdr=-0.0228 prmse=1.7831
+[temporal_adalnzero] step=1780/50000 total=4.7145 ce=5.5917 phase=1.5209 if=1.4838 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@1780 n=8 pesq=1.3664 estoi=0.5804 sdr=-0.9257 prmse=1.7830
+[temporal_adalnzero] step=1800/50000 total=4.4542 ce=5.2674 phase=1.5135 if=1.4818 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@1800 n=8 pesq=1.3435 estoi=0.5878 sdr=-0.6599 prmse=1.7882
+[temporal_adalnzero] step=1820/50000 total=4.4034 ce=5.2061 phase=1.4937 if=1.4869 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@1820 n=8 pesq=1.3434 estoi=0.5425 sdr=-0.3651 prmse=1.7872
+[temporal_adalnzero] step=1840/50000 total=4.4722 ce=5.2943 phase=1.4905 if=1.4613 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@1840 n=8 pesq=1.3716 estoi=0.5831 sdr=0.0626 prmse=1.7832
+[temporal_adalnzero] step=1860/50000 total=4.5739 ce=5.4231 phase=1.4779 if=1.4601 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@1860 n=8 pesq=1.3254 estoi=0.5872 sdr=-0.0606 prmse=1.7858
+[temporal_adalnzero] step=1880/50000 total=4.3877 ce=5.1863 phase=1.5030 if=1.4714 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@1880 n=8 pesq=1.3367 estoi=0.5737 sdr=-0.4622 prmse=1.7821
+[temporal_adalnzero] step=1900/50000 total=4.3857 ce=5.1804 phase=1.5188 if=1.4922 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@1900 n=8 pesq=1.3984 estoi=0.6035 sdr=-0.5289 prmse=1.7870
+[temporal_adalnzero] step=1920/50000 total=4.3360 ce=5.1232 phase=1.4932 if=1.4686 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@1920 n=8 pesq=1.3238 estoi=0.5338 sdr=-0.6076 prmse=1.7861
+[temporal_adalnzero] step=1940/50000 total=4.5172 ce=5.3451 phase=1.5200 if=1.4855 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@1940 n=8 pesq=1.3216 estoi=0.5680 sdr=-0.2189 prmse=1.7835
+[temporal_adalnzero] step=1960/50000 total=4.3109 ce=5.0935 phase=1.4839 if=1.4626 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@1960 n=8 pesq=1.3366 estoi=0.5863 sdr=-0.1821 prmse=1.7850
+[temporal_adalnzero] step=1980/50000 total=4.6274 ce=5.4880 phase=1.4931 if=1.4615 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@1980 n=8 pesq=1.3657 estoi=0.5801 sdr=-0.4986 prmse=1.7859
+[temporal_adalnzero] step=2000/50000 total=4.9027 ce=5.8261 phase=1.5201 if=1.4961 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@2000 n=8 pesq=1.3421 estoi=0.5732 sdr=-0.4966 prmse=1.7849
+[temporal_adalnzero] step=2020/50000 total=4.4591 ce=5.2752 phase=1.5077 if=1.4702 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@2020 n=8 pesq=1.3570 estoi=0.5894 sdr=-1.1127 prmse=1.7859
+[temporal_adalnzero] step=2040/50000 total=3.9514 ce=4.6404 phase=1.5108 if=1.4662 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@2040 n=8 pesq=1.3521 estoi=0.5778 sdr=-0.4756 prmse=1.7883
+[temporal_adalnzero] step=2060/50000 total=4.1398 ce=4.8789 phase=1.4909 if=1.4603 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@2060 n=8 pesq=1.3717 estoi=0.5872 sdr=-0.1486 prmse=1.7874
+[temporal_adalnzero] step=2080/50000 total=4.1269 ce=4.8644 phase=1.4901 if=1.4394 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@2080 n=8 pesq=1.3314 estoi=0.5580 sdr=-0.6255 prmse=1.7878
+[temporal_adalnzero] step=2100/50000 total=4.5131 ce=5.3413 phase=1.5125 if=1.4799 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@2100 n=8 pesq=1.3155 estoi=0.5718 sdr=-0.2356 prmse=1.7853
+[temporal_adalnzero] step=2120/50000 total=4.5321 ce=5.3656 phase=1.5089 if=1.4794 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@2120 n=8 pesq=1.3212 estoi=0.5767 sdr=-0.1599 prmse=1.7809
+[temporal_adalnzero] step=2140/50000 total=4.6619 ce=5.5260 phase=1.5184 if=1.4878 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@2140 n=8 pesq=1.3836 estoi=0.5754 sdr=-0.4094 prmse=1.7843
+[temporal_adalnzero] step=2160/50000 total=4.5851 ce=5.4322 phase=1.5068 if=1.4775 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@2160 n=8 pesq=1.3645 estoi=0.5736 sdr=-0.5310 prmse=1.7875
+[temporal_adalnzero] step=2180/50000 total=4.3276 ce=5.1122 phase=1.4935 if=1.4755 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@2180 n=8 pesq=1.3848 estoi=0.5916 sdr=-0.7127 prmse=1.7838
+[temporal_adalnzero] step=2200/50000 total=4.6637 ce=5.5297 phase=1.5130 if=1.4768 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@2200 n=8 pesq=1.3529 estoi=0.5790 sdr=-0.5881 prmse=1.7867
+[temporal_adalnzero] step=2220/50000 total=3.8265 ce=4.4868 phase=1.4942 if=1.4605 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@2220 n=8 pesq=1.3969 estoi=0.5801 sdr=-0.0185 prmse=1.7842
+[temporal_adalnzero] step=2240/50000 total=4.2564 ce=5.0221 phase=1.5022 if=1.4745 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@2240 n=8 pesq=1.3638 estoi=0.5700 sdr=-0.1685 prmse=1.7840
+[temporal_adalnzero] step=2260/50000 total=3.9173 ce=4.6031 phase=1.4782 if=1.4504 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@2260 n=8 pesq=1.3690 estoi=0.5796 sdr=-0.0518 prmse=1.7846
+[temporal_adalnzero] step=2280/50000 total=4.4708 ce=5.2903 phase=1.5019 if=1.4729 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@2280 n=8 pesq=1.3522 estoi=0.5754 sdr=-0.9404 prmse=1.7872
+[temporal_adalnzero] step=2300/50000 total=3.8804 ce=4.5545 phase=1.4948 if=1.4550 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@2300 n=8 pesq=1.3914 estoi=0.5955 sdr=-0.7966 prmse=1.7866
+[temporal_adalnzero] step=2320/50000 total=4.2366 ce=5.0011 phase=1.4802 if=1.4629 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@2320 n=8 pesq=1.3451 estoi=0.5688 sdr=-0.2623 prmse=1.7843
+[temporal_adalnzero] step=2340/50000 total=4.3217 ce=5.1068 phase=1.4825 if=1.4655 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@2340 n=8 pesq=1.3432 estoi=0.5745 sdr=-0.7496 prmse=1.7823
+[temporal_adalnzero] step=2360/50000 total=4.5228 ce=5.3549 phase=1.5068 if=1.4699 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@2360 n=8 pesq=1.3237 estoi=0.5576 sdr=-0.6249 prmse=1.7867
+[temporal_adalnzero] step=2380/50000 total=4.6620 ce=5.5267 phase=1.5140 if=1.4867 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@2380 n=8 pesq=1.3536 estoi=0.5562 sdr=-0.6464 prmse=1.7878
+[temporal_adalnzero] step=2400/50000 total=4.6514 ce=5.5148 phase=1.5068 if=1.4815 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@2400 n=8 pesq=1.3829 estoi=0.6141 sdr=-0.8796 prmse=1.7850
+[temporal_adalnzero] step=2420/50000 total=4.4023 ce=5.2093 phase=1.4765 if=1.4528 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@2420 n=8 pesq=1.3970 estoi=0.5867 sdr=-0.6722 prmse=1.7869
+[temporal_adalnzero] step=2440/50000 total=4.0066 ce=4.7132 phase=1.4868 if=1.4559 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@2440 n=8 pesq=1.3848 estoi=0.5862 sdr=0.0737 prmse=1.7799
+[temporal_adalnzero] step=2460/50000 total=4.3097 ce=5.0864 phase=1.5147 if=1.4860 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@2460 n=8 pesq=1.4130 estoi=0.5819 sdr=-0.2710 prmse=1.7830
+[temporal_adalnzero] step=2480/50000 total=4.6738 ce=5.5432 phase=1.5087 if=1.4719 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@2480 n=8 pesq=1.3783 estoi=0.5861 sdr=-0.3979 prmse=1.7819
+[temporal_adalnzero] step=2500/50000 total=4.4550 ce=5.2735 phase=1.4880 if=1.4558 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@2500 n=8 pesq=1.3898 estoi=0.5963 sdr=-0.3838 prmse=1.7844
+[temporal_adalnzero] step=2520/50000 total=4.7449 ce=5.6286 phase=1.5336 if=1.4774 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@2520 n=8 pesq=1.3597 estoi=0.5738 sdr=-0.4490 prmse=1.7859
+[temporal_adalnzero] step=2540/50000 total=4.4656 ce=5.2861 phase=1.4864 if=1.4688 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@2540 n=8 pesq=1.3936 estoi=0.5963 sdr=-0.7682 prmse=1.7865
+[temporal_adalnzero] step=2560/50000 total=3.7940 ce=4.4479 phase=1.4836 if=1.4551 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@2560 n=8 pesq=1.3473 estoi=0.5817 sdr=-0.6229 prmse=1.7854
+[temporal_adalnzero] step=2580/50000 total=3.8690 ce=4.5386 phase=1.4997 if=1.4699 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@2580 n=8 pesq=1.3744 estoi=0.5761 sdr=-0.4376 prmse=1.7857
+[temporal_adalnzero] step=2600/50000 total=4.3260 ce=5.1102 phase=1.4920 if=1.4764 w_phase=0.100 w_if=0.060
+[temporal_adalnzero/periodic] progress 8/8
+[temporal_adalnzero] eval@2600 n=8 pesq=1.3686 estoi=0.5658 sdr=-0.4135 prmse=1.7803
+[temporal_adalnzero] step=2620/50000 total=4.5396 ce=5.3759 phase=1.5000 if=1.4808 w_phase=0.100 w_if=0.060

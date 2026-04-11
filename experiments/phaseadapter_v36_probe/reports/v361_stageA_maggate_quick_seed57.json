@@ -1,0 +1,360 @@
+{
+  "meta": {
+    "device": "cuda",
+    "config": {
+      "seed": 57,
+      "fs": 16000,
+      "segment_length": 4.0,
+      "speech_dir": "data/chunks/bigspeech/",
+      "noise_dir": "data/chunks/bignoise/",
+      "layered_cfg": "configs/addse-s-mydata-layered-ft-pesq20.yaml",
+      "layered_ckpt": "logs/ft-pesq20-3layer/checkpoints/epoch=09-val_pesq=1.494.ckpt",
+      "phase_cnn_ckpt": "experiments/phase_branch2/weights/phase_cnn_branch2.pt",
+      "train_batch_size": 2,
+      "train_steps": 10,
+      "eval_examples": 10,
+      "solve_steps": 16,
+      "num_workers": 0,
+      "lr": 0.0001,
+      "weight_decay": 0.0001,
+      "frame_length": 512,
+      "hop_length": 256,
+      "n_fft": 512,
+      "snr_min": 0.0,
+      "snr_max": 10.0,
+      "adapter_hidden": 256,
+      "fixed_inject_indices": [
+        11,
+        9,
+        7
+      ],
+      "ce_weight": 0.65,
+      "phase_weight": 0.1,
+      "if_weight_low": 0.03,
+      "if_weight_high": 0.06,
+      "ce_gate_threshold": 8.8,
+      "phase_warmup_steps": 2,
+      "eval_every_steps": 0,
+      "acoustic_lr_scale": 1.0,
+      "skip_zero_step_eval": false,
+      "warm_start_unfreeze_nac_conv_blocks": 0,
+      "warm_start_unfreeze_nac_io": false,
+      "warm_start_unfreeze_dit_last_blocks": 2,
+      "report_json": "experiments/phaseadapter_v36_probe/reports/v361_stageA_maggate_quick_seed57.json",
+      "variants": [
+        {
+          "name": "mag_gated_temporal_adalnzero",
+          "temporal_adapter": true,
+          "adapter_scale": 0.06,
+          "use_mag_gate": true
+        }
+      ]
+    },
+    "note": "V3.6.1 AdaLN-Zero deep integration probe (fixed 7/9/11 + static vs temporal adapter)"
+  },
+  "rows": [
+    {
+      "variant": {
+        "name": "mag_gated_temporal_adalnzero",
+        "temporal_adapter": true,
+        "adapter_scale": 0.06,
+        "use_mag_gate": true
+      },
+      "inject_block_indices": [
+        11,
+        9,
+        7
+      ],
+      "trainable_params": 3497280,
+      "avg_step_seconds": 0.7590593300032197,
+      "zero_step_baseline": {
+        "pesq": 1.0456887245178224,
+        "estoi": 0.24062954481252122,
+        "sdr": -3.4385622143745422,
+        "phase_rmse": 1.8134844779968262,
+        "eval_examples": 10.0
+      },
+      "zero_step_adapter": {
+        "pesq": 1.0424385786056518,
+        "estoi": 0.24351470284177146,
+        "sdr": -3.2427428364753723,
+        "phase_rmse": 1.8141236662864686,
+        "eval_examples": 10.0
+      },
+      "after_probe_adapter": {
+        "pesq": 1.0539293527603149,
+        "estoi": 0.2408891392449998,
+        "sdr": -3.133909448981285,
+        "phase_rmse": 1.8126316666603088,
+        "eval_examples": 10.0
+      },
+      "phase_correction_gain_vs_zero_adapter": 0.0014919996261597568,
+      "zero_step_pesq_drop_vs_baseline": -0.0032501459121705434,
+      "losses": [
+        {
+          "step": 1,
+          "ce": 8.69348430633545,
+          "phase": 1.5703238248825073,
+          "if": 1.5466747283935547,
+          "phase_weight_eff": 0.0,
+          "if_weight_eff": 0.0,
+          "total": 5.650764465332031
+        },
+        {
+          "step": 2,
+          "ce": 9.637715339660645,
+          "phase": 1.5592998266220093,
+          "if": 1.548746943473816,
+          "phase_weight_eff": 0.0,
+          "if_weight_eff": 0.0,
+          "total": 6.264514923095703
+        },
+        {
+          "step": 3,
+          "ce": 9.18184757232666,
+          "phase": 1.5628516674041748,
+          "if": 1.545811653137207,
+          "phase_weight_eff": 0.1,
+          "if_weight_eff": 0.03,
+          "total": 6.170860290527344
+        },
+        {
+          "step": 4,
+          "ce": 8.603981971740723,
+          "phase": 1.5570744276046753,
+          "if": 1.5437368154525757,
+          "phase_weight_eff": 0.1,
+          "if_weight_eff": 0.06,
+          "total": 5.840919494628906
+        },
+        {
+          "step": 5,
+          "ce": 8.357721328735352,
+          "phase": 1.5633656978607178,
+          "if": 1.5440456867218018,
+          "phase_weight_eff": 0.1,
+          "if_weight_eff": 0.06,
+          "total": 5.681498050689697
+        },
+        {
+          "step": 6,
+          "ce": 8.564189910888672,
+          "phase": 1.5648505687713623,
+          "if": 1.5365749597549438,
+          "phase_weight_eff": 0.1,
+          "if_weight_eff": 0.06,
+          "total": 5.815402984619141
+        },
+        {
+          "step": 7,
+          "ce": 8.479632377624512,
+          "phase": 1.562467336654663,
+          "if": 1.5435891151428223,
+          "phase_weight_eff": 0.1,
+          "if_weight_eff": 0.06,
+          "total": 5.760622501373291
+        },
+        {
+          "step": 8,
+          "ce": 8.347799301147461,
+          "phase": 1.560779333114624,
+          "if": 1.5416374206542969,
+          "phase_weight_eff": 0.1,
+          "if_weight_eff": 0.06,
+          "total": 5.67464542388916
+        },
+        {
+          "step": 9,
+          "ce": 8.160408020019531,
+          "phase": 1.570580005645752,
+          "if": 1.5463151931762695,
+          "phase_weight_eff": 0.1,
+          "if_weight_eff": 0.06,
+          "total": 5.554101467132568
+        },
+        {
+          "step": 10,
+          "ce": 8.133719444274902,
+          "phase": 1.5693213939666748,
+          "if": 1.5414730310440063,
+          "phase_weight_eff": 0.1,
+          "if_weight_eff": 0.06,
+          "total": 5.536337852478027
+        }
+      ],
+      "grad_probe": [
+        {
+          "step": 1,
+          "ada_zero_grad_norm_by_block": [
+            [
+              11,
+              0.2957915961742401
+            ],
+            [
+              9,
+              0.16631071269512177
+            ],
+            [
+              7,
+              0.11553025990724564
+            ]
+          ]
+        },
+        {
+          "step": 2,
+          "ada_zero_grad_norm_by_block": [
+            [
+              11,
+              0.26806640625
+            ],
+            [
+              9,
+              0.13517186045646667
+            ],
+            [
+              7,
+              0.10212279111146927
+            ]
+          ]
+        },
+        {
+          "step": 3,
+          "ada_zero_grad_norm_by_block": [
+            [
+              11,
+              0.2835005819797516
+            ],
+            [
+              9,
+              0.14618223905563354
+            ],
+            [
+              7,
+              0.09480482339859009
+            ]
+          ]
+        },
+        {
+          "step": 4,
+          "ada_zero_grad_norm_by_block": [
+            [
+              11,
+              0.2657005190849304
+            ],
+            [
+              9,
+              0.13644811511039734
+            ],
+            [
+              7,
+              0.08852169662714005
+            ]
+          ]
+        },
+        {
+          "step": 5,
+          "ada_zero_grad_norm_by_block": [
+            [
+              11,
+              0.26812583208084106
+            ],
+            [
+              9,
+              0.1403035670518875
+            ],
+            [
+              7,
+              0.10192646086215973
+            ]
+          ]
+        },
+        {
+          "step": 6,
+          "ada_zero_grad_norm_by_block": [
+            [
+              11,
+              0.2854071259498596
+            ],
+            [
+              9,
+              0.14484961330890656
+            ],
+            [
+              7,
+              0.10880791395902634
+            ]
+          ]
+        },
+        {
+          "step": 7,
+          "ada_zero_grad_norm_by_block": [
+            [
+              11,
+              0.25135287642478943
+            ],
+            [
+              9,
+              0.12779012322425842
+            ],
+            [
+              7,
+              0.08814147859811783
+            ]
+          ]
+        },
+        {
+          "step": 8,
+          "ada_zero_grad_norm_by_block": [
+            [
+              11,
+              0.2666492164134979
+            ],
+            [
+              9,
+              0.13155819475650787
+            ],
+            [
+              7,
+              0.09689366817474365
+            ]
+          ]
+        },
+        {
+          "step": 9,
+          "ada_zero_grad_norm_by_block": [
+            [
+              11,
+              0.25075042247772217
+            ],
+            [
+              9,
+              0.12814652919769287
+            ],
+            [
+              7,
+              0.08764385432004929
+            ]
+          ]
+        },
+        {
+          "step": 10,
+          "ada_zero_grad_norm_by_block": [
+            [
+              11,
+              0.2566734254360199
+            ],
+            [
+              9,
+              0.12325315922498703
+            ],
+            [
+              7,
+              0.09110476076602936
+            ]
+          ]
+        }
+      ],
+      "eval_curve": []
+    }
+  ]
+}

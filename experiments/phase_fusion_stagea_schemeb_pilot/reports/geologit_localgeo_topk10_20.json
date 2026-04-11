@@ -1,0 +1,134 @@
+{
+  "meta": {
+    "device": "cuda",
+    "mode": "cosine",
+    "start_layer_zero_based": 2,
+    "train_steps": 40,
+    "batch_size": 4,
+    "probe_examples": 20,
+    "solve_steps": 32,
+    "lr": 0.0002,
+    "proximity_temp": 0.35,
+    "proximity_weight": 1.0,
+    "ce_weight": 0.5,
+    "direction_weight": 0.5,
+    "dist_weight": 0.1,
+    "sim_scale": 6.0,
+    "topk_lock": 10,
+    "lock_fill": -10000.0,
+    "logits_scale": 0.28,
+    "config": {
+      "seed": 42,
+      "fs": 16000,
+      "segment_length": 4.0,
+      "speech_dir": "data/chunks/bigspeech/",
+      "noise_dir": "data/chunks/bignoise/",
+      "layered_cfg": "configs/addse-s-mydata-layered-ft-pesq20.yaml",
+      "layered_ckpt": "logs/ft-pesq20-3layer/checkpoints/epoch=09-val_pesq=1.494.ckpt",
+      "phase_cnn_ckpt": "experiments/phase_branch2/weights/phase_cnn_branch2.pt",
+      "use_scheme_b": true,
+      "offset_start_layer": 1,
+      "alpha_init_value": 0.1,
+      "acoustic_lr_scale": 2.0,
+      "train_batch_size": 4,
+      "max_epochs": 1,
+      "train_batches_per_epoch": 100,
+      "val_examples_per_epoch": 60,
+      "eval_examples": 60,
+      "solve_steps": 32,
+      "num_workers": 0,
+      "lr": 0.0001,
+      "logits_scale": 0.28,
+      "lambda_ce_branch": 0.05,
+      "lambda_alpha_polar": 0.02,
+      "entropy_gate_power": 1.5,
+      "alpha_max": 0.12,
+      "low_rank_dim": 128,
+      "gate_hidden": 128,
+      "snr_min": 0.0,
+      "snr_max": 10.0,
+      "frame_length": 512,
+      "hop_length": 256,
+      "n_fft": 512,
+      "offset_head_last_ckpt": "experiments/phase_fusion_stagea_schemeb_pilot/weights/offset_head_last.pt",
+      "gate_last_ckpt": "experiments/phase_fusion_stagea_schemeb_pilot/weights/gate_last.pt",
+      "offset_head_best_ckpt": "experiments/phase_fusion_stagea_schemeb_pilot/weights/offset_head_best_pesq.pt",
+      "gate_best_ckpt": "experiments/phase_fusion_stagea_schemeb_pilot/weights/gate_best_pesq.pt",
+      "report_json": "experiments/phase_fusion_stagea_schemeb_pilot/reports/report_60_stagea_pilot.json"
+    }
+  },
+  "before": {
+    "examples": 20,
+    "cos_delta_to_ideal_mean": -0.008644341677427291,
+    "flip_rate_selected_layers": 0.996625,
+    "gentle_flip_audit": {
+      "flip_rate": 0.9966250000000001,
+      "changed": 7973,
+      "distance_mean": 8.586214542388916,
+      "distance_p95": 11.56765022277832
+    }
+  },
+  "after": {
+    "examples": 20,
+    "cos_delta_to_ideal_mean": -0.00846756345126778,
+    "flip_rate_selected_layers": 0.997625,
+    "gentle_flip_audit": {
+      "flip_rate": 0.997625,
+      "changed": 7981,
+      "distance_mean": 8.828938055038453,
+      "distance_p95": 11.74805932044983
+    }
+  },
+  "delta": {
+    "cos_delta_to_ideal_mean": 0.00017677822615951196,
+    "flip_rate_selected_layers": 0.0010000000000000009,
+    "distance_mean": 0.24272351264953684
+  },
+  "train_log": [
+    {
+      "step": 1,
+      "loss": 3901.75537109375,
+      "ce_hard": 2595.920166015625,
+      "loss_proximity": 2595.92041015625,
+      "loss_direction": 1.011532187461853,
+      "loss_dist": 73.69071197509766,
+      "cos_delta_to_ideal": -0.011532201431691647
+    },
+    {
+      "step": 10,
+      "loss": 3899.104736328125,
+      "ce_hard": 2593.781494140625,
+      "loss_proximity": 2593.78125,
+      "loss_direction": 1.0115108489990234,
+      "loss_dist": 79.2708740234375,
+      "cos_delta_to_ideal": -0.011510861106216908
+    },
+    {
+      "step": 20,
+      "loss": 3990.528076171875,
+      "ce_hard": 2654.7265625,
+      "loss_proximity": 2654.72607421875,
+      "loss_direction": 1.0103464126586914,
+      "loss_dist": 79.3359375,
+      "cos_delta_to_ideal": -0.010346418246626854
+    },
+    {
+      "step": 30,
+      "loss": 3966.624267578125,
+      "ce_hard": 2638.7490234375,
+      "loss_proximity": 2638.7490234375,
+      "loss_direction": 1.0096209049224854,
+      "loss_dist": 79.9573974609375,
+      "cos_delta_to_ideal": -0.00962087232619524
+    },
+    {
+      "step": 40,
+      "loss": 3992.558837890625,
+      "ce_hard": 2656.154296875,
+      "loss_proximity": 2656.154052734375,
+      "loss_direction": 1.0095655918121338,
+      "loss_dist": 78.22852325439453,
+      "cos_delta_to_ideal": -0.009565603919327259
+    }
+  ]
+}

@@ -1,0 +1,349 @@
+{
+  "meta": {
+    "device": "cuda",
+    "config": {
+      "seed": 42,
+      "fs": 16000,
+      "segment_length": 1.0,
+      "speech_dir": "data/chunks/bigspeech/",
+      "noise_dir": "data/chunks/bignoise/",
+      "layered_cfg": "configs/addse-s-mydata-layered-ft-pesq20.yaml",
+      "layered_ckpt": "logs/ft-pesq20-3layer/checkpoints/epoch=09-val_pesq=1.494.ckpt",
+      "phase_cnn_ckpt": "experiments/phase_branch2/weights/phase_cnn_branch2.pt",
+      "train_batch_size": 2,
+      "train_steps": 4,
+      "eval_examples": 5,
+      "solve_steps": 2,
+      "num_workers": 0,
+      "lr": 0.00012,
+      "weight_decay": 0.0001,
+      "frame_length": 512,
+      "hop_length": 256,
+      "n_fft": 512,
+      "snr_min": 0.0,
+      "snr_max": 10.0,
+      "adapter_hidden": 256,
+      "fixed_inject_indices": [
+        11,
+        9,
+        7
+      ],
+      "ce_weight": 1.0,
+      "phase_weight": 0.15,
+      "if_weight_low": 0.02,
+      "if_weight_high": 0.1,
+      "ce_gate_threshold": 9.9,
+      "phase_warmup_steps": 0,
+      "eval_every_steps": 100,
+      "acoustic_lr_scale": 1.0,
+      "report_json": "experiments/phaseadapter_v36_probe/reports/v361_adalnzero_probe_tiny_seed42.json",
+      "variants": [
+        {
+          "name": "static_adalnzero",
+          "temporal_adapter": false,
+          "adapter_scale": 0.05
+        },
+        {
+          "name": "temporal_adalnzero",
+          "temporal_adapter": true,
+          "adapter_scale": 0.05
+        }
+      ]
+    },
+    "note": "V3.6.1 AdaLN-Zero deep integration probe (fixed 7/9/11 + static vs temporal adapter)"
+  },
+  "rows": [
+    {
+      "variant": {
+        "name": "static_adalnzero",
+        "temporal_adapter": false,
+        "adapter_scale": 0.05
+      },
+      "inject_block_indices": [
+        11,
+        9,
+        7
+      ],
+      "trainable_params": 1506752,
+      "avg_step_seconds": 0.17112112500035437,
+      "zero_step_baseline": {
+        "pesq": 1.049266505241394,
+        "estoi": 0.16866470677890644,
+        "sdr": -4.353430777788162,
+        "phase_rmse": 1.8158040046691895,
+        "eval_examples": 5.0
+      },
+      "zero_step_adapter": {
+        "pesq": 1.040321445465088,
+        "estoi": 0.20131993232411607,
+        "sdr": -3.8762307167053223,
+        "phase_rmse": 1.8103153467178346,
+        "eval_examples": 5.0
+      },
+      "after_probe_adapter": {
+        "pesq": 1.0463221549987793,
+        "estoi": 0.24331507232890132,
+        "sdr": -4.311783164739609,
+        "phase_rmse": 1.8096991300582885,
+        "eval_examples": 5.0
+      },
+      "phase_correction_gain_vs_zero_adapter": 0.0006162166595460317,
+      "zero_step_pesq_drop_vs_baseline": -0.008945059776306108,
+      "losses": [
+        {
+          "step": 1,
+          "ce": 10.744407653808594,
+          "phase": 1.5505931377410889,
+          "if": 1.5398712158203125,
+          "phase_weight_eff": 0.15,
+          "if_weight_eff": 0.02,
+          "total": 11.007793426513672
+        },
+        {
+          "step": 2,
+          "ce": 11.697810173034668,
+          "phase": 1.5798527002334595,
+          "if": 1.5356708765029907,
+          "phase_weight_eff": 0.15,
+          "if_weight_eff": 0.02,
+          "total": 11.965500831604004
+        },
+        {
+          "step": 3,
+          "ce": 9.066038131713867,
+          "phase": 1.551396369934082,
+          "if": 1.544258952140808,
+          "phase_weight_eff": 0.15,
+          "if_weight_eff": 0.1,
+          "total": 9.453173637390137
+        },
+        {
+          "step": 4,
+          "ce": 9.162886619567871,
+          "phase": 1.5480589866638184,
+          "if": 1.5311843156814575,
+          "phase_weight_eff": 0.15,
+          "if_weight_eff": 0.1,
+          "total": 9.548213958740234
+        }
+      ],
+      "grad_probe": [
+        {
+          "step": 1,
+          "ada_zero_grad_norm_by_block": [
+            [
+              11,
+              0.3739379644393921
+            ],
+            [
+              9,
+              0.1993887722492218
+            ],
+            [
+              7,
+              0.16132082045078278
+            ]
+          ]
+        },
+        {
+          "step": 2,
+          "ada_zero_grad_norm_by_block": [
+            [
+              11,
+              0.34160685539245605
+            ],
+            [
+              9,
+              0.19580687582492828
+            ],
+            [
+              7,
+              0.19344942271709442
+            ]
+          ]
+        },
+        {
+          "step": 3,
+          "ada_zero_grad_norm_by_block": [
+            [
+              11,
+              0.28064799308776855
+            ],
+            [
+              9,
+              0.14979954063892365
+            ],
+            [
+              7,
+              0.12350139021873474
+            ]
+          ]
+        },
+        {
+          "step": 4,
+          "ada_zero_grad_norm_by_block": [
+            [
+              11,
+              0.3586704134941101
+            ],
+            [
+              9,
+              0.17820362746715546
+            ],
+            [
+              7,
+              0.1392669677734375
+            ]
+          ]
+        }
+      ],
+      "eval_curve": []
+    },
+    {
+      "variant": {
+        "name": "temporal_adalnzero",
+        "temporal_adapter": true,
+        "adapter_scale": 0.05
+      },
+      "inject_block_indices": [
+        11,
+        9,
+        7
+      ],
+      "trainable_params": 1901504,
+      "avg_step_seconds": 0.15712409999105148,
+      "zero_step_baseline": {
+        "pesq": 1.046761441230774,
+        "estoi": 0.2258538138970331,
+        "sdr": -4.418923616409302,
+        "phase_rmse": 1.823186731338501,
+        "eval_examples": 5.0
+      },
+      "zero_step_adapter": {
+        "pesq": 1.0523452520370484,
+        "estoi": 0.22542297365407862,
+        "sdr": -3.893394708633423,
+        "phase_rmse": 1.8159839391708374,
+        "eval_examples": 5.0
+      },
+      "after_probe_adapter": {
+        "pesq": 1.0493294954299928,
+        "estoi": 0.14071640288435333,
+        "sdr": -5.424952805042267,
+        "phase_rmse": 1.8090891122817994,
+        "eval_examples": 5.0
+      },
+      "phase_correction_gain_vs_zero_adapter": 0.006894826889038086,
+      "zero_step_pesq_drop_vs_baseline": 0.0055838108062744585,
+      "losses": [
+        {
+          "step": 1,
+          "ce": 10.085590362548828,
+          "phase": 1.5727907419204712,
+          "if": 1.5438493490219116,
+          "phase_weight_eff": 0.15,
+          "if_weight_eff": 0.02,
+          "total": 10.352386474609375
+        },
+        {
+          "step": 2,
+          "ce": 10.858636856079102,
+          "phase": 1.5834585428237915,
+          "if": 1.5377075672149658,
+          "phase_weight_eff": 0.15,
+          "if_weight_eff": 0.02,
+          "total": 11.126909255981445
+        },
+        {
+          "step": 3,
+          "ce": 10.384791374206543,
+          "phase": 1.5603076219558716,
+          "if": 1.5440611839294434,
+          "phase_weight_eff": 0.15,
+          "if_weight_eff": 0.02,
+          "total": 10.649718284606934
+        },
+        {
+          "step": 4,
+          "ce": 9.1132230758667,
+          "phase": 1.5635275840759277,
+          "if": 1.5422658920288086,
+          "phase_weight_eff": 0.15,
+          "if_weight_eff": 0.1,
+          "total": 9.501978874206543
+        }
+      ],
+      "grad_probe": [
+        {
+          "step": 1,
+          "ada_zero_grad_norm_by_block": [
+            [
+              11,
+              0.42987963557243347
+            ],
+            [
+              9,
+              0.22173993289470673
+            ],
+            [
+              7,
+              0.18637637794017792
+            ]
+          ]
+        },
+        {
+          "step": 2,
+          "ada_zero_grad_norm_by_block": [
+            [
+              11,
+              0.31935420632362366
+            ],
+            [
+              9,
+              0.18079018592834473
+            ],
+            [
+              7,
+              0.15100787580013275
+            ]
+          ]
+        },
+        {
+          "step": 3,
+          "ada_zero_grad_norm_by_block": [
+            [
+              11,
+              0.33788472414016724
+            ],
+            [
+              9,
+              0.1747090220451355
+            ],
+            [
+              7,
+              0.13427405059337616
+            ]
+          ]
+        },
+        {
+          "step": 4,
+          "ada_zero_grad_norm_by_block": [
+            [
+              11,
+              0.42776134610176086
+            ],
+            [
+              9,
+              0.21428465843200684
+            ],
+            [
+              7,
+              0.1613493412733078
+            ]
+          ]
+        }
+      ],
+      "eval_curve": []
+    }
+  ]
+}

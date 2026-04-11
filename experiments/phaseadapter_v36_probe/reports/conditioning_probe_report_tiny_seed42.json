@@ -1,0 +1,518 @@
+{
+  "meta": {
+    "device": "cuda",
+    "config": {
+      "seed": 42,
+      "fs": 16000,
+      "segment_length": 1.0,
+      "speech_dir": "data/chunks/bigspeech/",
+      "noise_dir": "data/chunks/bignoise/",
+      "layered_cfg": "configs/addse-s-mydata-layered-ft-pesq20.yaml",
+      "layered_ckpt": "logs/ft-pesq20-3layer/checkpoints/epoch=09-val_pesq=1.494.ckpt",
+      "phase_cnn_ckpt": "experiments/phase_branch2/weights/phase_cnn_branch2.pt",
+      "train_batch_size": 2,
+      "train_steps": 4,
+      "eval_examples": 3,
+      "solve_steps": 2,
+      "num_workers": 0,
+      "lr": 0.00012,
+      "weight_decay": 0.0001,
+      "frame_length": 512,
+      "hop_length": 256,
+      "n_fft": 512,
+      "snr_min": 0.0,
+      "snr_max": 10.0,
+      "adapter_hidden": 256,
+      "ce_weight": 1.0,
+      "phase_weight": 0.15,
+      "if_weight": 0.1,
+      "report_json": "experiments/phaseadapter_v36_probe/reports/conditioning_probe_report_tiny_seed42.json",
+      "variants": [
+        {
+          "name": "alt3_hybrid",
+          "inject_mode": "adaln_hybrid",
+          "inject_num_blocks": 3,
+          "inject_stride": 2,
+          "adapter_scale": 0.05,
+          "unfreeze_last_n_blocks": 0
+        },
+        {
+          "name": "last4_hybrid",
+          "inject_mode": "adaln_hybrid",
+          "inject_num_blocks": 4,
+          "inject_stride": 1,
+          "adapter_scale": 0.05,
+          "unfreeze_last_n_blocks": 0
+        },
+        {
+          "name": "last4_gated",
+          "inject_mode": "adaln_gated",
+          "inject_num_blocks": 4,
+          "inject_stride": 1,
+          "adapter_scale": 0.05,
+          "unfreeze_last_n_blocks": 1
+        }
+      ]
+    },
+    "note": "Short-term conditioning probe for injection location and objective alignment."
+  },
+  "rows": [
+    {
+      "variant": {
+        "name": "alt3_hybrid",
+        "inject_mode": "adaln_hybrid",
+        "inject_num_blocks": 3,
+        "inject_stride": 2,
+        "adapter_scale": 0.05,
+        "unfreeze_last_n_blocks": 0
+      },
+      "inject_block_indices": [
+        11,
+        9,
+        7
+      ],
+      "trainable_params": 1248128,
+      "unfrozen_main_params": 0,
+      "avg_step_seconds": 0.19013039999845205,
+      "zero_step_baseline": {
+        "pesq": 1.0514814058939617,
+        "estoi": 0.1908491649833818,
+        "sdr": -4.770374695460002,
+        "phase_rmse": 1.823352297147115,
+        "eval_examples": 3.0
+      },
+      "zero_step_adapter": {
+        "pesq": 1.0603614648183186,
+        "estoi": 0.06242356701910214,
+        "sdr": -4.615896046161652,
+        "phase_rmse": 1.826678951581319,
+        "eval_examples": 3.0
+      },
+      "after_probe_adapter": {
+        "pesq": 1.0509236256281536,
+        "estoi": 0.17269090191250835,
+        "sdr": -4.777987102667491,
+        "phase_rmse": 1.8245235284169514,
+        "eval_examples": 3.0
+      },
+      "phase_correction_gain_vs_zero_adapter": 0.0021554231643676758,
+      "zero_step_pesq_drop_vs_baseline": 0.008880058924356948,
+      "losses": [
+        {
+          "step": 1,
+          "ce": 10.68212890625,
+          "phase": 1.573329210281372,
+          "if": 1.5356351137161255,
+          "total": 11.071691513061523
+        },
+        {
+          "step": 2,
+          "ce": 11.564493179321289,
+          "phase": 1.5318686962127686,
+          "if": 1.5392396450042725,
+          "total": 11.948197364807129
+        },
+        {
+          "step": 3,
+          "ce": 9.789949417114258,
+          "phase": 1.5786417722702026,
+          "if": 1.5341846942901611,
+          "total": 10.180164337158203
+        },
+        {
+          "step": 4,
+          "ce": 9.994020462036133,
+          "phase": 1.570963740348816,
+          "if": 1.5340007543563843,
+          "total": 10.383065223693848
+        }
+      ],
+      "grad_probe": [
+        {
+          "step": 1,
+          "cond_proj_grad_norm_by_block": [
+            [
+              11,
+              0.029359223321080208
+            ],
+            [
+              9,
+              0.0071913739666342735
+            ],
+            [
+              7,
+              0.009703918360173702
+            ]
+          ]
+        },
+        {
+          "step": 2,
+          "cond_proj_grad_norm_by_block": [
+            [
+              11,
+              0.033700693398714066
+            ],
+            [
+              9,
+              0.009033468551933765
+            ],
+            [
+              7,
+              0.007201588712632656
+            ]
+          ]
+        },
+        {
+          "step": 3,
+          "cond_proj_grad_norm_by_block": [
+            [
+              11,
+              0.020461788401007652
+            ],
+            [
+              9,
+              0.0077506741508841515
+            ],
+            [
+              7,
+              0.005306445527821779
+            ]
+          ]
+        },
+        {
+          "step": 4,
+          "cond_proj_grad_norm_by_block": [
+            [
+              11,
+              0.021983331069350243
+            ],
+            [
+              9,
+              0.006410662084817886
+            ],
+            [
+              7,
+              0.007079399656504393
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "variant": {
+        "name": "last4_hybrid",
+        "inject_mode": "adaln_hybrid",
+        "inject_num_blocks": 4,
+        "inject_stride": 1,
+        "adapter_scale": 0.05,
+        "unfreeze_last_n_blocks": 0
+      },
+      "inject_block_indices": [
+        11,
+        10,
+        9,
+        8
+      ],
+      "trainable_params": 1285568,
+      "unfrozen_main_params": 0,
+      "avg_step_seconds": 0.17491052499826765,
+      "zero_step_baseline": {
+        "pesq": 1.0466814438501995,
+        "estoi": 0.1467478816529297,
+        "sdr": -4.016377031803131,
+        "phase_rmse": 1.8240575790405273,
+        "eval_examples": 3.0
+      },
+      "zero_step_adapter": {
+        "pesq": 1.059038241704305,
+        "estoi": 0.21078236782089452,
+        "sdr": -5.6509135166804,
+        "phase_rmse": 1.8099819819132488,
+        "eval_examples": 3.0
+      },
+      "after_probe_adapter": {
+        "pesq": 1.040567398071289,
+        "estoi": 0.1481842325208528,
+        "sdr": -4.712086419264476,
+        "phase_rmse": 1.8148672978083293,
+        "eval_examples": 3.0
+      },
+      "phase_correction_gain_vs_zero_adapter": -0.004885315895080566,
+      "zero_step_pesq_drop_vs_baseline": 0.012356797854105483,
+      "losses": [
+        {
+          "step": 1,
+          "ce": 10.323129653930664,
+          "phase": 1.561010479927063,
+          "if": 1.5416609048843384,
+          "total": 10.711447715759277
+        },
+        {
+          "step": 2,
+          "ce": 11.289892196655273,
+          "phase": 1.5475748777389526,
+          "if": 1.5391632318496704,
+          "total": 11.675944328308105
+        },
+        {
+          "step": 3,
+          "ce": 9.931668281555176,
+          "phase": 1.5768074989318848,
+          "if": 1.550265908241272,
+          "total": 10.32321548461914
+        },
+        {
+          "step": 4,
+          "ce": 9.691991806030273,
+          "phase": 1.570491075515747,
+          "if": 1.5423429012298584,
+          "total": 10.081799507141113
+        }
+      ],
+      "grad_probe": [
+        {
+          "step": 1,
+          "cond_proj_grad_norm_by_block": [
+            [
+              11,
+              0.02487616427242756
+            ],
+            [
+              10,
+              0.017321499064564705
+            ],
+            [
+              9,
+              0.006329797208309174
+            ],
+            [
+              8,
+              0.018556855618953705
+            ]
+          ]
+        },
+        {
+          "step": 2,
+          "cond_proj_grad_norm_by_block": [
+            [
+              11,
+              0.03505515679717064
+            ],
+            [
+              10,
+              0.01642310619354248
+            ],
+            [
+              9,
+              0.0117506617680192
+            ],
+            [
+              8,
+              0.0124433021992445
+            ]
+          ]
+        },
+        {
+          "step": 3,
+          "cond_proj_grad_norm_by_block": [
+            [
+              11,
+              0.01841416396200657
+            ],
+            [
+              10,
+              0.011690923012793064
+            ],
+            [
+              9,
+              0.00592748774215579
+            ],
+            [
+              8,
+              0.004991300869733095
+            ]
+          ]
+        },
+        {
+          "step": 4,
+          "cond_proj_grad_norm_by_block": [
+            [
+              11,
+              0.018928654491901398
+            ],
+            [
+              10,
+              0.012912464328110218
+            ],
+            [
+              9,
+              0.005352717824280262
+            ],
+            [
+              8,
+              0.011564823798835278
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "variant": {
+        "name": "last4_gated",
+        "inject_mode": "adaln_gated",
+        "inject_num_blocks": 4,
+        "inject_stride": 1,
+        "adapter_scale": 0.05,
+        "unfreeze_last_n_blocks": 1
+      },
+      "inject_block_indices": [
+        11,
+        10,
+        9,
+        8
+      ],
+      "trainable_params": 1803776,
+      "unfrozen_main_params": 666432,
+      "avg_step_seconds": 0.1719986250027432,
+      "zero_step_baseline": {
+        "pesq": 1.0499879916508992,
+        "estoi": 0.16762828314562742,
+        "sdr": -5.848613083362579,
+        "phase_rmse": 1.8139574527740479,
+        "eval_examples": 3.0
+      },
+      "zero_step_adapter": {
+        "pesq": 1.047506848971049,
+        "estoi": 0.2763819144376148,
+        "sdr": -6.2691547473271685,
+        "phase_rmse": 1.810004989306132,
+        "eval_examples": 3.0
+      },
+      "after_probe_adapter": {
+        "pesq": 1.0447439750035603,
+        "estoi": 0.1564316950972982,
+        "sdr": -5.061872551838557,
+        "phase_rmse": 1.8195433616638184,
+        "eval_examples": 3.0
+      },
+      "phase_correction_gain_vs_zero_adapter": -0.009538372357686287,
+      "zero_step_pesq_drop_vs_baseline": -0.0024811426798501124,
+      "losses": [
+        {
+          "step": 1,
+          "ce": 9.873710632324219,
+          "phase": 1.5438727140426636,
+          "if": 1.5380924940109253,
+          "total": 10.259100914001465
+        },
+        {
+          "step": 2,
+          "ce": 10.978137969970703,
+          "phase": 1.5428799390792847,
+          "if": 1.5357191562652588,
+          "total": 11.363142013549805
+        },
+        {
+          "step": 3,
+          "ce": 9.978154182434082,
+          "phase": 1.566022276878357,
+          "if": 1.5333662033081055,
+          "total": 10.36639404296875
+        },
+        {
+          "step": 4,
+          "ce": 8.845695495605469,
+          "phase": 1.5620942115783691,
+          "if": 1.5510036945343018,
+          "total": 9.23511028289795
+        }
+      ],
+      "grad_probe": [
+        {
+          "step": 1,
+          "cond_proj_grad_norm_by_block": [
+            [
+              11,
+              0.026299308985471725
+            ],
+            [
+              10,
+              0.015673574060201645
+            ],
+            [
+              9,
+              0.007107042707502842
+            ],
+            [
+              8,
+              0.01356329582631588
+            ]
+          ]
+        },
+        {
+          "step": 2,
+          "cond_proj_grad_norm_by_block": [
+            [
+              11,
+              0.034106962382793427
+            ],
+            [
+              10,
+              0.015681829303503036
+            ],
+            [
+              9,
+              0.0077958619222044945
+            ],
+            [
+              8,
+              0.0100881801918149
+            ]
+          ]
+        },
+        {
+          "step": 3,
+          "cond_proj_grad_norm_by_block": [
+            [
+              11,
+              0.02587217092514038
+            ],
+            [
+              10,
+              0.01282406970858574
+            ],
+            [
+              9,
+              0.006763549521565437
+            ],
+            [
+              8,
+              0.00771097419783473
+            ]
+          ]
+        },
+        {
+          "step": 4,
+          "cond_proj_grad_norm_by_block": [
+            [
+              11,
+              0.01947864145040512
+            ],
+            [
+              10,
+              0.011796724982559681
+            ],
+            [
+              9,
+              0.005916129797697067
+            ],
+            [
+              8,
+              0.009785996749997139
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

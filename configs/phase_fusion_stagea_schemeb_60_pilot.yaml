@@ -1,0 +1,46 @@
+seed: 42
+fs: 16000
+segment_length: 4.0
+
+speech_dir: data/chunks/bigspeech/
+noise_dir: data/chunks/bignoise/
+
+layered_cfg: configs/addse-s-mydata-layered-ft-pesq20.yaml
+layered_ckpt: logs/ft-pesq20-3layer/checkpoints/epoch=09-val_pesq=1.494.ckpt
+phase_cnn_ckpt: experiments/phase_branch2/weights/phase_cnn_branch2.pt
+
+use_scheme_b: true
+offset_start_layer: 1
+alpha_init_value: 0.1
+acoustic_lr_scale: 2.0
+
+train_batch_size: 4
+max_epochs: 1
+train_batches_per_epoch: 100
+val_examples_per_epoch: 60
+eval_examples: 60
+solve_steps: 32
+num_workers: 0
+
+lr: 0.00010
+logits_scale: 0.28
+lambda_ce_branch: 0.05
+lambda_alpha_polar: 0.02
+entropy_gate_power: 1.5
+alpha_max: 0.12
+
+low_rank_dim: 128
+gate_hidden: 128
+
+snr_min: 0.0
+snr_max: 10.0
+
+frame_length: 512
+hop_length: 256
+n_fft: 512
+
+offset_head_last_ckpt: experiments/phase_fusion_stagea_schemeb_pilot/weights/offset_head_last.pt
+gate_last_ckpt: experiments/phase_fusion_stagea_schemeb_pilot/weights/gate_last.pt
+offset_head_best_ckpt: experiments/phase_fusion_stagea_schemeb_pilot/weights/offset_head_best_pesq.pt
+gate_best_ckpt: experiments/phase_fusion_stagea_schemeb_pilot/weights/gate_best_pesq.pt
+report_json: experiments/phase_fusion_stagea_schemeb_pilot/reports/report_60_stagea_pilot.json

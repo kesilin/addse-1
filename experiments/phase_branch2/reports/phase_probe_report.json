@@ -1,0 +1,24 @@
+{
+  "quantizer_baseline": {
+    "eval_examples": 100.0,
+    "phase_rmse": 1.7710642051696777,
+    "phase_cos_alignment": 0.04476522731594741,
+    "group_delay_mae": 2.5525952267646788,
+    "plv": 0.04572859515435994,
+    "feature_alignment_to_clean": 0.4199625173956156
+  },
+  "cnn_phase_residual": {
+    "eval_examples": 100.0,
+    "phase_rmse": 1.420333470106125,
+    "phase_cos_alignment": 0.3564221367239952,
+    "group_delay_mae": 2.1824565148353576,
+    "plv": 0.3564361719787121,
+    "phase_feature_alignment_to_clean": 0.35642215177416803
+  },
+  "delta_cnn_minus_quantizer": {
+    "phase_rmse": -0.3507307350635527,
+    "phase_cos_alignment": 0.3116569094080478,
+    "group_delay_mae": -0.37013871192932113,
+    "plv": 0.3107075768243521
+  }
+}

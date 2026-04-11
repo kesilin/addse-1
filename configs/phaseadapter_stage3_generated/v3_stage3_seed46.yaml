@@ -1,0 +1,40 @@
+seed: 46
+fs: 16000
+segment_length: 1.0
+speech_dir: data/chunks/bigspeech/
+noise_dir: data/chunks/bignoise/
+baseline_cfg: configs/addse-s-mydata-eval-3metrics.yaml
+baseline_ckpt: logs/addse-edbase-quick/checkpoints/addse-s.ckpt
+layered_cfg: configs/addse-s-mydata-layered-ft-pesq20.yaml
+layered_ckpt: logs/ft-pesq20-3layer/checkpoints/epoch=09-val_pesq=1.494.ckpt
+phase_cnn_ckpt: experiments/phase_branch2/weights/phase_cnn_branch2.pt
+init_adapter_ckpt: experiments/phase_fusion_scheme1_v2/weights/adapter.pt
+adapter_ckpt: experiments/phaseadapter_v35_probe/weights/phase_adapter_stage3_v3_seed46.pt
+report_json: experiments/phaseadapter_v35_probe/reports/probe_report_stage3_v3_seed46.json
+train_steps: 200
+train_batch_size: 2
+eval_examples: 300
+num_workers: 0
+lr: 0.00012
+lambda_phase: 0.35
+band_loss_weight: 0.45
+fusion_scale_layered: 0.16
+adapter_hidden: 512
+use_dilation: true
+dilation_rates:
+- 1
+- 2
+- 4
+phase_delta_clip: 1.2
+band_edges:
+- 64
+- 128
+band_weights:
+- 0.6
+- 1.0
+- 1.4
+snr_min: 0.0
+snr_max: 10.0
+frame_length: 512
+hop_length: 256
+n_fft: 512

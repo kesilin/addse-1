@@ -1,0 +1,51 @@
+seed: 57
+
+fs: 16000
+segment_length: 4.0
+speech_dir: data/chunks/bigspeech/
+noise_dir: data/chunks/bignoise/
+
+layered_cfg: configs/addse-s-mydata-layered-ft-pesq20.yaml
+layered_ckpt: logs/ft-pesq20-3layer/checkpoints/epoch=09-val_pesq=1.494.ckpt
+phase_cnn_ckpt: experiments/phase_branch2/weights/phase_cnn_branch2.pt
+
+train_batch_size: 2
+train_steps: 50000
+eval_examples: 200
+solve_steps: 16
+num_workers: 0
+
+lr: 0.00008
+weight_decay: 0.0001
+
+frame_length: 512
+hop_length: 256
+n_fft: 512
+snr_min: 0.0
+snr_max: 10.0
+
+adapter_hidden: 256
+fixed_inject_indices: [11, 9, 7]
+
+ce_weight: 0.80
+phase_weight: 0.10
+if_weight_low: 0.03
+if_weight_high: 0.06
+ce_gate_threshold: 8.8
+phase_warmup_steps: 600
+eval_every_steps: 20
+print_every_steps: 20
+probe_eval_examples: 8
+acoustic_lr_scale: 1.0
+skip_zero_step_eval: false
+
+warm_start_unfreeze_nac_conv_blocks: 0
+warm_start_unfreeze_nac_io: false
+warm_start_unfreeze_dit_last_blocks: 4
+
+report_json: experiments/phaseadapter_v36_probe/reports/v361_stageAmid_candidate_long50k_seed57.json
+
+variants:
+  - name: temporal_adalnzero
+    temporal_adapter: true
+    adapter_scale: 0.06

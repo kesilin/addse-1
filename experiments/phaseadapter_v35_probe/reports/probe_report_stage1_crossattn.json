@@ -1,0 +1,67 @@
+{
+  "meta": {
+    "device": "cuda",
+    "config": {
+      "seed": 42,
+      "fs": 16000,
+      "segment_length": 4.0,
+      "speech_dir": "data/chunks/bigspeech/",
+      "noise_dir": "data/chunks/bignoise/",
+      "layered_cfg": "configs/addse-s-mydata-layered-ft-pesq20.yaml",
+      "layered_ckpt": "logs/ft-pesq20-3layer/checkpoints/epoch=09-val_pesq=1.494.ckpt",
+      "phase_cnn_ckpt": "experiments/phase_branch2/weights/phase_cnn_branch2.pt",
+      "train_batch_size": 2,
+      "train_steps": 40,
+      "eval_examples": 20,
+      "solve_steps": 16,
+      "num_workers": 0,
+      "lr": 0.00012,
+      "weight_decay": 0.0001,
+      "frame_length": 512,
+      "hop_length": 256,
+      "n_fft": 512,
+      "snr_min": 0.0,
+      "snr_max": 10.0,
+      "adapter_hidden": 256,
+      "inject_last_n_blocks": 1,
+      "inject_mode": "cross_attn",
+      "adapter_scale": 0.05,
+      "adapter_weight": "experiments/phaseadapter_v35_probe/weights/phase_adapter_stage1_crossattn.pt",
+      "report_json": "experiments/phaseadapter_v35_probe/reports/probe_report_stage1_crossattn.json"
+    },
+    "inject_mode": "cross_attn",
+    "inject_last_n_blocks": 1
+  },
+  "train_log": [
+    {
+      "step": 1,
+      "loss": 9.443105697631836
+    },
+    {
+      "step": 20,
+      "loss": 9.33717155456543
+    },
+    {
+      "step": 40,
+      "loss": 7.847355842590332
+    }
+  ],
+  "eval_baseline": {
+    "pesq": 1.045198780298233,
+    "estoi": 0.24735976601535897,
+    "sdr": -3.6010429859161377,
+    "eval_examples": 20.0
+  },
+  "eval_adapter": {
+    "pesq": 1.067217344045639,
+    "estoi": 0.29059275293047193,
+    "sdr": -2.6775880604982376,
+    "eval_examples": 20.0
+  },
+  "delta_adapter_minus_baseline": {
+    "pesq": 0.02201856374740596,
+    "estoi": 0.04323298691511296,
+    "sdr": 0.9234549254179001
+  },
+  "adapter_weight": "experiments/phaseadapter_v35_probe/weights/phase_adapter_stage1_crossattn.pt"
+}

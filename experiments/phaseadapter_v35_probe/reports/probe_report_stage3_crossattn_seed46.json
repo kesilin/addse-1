@@ -1,0 +1,99 @@
+{
+  "meta": {
+    "device": "cuda",
+    "config": {
+      "seed": 46,
+      "fs": 16000,
+      "segment_length": 1.0,
+      "speech_dir": "data/chunks/bigspeech/",
+      "noise_dir": "data/chunks/bignoise/",
+      "layered_cfg": "configs/addse-s-mydata-layered-ft-pesq20.yaml",
+      "layered_ckpt": "logs/ft-pesq20-3layer/checkpoints/epoch=09-val_pesq=1.494.ckpt",
+      "phase_cnn_ckpt": "experiments/phase_branch2/weights/phase_cnn_branch2.pt",
+      "train_batch_size": 2,
+      "train_steps": 200,
+      "eval_examples": 300,
+      "solve_steps": 8,
+      "num_workers": 0,
+      "lr": 0.00012,
+      "weight_decay": 0.0001,
+      "frame_length": 512,
+      "hop_length": 256,
+      "n_fft": 512,
+      "snr_min": 0.0,
+      "snr_max": 10.0,
+      "adapter_hidden": 256,
+      "inject_last_n_blocks": 1,
+      "inject_mode": "cross_attn",
+      "adapter_scale": 0.05,
+      "adapter_weight": "experiments/phaseadapter_v35_probe/weights/phase_adapter_stage3_crossattn_seed46.pt",
+      "report_json": "experiments/phaseadapter_v35_probe/reports/probe_report_stage3_crossattn_seed46.json"
+    },
+    "inject_mode": "cross_attn",
+    "inject_last_n_blocks": 1
+  },
+  "train_log": [
+    {
+      "step": 1,
+      "loss": 9.014335632324219
+    },
+    {
+      "step": 20,
+      "loss": 9.274860382080078
+    },
+    {
+      "step": 40,
+      "loss": 8.317981719970703
+    },
+    {
+      "step": 60,
+      "loss": 6.252885341644287
+    },
+    {
+      "step": 80,
+      "loss": 6.0541229248046875
+    },
+    {
+      "step": 100,
+      "loss": 5.946744918823242
+    },
+    {
+      "step": 120,
+      "loss": 6.156926155090332
+    },
+    {
+      "step": 140,
+      "loss": 5.861898899078369
+    },
+    {
+      "step": 160,
+      "loss": 6.162192344665527
+    },
+    {
+      "step": 180,
+      "loss": 5.9464874267578125
+    },
+    {
+      "step": 200,
+      "loss": 6.043531894683838
+    }
+  ],
+  "eval_baseline": {
+    "pesq": 1.0605487672487894,
+    "estoi": 0.25217915114676404,
+    "sdr": -3.8123821270962557,
+    "eval_examples": 300.0
+  },
+  "eval_adapter": {
+    "pesq": 1.2148911039034525,
+    "estoi": 0.4756217009136315,
+    "sdr": -4.874102152697742,
+    "eval_examples": 300.0
+  },
+  "delta_adapter_minus_baseline": {
+    "pesq": 0.15434233665466301,
+    "estoi": 0.22344254976686745,
+    "sdr": -1.0617200256014865
+  },
+  "adapter_weight": "experiments/phaseadapter_v35_probe/weights/phase_adapter_stage3_crossattn_seed46.pt"
+}

@@ -1,0 +1,96 @@
+{
+  "spec": {
+    "seeds": [
+      42,
+      43,
+      44,
+      45,
+      46
+    ],
+    "rounds": 5,
+    "train_steps": 200,
+    "eval_examples": 200,
+    "model": "v3.6.1 temporal_adalnzero only"
+  },
+  "rows": [
+    {
+      "seed": 42,
+      "after_probe_adapter": {
+        "pesq": 1.1934305983781814,
+        "estoi": 0.5360130133253117,
+        "sdr": -2.6905598597601057,
+        "phase_rmse": 1.794602671265602,
+        "eval_examples": 200.0
+      },
+      "zero_step_baseline": null,
+      "phase_correction_gain_vs_zero_adapter": null,
+      "zero_step_pesq_drop_vs_baseline": null,
+      "avg_step_seconds": 0.6167452225004673
+    },
+    {
+      "seed": 43,
+      "after_probe_adapter": {
+        "pesq": 1.1932618016004561,
+        "estoi": 0.5308689229856437,
+        "sdr": -3.021987424697727,
+        "phase_rmse": 1.7952221924066543,
+        "eval_examples": 200.0
+      },
+      "zero_step_baseline": null,
+      "phase_correction_gain_vs_zero_adapter": null,
+      "zero_step_pesq_drop_vs_baseline": null,
+      "avg_step_seconds": 0.5637609390007856
+    },
+    {
+      "seed": 44,
+      "after_probe_adapter": {
+        "pesq": 1.200113332271576,
+        "estoi": 0.5315570788217203,
+        "sdr": -2.8440137564204635,
+        "phase_rmse": 1.7947079199552536,
+        "eval_examples": 200.0
+      },
+      "zero_step_baseline": null,
+      "phase_correction_gain_vs_zero_adapter": null,
+      "zero_step_pesq_drop_vs_baseline": null,
+      "avg_step_seconds": 0.5002108865011542
+    },
+    {
+      "seed": 45,
+      "after_probe_adapter": {
+        "pesq": 1.2022646534442902,
+        "estoi": 0.5366287362636868,
+        "sdr": -2.609459421923384,
+        "phase_rmse": 1.7930967891216278,
+        "eval_examples": 200.0
+      },
+      "zero_step_baseline": null,
+      "phase_correction_gain_vs_zero_adapter": null,
+      "zero_step_pesq_drop_vs_baseline": null,
+      "avg_step_seconds": 0.48608087100015834
+    },
+    {
+      "seed": 46,
+      "after_probe_adapter": {
+        "pesq": 1.1881886219978333,
+        "estoi": 0.5469397071839402,
+        "sdr": -2.28153420612216,
+        "phase_rmse": 1.7912202966213226,
+        "eval_examples": 200.0
+      },
+      "zero_step_baseline": null,
+      "phase_correction_gain_vs_zero_adapter": null,
+      "zero_step_pesq_drop_vs_baseline": null,
+      "avg_step_seconds": 0.4887157624984684
+    }
+  ],
+  "aggregate": {
+    "after_probe_adapter_mean": {
+      "pesq": 1.1954518015384674,
+      "estoi": 0.5364014917160606,
+      "sdr": -2.689510933784768,
+      "phase_rmse": 1.7937699738740922
+    },
+    "avg_step_seconds_mean": 0.5311027363002068
+  }
+}

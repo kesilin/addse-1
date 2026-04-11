@@ -1,0 +1,54 @@
+seed: 42
+
+fs: 16000
+segment_length: 1.0
+speech_dir: data/chunks/bigspeech/
+noise_dir: data/chunks/bignoise/
+
+layered_cfg: configs/addse-s-mydata-layered-ft-pesq20.yaml
+layered_ckpt: logs/ft-pesq20-3layer/checkpoints/epoch=09-val_pesq=1.494.ckpt
+phase_cnn_ckpt: experiments/phase_branch2/weights/phase_cnn_branch2.pt
+
+train_batch_size: 2
+train_steps: 4
+eval_examples: 3
+solve_steps: 2
+num_workers: 0
+
+lr: 0.00012
+weight_decay: 0.0001
+
+frame_length: 512
+hop_length: 256
+n_fft: 512
+snr_min: 0.0
+snr_max: 10.0
+adapter_hidden: 256
+
+ce_weight: 1.0
+phase_weight: 0.15
+if_weight: 0.10
+
+report_json: experiments/phaseadapter_v36_probe/reports/conditioning_probe_report_tiny_seed42.json
+
+variants:
+  - name: alt3_hybrid
+    inject_mode: adaln_hybrid
+    inject_num_blocks: 3
+    inject_stride: 2
+    adapter_scale: 0.05
+    unfreeze_last_n_blocks: 0
+
+  - name: last4_hybrid
+    inject_mode: adaln_hybrid
+    inject_num_blocks: 4
+    inject_stride: 1
+    adapter_scale: 0.05
+    unfreeze_last_n_blocks: 0
+
+  - name: last4_gated
+    inject_mode: adaln_gated
+    inject_num_blocks: 4
+    inject_stride: 1
+    adapter_scale: 0.05
+    unfreeze_last_n_blocks: 1

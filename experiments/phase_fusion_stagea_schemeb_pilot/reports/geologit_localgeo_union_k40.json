@@ -1,0 +1,138 @@
+{
+  "meta": {
+    "device": "cuda",
+    "mode": "cosine",
+    "start_layer_zero_based": 2,
+    "train_steps": 40,
+    "batch_size": 4,
+    "probe_examples": 20,
+    "solve_steps": 32,
+    "lr": 0.0002,
+    "proximity_temp": 0.35,
+    "proximity_weight": 1.0,
+    "ce_weight": 0.5,
+    "direction_weight": 0.5,
+    "dist_weight": 0.1,
+    "sim_scale": 6.0,
+    "topk_lock": 40,
+    "lock_fill": -40.0,
+    "train_mask_mode": "topk_oracle_union",
+    "eval_mask_mode": "topk",
+    "dist_margin": 4.0,
+    "dist_flip_only": true,
+    "logits_scale": 0.28,
+    "config": {
+      "seed": 42,
+      "fs": 16000,
+      "segment_length": 4.0,
+      "speech_dir": "data/chunks/bigspeech/",
+      "noise_dir": "data/chunks/bignoise/",
+      "layered_cfg": "configs/addse-s-mydata-layered-ft-pesq20.yaml",
+      "layered_ckpt": "logs/ft-pesq20-3layer/checkpoints/epoch=09-val_pesq=1.494.ckpt",
+      "phase_cnn_ckpt": "experiments/phase_branch2/weights/phase_cnn_branch2.pt",
+      "use_scheme_b": true,
+      "offset_start_layer": 1,
+      "alpha_init_value": 0.1,
+      "acoustic_lr_scale": 2.0,
+      "train_batch_size": 4,
+      "max_epochs": 1,
+      "train_batches_per_epoch": 100,
+      "val_examples_per_epoch": 60,
+      "eval_examples": 60,
+      "solve_steps": 32,
+      "num_workers": 0,
+      "lr": 0.0001,
+      "logits_scale": 0.28,
+      "lambda_ce_branch": 0.05,
+      "lambda_alpha_polar": 0.02,
+      "entropy_gate_power": 1.5,
+      "alpha_max": 0.12,
+      "low_rank_dim": 128,
+      "gate_hidden": 128,
+      "snr_min": 0.0,
+      "snr_max": 10.0,
+      "frame_length": 512,
+      "hop_length": 256,
+      "n_fft": 512,
+      "offset_head_last_ckpt": "experiments/phase_fusion_stagea_schemeb_pilot/weights/offset_head_last.pt",
+      "gate_last_ckpt": "experiments/phase_fusion_stagea_schemeb_pilot/weights/gate_last.pt",
+      "offset_head_best_ckpt": "experiments/phase_fusion_stagea_schemeb_pilot/weights/offset_head_best_pesq.pt",
+      "gate_best_ckpt": "experiments/phase_fusion_stagea_schemeb_pilot/weights/gate_best_pesq.pt",
+      "report_json": "experiments/phase_fusion_stagea_schemeb_pilot/reports/report_60_stagea_pilot.json"
+    }
+  },
+  "before": {
+    "examples": 20,
+    "cos_delta_to_ideal_mean": -0.01352766971103847,
+    "flip_rate_selected_layers": 0.996625,
+    "gentle_flip_audit": {
+      "flip_rate": 0.9966250000000001,
+      "changed": 7973,
+      "distance_mean": 8.587532997131348,
+      "distance_p95": 11.578495359420776
+    }
+  },
+  "after": {
+    "examples": 20,
+    "cos_delta_to_ideal_mean": -0.01335599534213543,
+    "flip_rate_selected_layers": 0.995375,
+    "gentle_flip_audit": {
+      "flip_rate": 0.9953749999999999,
+      "changed": 7963,
+      "distance_mean": 8.369875025749206,
+      "distance_p95": 11.350844764709473
+    }
+  },
+  "delta": {
+    "cos_delta_to_ideal_mean": 0.0001716743689030402,
+    "flip_rate_selected_layers": -0.0012499999999999734,
+    "distance_mean": -0.21765797138214182
+  },
+  "train_log": [
+    {
+      "step": 1,
+      "loss": 15.073615074157715,
+      "ce_hard": 8.197295188903809,
+      "loss_proximity": 8.197295188903809,
+      "loss_direction": 0.9903232455253601,
+      "loss_dist": 22.82510757446289,
+      "cos_delta_to_ideal": 0.009676730260252953
+    },
+    {
+      "step": 10,
+      "loss": 14.690729141235352,
+      "ce_hard": 7.972780704498291,
+      "loss_proximity": 7.972781658172607,
+      "loss_direction": 0.9895697236061096,
+      "loss_dist": 22.367717742919922,
+      "cos_delta_to_ideal": 0.01043030433356762
+    },
+    {
+      "step": 20,
+      "loss": 14.342254638671875,
+      "ce_hard": 7.736202239990234,
+      "loss_proximity": 7.736202239990234,
+      "loss_direction": 0.9875863194465637,
+      "loss_dist": 22.441577911376953,
+      "cos_delta_to_ideal": 0.01241366844624281
+    },
+    {
+      "step": 30,
+      "loss": 14.086664199829102,
+      "ce_hard": 7.622648239135742,
+      "loss_proximity": 7.6226487159729,
+      "loss_direction": 0.9872375130653381,
+      "loss_dist": 21.590723037719727,
+      "cos_delta_to_ideal": 0.01276251021772623
+    },
+    {
+      "step": 40,
+      "loss": 13.806884765625,
+      "ce_hard": 7.4804768562316895,
+      "loss_proximity": 7.480477333068848,
+      "loss_direction": 0.9867171049118042,
+      "loss_dist": 20.92810821533203,
+      "cos_delta_to_ideal": 0.013282890431582928
+    }
+  ]
+}

@@ -1,0 +1,134 @@
+{
+  "meta": {
+    "device": "cuda",
+    "mode": "cosine",
+    "start_layer_zero_based": 2,
+    "train_steps": 40,
+    "batch_size": 4,
+    "probe_examples": 1,
+    "solve_steps": 32,
+    "lr": 0.0002,
+    "proximity_temp": 0.35,
+    "proximity_weight": 1.0,
+    "ce_weight": 0.5,
+    "direction_weight": 0.5,
+    "dist_weight": 0.1,
+    "sim_scale": 6.0,
+    "topk_lock": 10,
+    "lock_fill": -10000.0,
+    "logits_scale": 0.28,
+    "config": {
+      "seed": 42,
+      "fs": 16000,
+      "segment_length": 4.0,
+      "speech_dir": "data/chunks/bigspeech/",
+      "noise_dir": "data/chunks/bignoise/",
+      "layered_cfg": "configs/addse-s-mydata-layered-ft-pesq20.yaml",
+      "layered_ckpt": "logs/ft-pesq20-3layer/checkpoints/epoch=09-val_pesq=1.494.ckpt",
+      "phase_cnn_ckpt": "experiments/phase_branch2/weights/phase_cnn_branch2.pt",
+      "use_scheme_b": true,
+      "offset_start_layer": 1,
+      "alpha_init_value": 0.1,
+      "acoustic_lr_scale": 2.0,
+      "train_batch_size": 4,
+      "max_epochs": 1,
+      "train_batches_per_epoch": 100,
+      "val_examples_per_epoch": 60,
+      "eval_examples": 60,
+      "solve_steps": 32,
+      "num_workers": 0,
+      "lr": 0.0001,
+      "logits_scale": 0.28,
+      "lambda_ce_branch": 0.05,
+      "lambda_alpha_polar": 0.02,
+      "entropy_gate_power": 1.5,
+      "alpha_max": 0.12,
+      "low_rank_dim": 128,
+      "gate_hidden": 128,
+      "snr_min": 0.0,
+      "snr_max": 10.0,
+      "frame_length": 512,
+      "hop_length": 256,
+      "n_fft": 512,
+      "offset_head_last_ckpt": "experiments/phase_fusion_stagea_schemeb_pilot/weights/offset_head_last.pt",
+      "gate_last_ckpt": "experiments/phase_fusion_stagea_schemeb_pilot/weights/gate_last.pt",
+      "offset_head_best_ckpt": "experiments/phase_fusion_stagea_schemeb_pilot/weights/offset_head_best_pesq.pt",
+      "gate_best_ckpt": "experiments/phase_fusion_stagea_schemeb_pilot/weights/gate_best_pesq.pt",
+      "report_json": "experiments/phase_fusion_stagea_schemeb_pilot/reports/report_60_stagea_pilot.json"
+    }
+  },
+  "before": {
+    "examples": 1,
+    "cos_delta_to_ideal_mean": -0.007398195564746857,
+    "flip_rate_selected_layers": 1.0,
+    "gentle_flip_audit": {
+      "flip_rate": 1.0,
+      "changed": 400,
+      "distance_mean": 8.921834945678711,
+      "distance_p95": 11.858704566955566
+    }
+  },
+  "after": {
+    "examples": 1,
+    "cos_delta_to_ideal_mean": -0.007494146469980478,
+    "flip_rate_selected_layers": 1.0,
+    "gentle_flip_audit": {
+      "flip_rate": 1.0,
+      "changed": 400,
+      "distance_mean": 9.08389949798584,
+      "distance_p95": 11.764121055603027
+    }
+  },
+  "delta": {
+    "cos_delta_to_ideal_mean": -9.59509052336216e-05,
+    "flip_rate_selected_layers": 0.0,
+    "distance_mean": 0.1620645523071289
+  },
+  "train_log": [
+    {
+      "step": 1,
+      "loss": 3909.8359375,
+      "ce_hard": 2601.3505859375,
+      "loss_proximity": 2601.35009765625,
+      "loss_direction": 1.0117963552474976,
+      "loss_dist": 73.0458984375,
+      "cos_delta_to_ideal": -0.011796343140304089
+    },
+    {
+      "step": 10,
+      "loss": 3933.46240234375,
+      "ce_hard": 2616.6318359375,
+      "loss_proximity": 2616.631591796875,
+      "loss_direction": 1.0116310119628906,
+      "loss_dist": 80.09152221679688,
+      "cos_delta_to_ideal": -0.011631054803729057
+    },
+    {
+      "step": 20,
+      "loss": 3974.2880859375,
+      "ce_hard": 2644.0166015625,
+      "loss_proximity": 2644.01611328125,
+      "loss_direction": 1.0100054740905762,
+      "loss_dist": 77.58683776855469,
+      "cos_delta_to_ideal": -0.01000551600009203
+    },
+    {
+      "step": 30,
+      "loss": 3980.033447265625,
+      "ce_hard": 2647.694091796875,
+      "loss_proximity": 2647.694091796875,
+      "loss_direction": 1.0098904371261597,
+      "loss_dist": 79.87452697753906,
+      "cos_delta_to_ideal": -0.009890399873256683
+    },
+    {
+      "step": 40,
+      "loss": 3963.626220703125,
+      "ce_hard": 2636.81591796875,
+      "loss_proximity": 2636.816162109375,
+      "loss_direction": 1.0093435049057007,
+      "loss_dist": 78.974853515625,
+      "cos_delta_to_ideal": -0.009343493729829788
+    }
+  ]
+}

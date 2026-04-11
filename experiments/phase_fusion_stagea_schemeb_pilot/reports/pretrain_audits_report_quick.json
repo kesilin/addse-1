@@ -1,0 +1,112 @@
+{
+  "meta": {
+    "device": "cuda",
+    "ckpt_mode": "best",
+    "examples": 12,
+    "grad_steps": 6,
+    "gumbel_tau": 2.5,
+    "config": {
+      "seed": 42,
+      "fs": 16000,
+      "segment_length": 4.0,
+      "speech_dir": "data/chunks/bigspeech/",
+      "noise_dir": "data/chunks/bignoise/",
+      "layered_cfg": "configs/addse-s-mydata-layered-ft-pesq20.yaml",
+      "layered_ckpt": "logs/ft-pesq20-3layer/checkpoints/epoch=09-val_pesq=1.494.ckpt",
+      "phase_cnn_ckpt": "experiments/phase_branch2/weights/phase_cnn_branch2.pt",
+      "use_scheme_b": true,
+      "offset_start_layer": 1,
+      "alpha_init_value": 0.1,
+      "acoustic_lr_scale": 2.0,
+      "train_batch_size": 4,
+      "max_epochs": 1,
+      "train_batches_per_epoch": 100,
+      "val_examples_per_epoch": 60,
+      "eval_examples": 60,
+      "solve_steps": 32,
+      "num_workers": 0,
+      "lr": 0.0001,
+      "logits_scale": 0.28,
+      "lambda_ce_branch": 0.05,
+      "lambda_alpha_polar": 0.02,
+      "entropy_gate_power": 1.5,
+      "alpha_max": 0.12,
+      "low_rank_dim": 128,
+      "gate_hidden": 128,
+      "snr_min": 0.0,
+      "snr_max": 10.0,
+      "frame_length": 512,
+      "hop_length": 256,
+      "n_fft": 512,
+      "offset_head_last_ckpt": "experiments/phase_fusion_stagea_schemeb_pilot/weights/offset_head_last.pt",
+      "gate_last_ckpt": "experiments/phase_fusion_stagea_schemeb_pilot/weights/gate_last.pt",
+      "offset_head_best_ckpt": "experiments/phase_fusion_stagea_schemeb_pilot/weights/offset_head_best_pesq.pt",
+      "gate_best_ckpt": "experiments/phase_fusion_stagea_schemeb_pilot/weights/gate_best_pesq.pt",
+      "report_json": "experiments/phase_fusion_stagea_schemeb_pilot/reports/report_60_stagea_pilot.json"
+    }
+  },
+  "audit_a_feature_alignment": {
+    "examples": 12,
+    "tokens_used": 7200,
+    "feature_channels_sampled": 64,
+    "mi_feat_to_clean_token": {
+      "mean": 0.8119617700576782,
+      "std": 0.1328597068786621
+    },
+    "mi_feat_to_need_fix_binary": {
+      "mean": 0.001192634692415595,
+      "std": 0.0003732898330781609
+    },
+    "mi_feat_to_base_token": {
+      "mean": 0.8294895887374878,
+      "std": 0.1361611932516098
+    },
+    "mi_feat_to_clean_token_shuffled_baseline": {
+      "mean": 0.8128411173820496,
+      "std": 0.1324627846479416
+    }
+  },
+  "audit_b_gradient_flow": {
+    "hard_ce": {
+      "steps": 6,
+      "loss_start": 9.97787094116211,
+      "loss_end": 9.40835952758789,
+      "grad_norm_offset_mean": 0.05933469161391258,
+      "grad_norm_gate_mean": 0.007141666486859322,
+      "cos_delta_to_ideal_start": 0.010323776863515377,
+      "cos_delta_to_ideal_end": 0.010885809548199177,
+      "cos_delta_to_ideal_mean": 0.010829097591340542
+    },
+    "gumbel_soft": {
+      "steps": 6,
+      "loss_start": 7.268192768096924,
+      "loss_end": 7.315107822418213,
+      "grad_norm_offset_mean": 0.027098441496491432,
+      "grad_norm_gate_mean": 0.004053764510899782,
+      "cos_delta_to_ideal_start": 0.010830922052264214,
+      "cos_delta_to_ideal_end": 0.011471247300505638,
+      "cos_delta_to_ideal_mean": 0.011277974583208561
+    },
+    "temperature": 2.5
+  },
+  "audit_c_phase_consistency": {
+    "examples": 12,
+    "pred_phase_temporal_tv": {
+      "mean_abs_diff": 2.079831123352051,
+      "p95_abs_diff": 4.871174494425456
+    },
+    "ideal_phase_delta_temporal_tv": {
+      "mean_abs_diff": 1.6646993060906727,
+      "p95_abs_diff": 4.389185229937236
+    },
+    "pred_vs_ideal_tv_ratio": 1.2493734548591005,
+    "alpha_temporal_tv": {
+      "mean_abs_diff": 9.957211871854572e-05,
+      "p95_abs_diff": 0.0002831243382388493
+    },
+    "delta_norm_temporal_tv": {
+      "mean_abs_diff": 11.423616250356039,
+      "p95_abs_diff": 31.891972700754803
+    }
+  }
+}

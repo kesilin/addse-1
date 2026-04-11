@@ -1,0 +1,75 @@
+{
+  "meta": {
+    "device": "cuda",
+    "config": {
+      "seed": 42,
+      "fs": 16000,
+      "segment_length": 4.0,
+      "speech_dir": "data/chunks/bigspeech/",
+      "noise_dir": "data/chunks/bignoise/",
+      "layered_cfg": "configs/addse-s-mydata-layered-ft-pesq20.yaml",
+      "layered_ckpt": "logs/ft-pesq20-3layer/checkpoints/epoch=09-val_pesq=1.494.ckpt",
+      "phase_cnn_ckpt": "experiments/phase_branch2/weights/phase_cnn_branch2.pt",
+      "train_batch_size": 2,
+      "train_steps": 80,
+      "eval_examples": 30,
+      "solve_steps": 16,
+      "num_workers": 0,
+      "lr": 0.00012,
+      "weight_decay": 0.0001,
+      "frame_length": 512,
+      "hop_length": 256,
+      "n_fft": 512,
+      "snr_min": 0.0,
+      "snr_max": 10.0,
+      "adapter_hidden": 256,
+      "inject_last_n_blocks": 1,
+      "inject_mode": "adaln",
+      "adapter_scale": 0.05,
+      "adapter_weight": "experiments/phaseadapter_v35_probe/weights/phase_adapter_stage1_adaln.pt",
+      "report_json": "experiments/phaseadapter_v35_probe/reports/probe_report_stage1_adaln.json"
+    },
+    "inject_mode": "adaln",
+    "inject_last_n_blocks": 1
+  },
+  "train_log": [
+    {
+      "step": 1,
+      "loss": 9.443098068237305
+    },
+    {
+      "step": 20,
+      "loss": 9.338483810424805
+    },
+    {
+      "step": 40,
+      "loss": 8.928130149841309
+    },
+    {
+      "step": 60,
+      "loss": 8.750099182128906
+    },
+    {
+      "step": 80,
+      "loss": 8.622547149658203
+    }
+  ],
+  "eval_baseline": {
+    "pesq": 1.0458285967508951,
+    "estoi": 0.24178699559869982,
+    "sdr": -3.456051761905352,
+    "eval_examples": 30.0
+  },
+  "eval_adapter": {
+    "pesq": 1.064965550104777,
+    "estoi": 0.3163684477763709,
+    "sdr": -4.318923374017079,
+    "eval_examples": 30.0
+  },
+  "delta_adapter_minus_baseline": {
+    "pesq": 0.01913695335388188,
+    "estoi": 0.07458145217767109,
+    "sdr": -0.8628716121117272
+  },
+  "adapter_weight": "experiments/phaseadapter_v35_probe/weights/phase_adapter_stage1_adaln.pt"
+}

@@ -1,0 +1,135 @@
+name: addse-s-mydata-layered-ft-pesq20
+seed: 42
+fs: 16000
+train_segment_length: 4.0
+val_segment_length: 4.0
+max_dynamic_range: 25.0
+num_workers: 0
+
+checkpoint_monitor: val_pesq
+checkpoint_mode: max
+checkpoint_filename: "{epoch:02d}-{val_pesq:.3f}"
+
+lm:
+  _target_: addse.lightning.ADDSELightningModule
+  nac_cfg: configs/nac.yaml
+  nac_ckpt: logs/nac/checkpoints/last.ckpt
+  model:
+    _target_: addse.models.ADDSERQDiT
+    input_channels: 1024
+    output_channels: 1024
+    num_codebooks: 4
+    hidden_dim: 192
+    num_layers: 12
+    num_heads: 12
+    max_seq_len: 1024
+    conditional: true
+    time_independent: true
+  num_steps: 128
+  block_size: 200
+
+  # Layered 3+1 objective (keep structure unchanged)
+  discrete_layered_training: true
+  discrete_front_books: 3
+  discrete_front_weight: 1.0
+  discrete_post_weight: 1.1
+  discrete_post_mask_ratio: 0.9
+  discrete_target_front_entropy: 1.2
+  discrete_target_post_entropy: 1.9
+  discrete_ce_weight: 1.0
+
+  val_metrics:
+    pesq:
+      _target_: addse.metrics.PESQMetric
+      fs: ${fs}
+    estoi:
+      _target_: addse.metrics.STOIMetric
+      fs: ${fs}
+      extended: true
+    sdr:
+      _target_: addse.metrics.SDRMetric
+      scale_invariant: false
+
+  optimizer:
+    _target_: torch.optim.AdamW
+    _partial_: true
+    lr: 1.0e-5
+    eps: 1.0e-7
+  debug_sample: [0, 0]
+
+dm:
+  _target_: addse.lightning.DataModule
+  train_dataset:
+    _target_: addse.data.DynamicMixingDataset
+    _partial_: true
+    length: .inf
+    resume: false
+    reset_rngs: false
+    snr_range: [0.0, 10.0]
+    rms_range: [0.0, 0.0]
+    speech_dataset:
+      _target_: addse.data.AudioStreamingDataset
+      input_dir: data/chunks/bigspeech/
+      fs: ${fs}
+      segment_length: ${train_segment_length}
+      max_dynamic_range: ${max_dynamic_range}
+      seed: ${seed}
+    noise_dataset:
+      _target_: addse.data.AudioStreamingDataset
+      input_dir: data/chunks/bignoise/
+      fs: ${fs}
+      segment_length: ${train_segment_length}
+      max_dynamic_range: ${max_dynamic_range}
+      seed: ${seed}
+  val_dataset:
+    _target_: addse.data.DynamicMixingDataset
+    _partial_: true
+    length: 100
+    resume: false
+    reset_rngs: true
+    snr_range: [0.0, 10.0]
+    rms_range: [0.0, 0.0]
+    speech_dataset:
+      _target_: addse.data.AudioStreamingDataset
+      input_dir: data/chunks/bigspeech/
+      fs: ${fs}
+      segment_length: ${val_segment_length}
+      max_dynamic_range: ${max_dynamic_range}
+      seed: ${seed}
+      shuffle: false
+    noise_dataset:
+      _target_: addse.data.AudioStreamingDataset
+      input_dir: data/chunks/bignoise/
+      fs: ${fs}
+      segment_length: ${val_segment_length}
+      max_dynamic_range: ${max_dynamic_range}
+      seed: ${seed}
+      shuffle: false
+  train_dataloader:
+    _target_: addse.data.AudioStreamingDataLoader
+    _partial_: true
+    batch_size: 8
+    num_workers: ${num_workers}
+    shuffle: true
+  val_dataloader:
+    _target_: addse.data.AudioStreamingDataLoader
+    _partial_: true
+    batch_size: 1
+    num_workers: ${num_workers}
+    shuffle: false
+
+trainer:
+  _target_: lightning.Trainer
+  accelerator: gpu
+  devices: 1
+  limit_train_batches: 60
+  limit_val_batches: 10
+  max_epochs: 20
+  gradient_clip_val: 1.0
+  precision: 16-mixed
+
+extra_callbacks:
+  - _target_: addse.callbacks.EMAWeightAveraging
+    decay: 0.999
+
+auto_eval: null
