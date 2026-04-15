@@ -1,0 +1,56 @@
+{
+  "results": {
+    "baseline": {
+      "pesq": 1.5312992811203003,
+      "estoi": 0.6412895497330318,
+      "sdr": 1.7226792218086,
+      "phase_rmse": 1.7836122334003448,
+      "eval_examples": 120.0,
+      "pesq_examples": 20.0,
+      "params": 5774848
+    },
+    "confidence_agree_lite": {
+      "pesq": 1.4606264293193818,
+      "estoi": 0.6425021914950547,
+      "sdr": 1.5197197570620726,
+      "phase_rmse": 1.78267702460289,
+      "eval_examples": 120.0,
+      "pesq_examples": 20.0,
+      "params": 1372931
+    }
+  },
+  "baseline_variant": "baseline",
+  "delta_vs_baseline": {
+    "confidence_agree_lite": {
+      "pesq": -0.07067285180091853,
+      "estoi": 0.001212641762022959,
+      "sdr": -0.20295946474652737,
+      "phase_rmse": -0.0009352087974547896,
+      "params_ratio": 0.23774322718104443
+    }
+  },
+  "ranking_by_performance": [
+    "baseline",
+    "confidence_agree_lite"
+  ],
+  "config": {
+    "train_steps": 200,
+    "train_batch_size": 2,
+    "eval_examples": 120,
+    "train_eval_examples": 20,
+    "train_eval_every_steps": 20,
+    "pesq_max_examples": 20,
+    "lr": 0.00012,
+    "lambda_phase": 0.35,
+    "band_loss_weight": 0.45,
+    "fusion_scale_layered": 0.16,
+    "snr_min": 0.0,
+    "snr_max": 10.0,
+    "variants": [
+      "baseline",
+      "confidence_agree_lite"
+    ],
+    "mode": "quick_compare",
+    "quick_solve_steps": 4
+  }
+}

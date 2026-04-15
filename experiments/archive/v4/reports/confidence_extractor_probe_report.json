@@ -1,0 +1,67 @@
+{
+  "config": {
+    "seed": 42,
+    "fs": 16000,
+    "segment_length": 4.0,
+    "speech_dir": "data/chunks/bigspeech/",
+    "noise_dir": "data/chunks/bignoise/",
+    "snr_min": 0.0,
+    "snr_max": 10.0,
+    "train_steps": 1,
+    "train_batch_size": 1,
+    "eval_examples": 1,
+    "quick_eval_every_steps": 20,
+    "num_workers": 0,
+    "lr": 0.0001,
+    "phase_delta_clip": 1.2,
+    "frame_length": 512,
+    "hop_length": 256,
+    "n_fft": 512,
+    "baseline_hidden": 128,
+    "confidence_hidden": 128,
+    "gate_entropy_weight": 0.002,
+    "report_json": "experiments/archive/v4/reports/confidence_extractor_probe_report.json"
+  },
+  "baseline": {
+    "name": "baseline_extractor",
+    "params": 151297,
+    "train_steps": 1,
+    "last_train_loss": 0.42973875999450684,
+    "eval": {
+      "pesq": 1.1064107418060303,
+      "estoi": 0.3504766922850702,
+      "sdr": 0.9411217272281647,
+      "phase_rmse": 1.5703681707382202,
+      "alignment_cos": 0.22997567057609558,
+      "uncertainty_mean": 0.0,
+      "uncertainty_error_corr": 0.0,
+      "high_uncertainty_ratio": 0.0,
+      "eval_examples": 1.0
+    }
+  },
+  "confidence_guided": {
+    "name": "confidence_guided_extractor",
+    "params": 637571,
+    "train_steps": 1,
+    "last_train_loss": 0.43081367015838623,
+    "eval": {
+      "pesq": 1.1064401865005493,
+      "estoi": 0.3500640647828251,
+      "sdr": 0.9414143115282059,
+      "phase_rmse": 1.570487380027771,
+      "alignment_cos": 0.2300523966550827,
+      "uncertainty_mean": 0.4880222678184509,
+      "uncertainty_error_corr": -0.025372151285409927,
+      "high_uncertainty_ratio": 0.0,
+      "eval_examples": 1.0
+    }
+  },
+  "delta_confidence_minus_baseline": {
+    "pesq": 2.944469451904297e-05,
+    "estoi": -0.0004126275022451331,
+    "sdr": 0.00029258430004119873,
+    "phase_rmse": 0.00011920928955078125,
+    "alignment_cos": 7.672607898712158e-05,
+    "params_ratio": 4.214035968988149
+  }
+}

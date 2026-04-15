@@ -1,0 +1,72 @@
+{
+  "results": {
+    "baseline": {
+      "pesq": 1.5026899377504985,
+      "estoi": 0.6078843194921799,
+      "sdr": 1.6182202513737138,
+      "phase_rmse": 1.784576553106308,
+      "eval_examples": 40.0,
+      "pesq_examples": 12.0,
+      "trainable_params": 0,
+      "total_params": 5774848,
+      "trainable_ratio": 0.0,
+      "total_params_vs_baseline_ratio": 1.0,
+      "trainable_params_vs_baseline_ratio": 0.0
+    },
+    "confidence_agree_lite_v2": {
+      "pesq": 1.5070201754570007,
+      "estoi": 0.6084084310351261,
+      "sdr": 1.7318841004744172,
+      "phase_rmse": 1.7853557556867599,
+      "eval_examples": 40.0,
+      "pesq_examples": 12.0,
+      "trainable_params": 0,
+      "total_params": 7147779,
+      "trainable_ratio": 0.0,
+      "total_params_vs_baseline_ratio": 1.2377432271810445,
+      "trainable_params_vs_baseline_ratio": 0.0
+    }
+  },
+  "train_diagnostics": {},
+  "system_checks": {},
+  "baseline_variant": "baseline",
+  "delta_vs_baseline": {
+    "confidence_agree_lite_v2": {
+      "pesq": 0.004330237706502205,
+      "estoi": 0.0005241115429461818,
+      "sdr": 0.11366384910070337,
+      "phase_rmse": 0.0007792025804518321,
+      "trainable_params_ratio": 0.0,
+      "total_params_ratio": 1.2377432271810445
+    }
+  },
+  "ranking_by_performance": [
+    "confidence_agree_lite_v2",
+    "baseline"
+  ],
+  "config": {
+    "train_steps": 1000,
+    "train_batch_size": 1,
+    "eval_examples": 40,
+    "train_eval_examples": 100,
+    "train_eval_every_steps": 200,
+    "pesq_max_examples": 12,
+    "lr": 0.0001,
+    "lambda_phase": 0.35,
+    "band_loss_weight": 0.45,
+    "fusion_scale_layered": 0.16,
+    "snr_min": 0.0,
+    "snr_max": 10.0,
+    "phase_model_variant": "phase_residual_v2",
+    "fusion_train_base_adapter": false,
+    "fusion_base_lr_scale": 0.2,
+    "baseline_ref_total_params": 5774848,
+    "baseline_ref_trainable_params": 5774848,
+    "variants": [
+      "baseline",
+      "confidence_agree_lite_v2"
+    ],
+    "mode": "eval_only",
+    "quick_solve_steps": 128
+  }
+}

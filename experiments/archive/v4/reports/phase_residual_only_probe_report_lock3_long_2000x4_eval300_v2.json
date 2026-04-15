@@ -1,0 +1,92 @@
+{
+  "config": {
+    "seed": 42,
+    "fs": 16000,
+    "segment_length": 4.0,
+    "speech_dir": "data/chunks/bigspeech/",
+    "noise_dir": "data/chunks/bignoise/",
+    "snr_min": 0.0,
+    "snr_max": 10.0,
+    "train_steps": 2000,
+    "train_batch_size": 4,
+    "eval_examples": 300,
+    "pesq_max_examples": 60,
+    "quick_eval_every_steps": 400,
+    "num_workers": 0,
+    "lr": 0.0001,
+    "phase_delta_clip": 1.2,
+    "frame_length": 512,
+    "hop_length": 256,
+    "n_fft": 512,
+    "baseline_hidden": 128,
+    "residual_hidden": 96,
+    "hard_threshold": 0.52,
+    "route_temperature": 0.16,
+    "gate_entropy_weight": 0.003,
+    "uncertainty_balance_weight": 0.02,
+    "uncertainty_target": 0.5,
+    "report_json": "experiments/archive/v4/reports/phase_residual_only_probe_report_lock3_long_2000x4_eval300_v2.json",
+    "weights_dir": "experiments/archive/v4/weights/phase_residual_lock3_long_2000_v2"
+  },
+  "results": {
+    "baseline_extractor": {
+      "name": "baseline_extractor",
+      "params": 151297,
+      "train_steps": 2000,
+      "last_train_loss": 0.8460290431976318,
+      "eval": {
+        "pesq": 1.1779991865158081,
+        "estoi": 0.5411504461072554,
+        "sdr": 4.982301224337425,
+        "phase_rmse": 1.50436465938886,
+        "phase_mae": 1.1818300706148148,
+        "phase_p95_abs": 2.89051101843516,
+        "phase_large_error_ratio": 0.33609142969051997,
+        "alignment_cos": 0.28687440569202105,
+        "uncertainty_mean": 0.0,
+        "uncertainty_error_corr": 0.0,
+        "high_uncertainty_ratio": 0.0,
+        "eval_examples": 300.0,
+        "pesq_examples": 60.0
+      }
+    },
+    "phase_residual_stability_v2": {
+      "name": "phase_residual_stability_v2",
+      "params": 115638,
+      "train_steps": 2000,
+      "last_train_loss": 0.8460678458213806,
+      "eval": {
+        "pesq": 1.1780848264694215,
+        "estoi": 0.5411213341344177,
+        "sdr": 4.981830450197837,
+        "phase_rmse": 1.504311189254125,
+        "phase_mae": 1.1818396174907684,
+        "phase_p95_abs": 2.8905260125796,
+        "phase_large_error_ratio": 0.3360942203799884,
+        "alignment_cos": 0.2868749888986349,
+        "uncertainty_mean": 0.5006201841433843,
+        "uncertainty_error_corr": -0.0006316034244900948,
+        "high_uncertainty_ratio": 0.5006114037831625,
+        "eval_examples": 300.0,
+        "pesq_examples": 60.0
+      }
+    }
+  },
+  "delta_vs_baseline": {
+    "phase_residual_stability_v2": {
+      "pesq": 8.563995361332566e-05,
+      "estoi": -2.9111972837725375e-05,
+      "sdr": -0.00047077413958795944,
+      "phase_rmse": -5.347013473500084e-05,
+      "phase_mae": 9.546875953558853e-06,
+      "phase_p95_abs": 1.4994144439839374e-05,
+      "phase_large_error_ratio": 2.7906894684015526e-06,
+      "alignment_cos": 5.832066138355962e-07,
+      "params_ratio": 0.7643112553454464
+    }
+  },
+  "ranking_by_performance": [
+    "baseline_extractor",
+    "phase_residual_stability_v2"
+  ]
+}

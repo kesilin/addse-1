@@ -1,8 +1,19 @@
 import argparse
 import json
+import sys
 from pathlib import Path
 
 import torch
+
+EXPERIMENTS_DIR = Path(__file__).resolve().parent
+EXPERIMENTS_ROOT = EXPERIMENTS_DIR.parents[1]
+if str(EXPERIMENTS_ROOT) not in sys.path:
+    sys.path.insert(0, str(EXPERIMENTS_ROOT))
+if str(EXPERIMENTS_DIR) not in sys.path:
+    sys.path.insert(0, str(EXPERIMENTS_DIR))
+V4_DIR = EXPERIMENTS_DIR.parent / "v4"
+if str(V4_DIR) not in sys.path:
+    sys.path.insert(0, str(V4_DIR))
 
 from phase_fusion_layered_compare_500 import (
     _evaluate_layered_fused,
@@ -10,6 +21,8 @@ from phase_fusion_layered_compare_500 import (
     _load_lm,
     _make_base_cfg,
     _train_layered_adapter,
+    count_total_params,
+    count_trainable_params,
     load_cfg,
 )
 from phase_fusion_scheme1 import load_phase_cnn
@@ -35,8 +48,19 @@ def main() -> int:
     phase_bins = cfg.n_fft // 2 + 1
     in_cont_ch = layered_lm.nac.encoder.out_conv.conv.out_channels
     phase_cnn = load_phase_cnn(_make_base_cfg(cfg, cfg.fusion_scale_layered), in_ch=in_cont_ch, out_ch=phase_bins, device=device)
+    phase_model_total_params = int(count_total_params(phase_cnn))
+    phase_model_trainable_params = int(count_trainable_params(phase_cnn))
+    print(
+        f"Phase model params total={phase_model_total_params} "
+        f"trainable={phase_model_trainable_params} variant=phase_cnn"
+    )
 
     adapter = _load_adapter(cfg, 2 * phase_bins, layered_lm.nac.decoder.in_conv.conv.in_channels, device, cfg.init_adapter_ckpt)
+    adapter_total_params = int(count_total_params(adapter))
+    adapter_trainable_params = int(count_trainable_params(adapter))
+    print(
+        f"Adapter params total={adapter_total_params} trainable={adapter_trainable_params}"
+    )
     if args.mode == "train_eval":
         _train_layered_adapter(cfg, layered_lm, phase_cnn, adapter, stft, device)
 
@@ -45,6 +69,14 @@ def main() -> int:
 
     report = {
         "layered_fused_v3_only": fused_report,
+        "param_report": {
+            "phase_model_total_params": phase_model_total_params,
+            "phase_model_trainable_params": phase_model_trainable_params,
+            "adapter_total_params": adapter_total_params,
+            "adapter_trainable_params": adapter_trainable_params,
+            "fusion_plus_phase_total_params": int(adapter_total_params + phase_model_total_params),
+            "fusion_plus_phase_trainable_params": int(adapter_trainable_params + phase_model_trainable_params),
+        },
         "config": {
             "train_steps": cfg.train_steps,
             "train_batch_size": cfg.train_batch_size,

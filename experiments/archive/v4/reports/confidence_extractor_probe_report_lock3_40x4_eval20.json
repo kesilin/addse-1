@@ -1,0 +1,136 @@
+{
+  "config": {
+    "seed": 42,
+    "fs": 16000,
+    "segment_length": 4.0,
+    "speech_dir": "data/chunks/bigspeech/",
+    "noise_dir": "data/chunks/bignoise/",
+    "snr_min": 0.0,
+    "snr_max": 10.0,
+    "train_steps": 40,
+    "train_batch_size": 4,
+    "eval_examples": 20,
+    "pesq_max_examples": 8,
+    "quick_eval_every_steps": 0,
+    "num_workers": 0,
+    "lr": 0.0001,
+    "phase_delta_clip": 1.2,
+    "frame_length": 512,
+    "hop_length": 256,
+    "n_fft": 512,
+    "baseline_hidden": 128,
+    "confidence_hidden": 128,
+    "high_hidden_mult": 1.5,
+    "hard_threshold": 0.55,
+    "topk_ratio": 0.25,
+    "gate_entropy_weight": 0.002,
+    "report_json": "experiments/archive/v4/reports/confidence_extractor_probe_report_lock3_40x4_eval20.json",
+    "weights_dir": "experiments/archive/v4/weights/confidence_extractor_lock3"
+  },
+  "results": {
+    "baseline_extractor": {
+      "name": "baseline_extractor",
+      "params": 151297,
+      "train_steps": 40,
+      "last_train_loss": 0.7084420323371887,
+      "eval": {
+        "pesq": 1.1623767018318176,
+        "estoi": 0.49044866048974534,
+        "sdr": 4.646676305681467,
+        "phase_rmse": 1.530708110332489,
+        "alignment_cos": 0.2668588750064373,
+        "uncertainty_mean": 0.0,
+        "uncertainty_error_corr": 0.0,
+        "high_uncertainty_ratio": 0.0,
+        "eval_examples": 20.0,
+        "pesq_examples": 8.0
+      }
+    },
+    "confidence_soft_lite": {
+      "name": "confidence_soft_lite",
+      "params": 197859,
+      "train_steps": 40,
+      "last_train_loss": 0.7098102569580078,
+      "eval": {
+        "pesq": 1.1623995900154114,
+        "estoi": 0.49045165041792327,
+        "sdr": 4.651715815067291,
+        "phase_rmse": 1.5307743668556213,
+        "alignment_cos": 0.26688954830169676,
+        "uncertainty_mean": 0.5173485934734344,
+        "uncertainty_error_corr": 4.92367813421879e-05,
+        "high_uncertainty_ratio": 1.0,
+        "eval_examples": 20.0,
+        "pesq_examples": 8.0
+      }
+    },
+    "confidence_hard_lite": {
+      "name": "confidence_hard_lite",
+      "params": 197859,
+      "train_steps": 40,
+      "last_train_loss": 0.7098179459571838,
+      "eval": {
+        "pesq": 1.1623976528644562,
+        "estoi": 0.4904541306121355,
+        "sdr": 4.651639629155397,
+        "phase_rmse": 1.5308666288852693,
+        "alignment_cos": 0.26688880771398543,
+        "uncertainty_mean": 0.5149098068475724,
+        "uncertainty_error_corr": -0.045778412092477086,
+        "high_uncertainty_ratio": 1.0,
+        "eval_examples": 20.0,
+        "pesq_examples": 8.0
+      }
+    },
+    "confidence_topk_tiny": {
+      "name": "confidence_topk_tiny",
+      "params": 139123,
+      "train_steps": 40,
+      "last_train_loss": 0.7098125219345093,
+      "eval": {
+        "pesq": 1.1619343310594559,
+        "estoi": 0.4904964171875285,
+        "sdr": 4.640967182815075,
+        "phase_rmse": 1.5306594669818878,
+        "alignment_cos": 0.26678398698568345,
+        "uncertainty_mean": 0.4893038868904114,
+        "uncertainty_error_corr": -0.07500804495066404,
+        "high_uncertainty_ratio": 1.3951974142401014e-05,
+        "eval_examples": 20.0,
+        "pesq_examples": 8.0
+      }
+    }
+  },
+  "delta_vs_baseline": {
+    "confidence_soft_lite": {
+      "pesq": 2.288818359375e-05,
+      "estoi": 2.9899281779321996e-06,
+      "sdr": 0.0050395093858242035,
+      "phase_rmse": 6.625652313219099e-05,
+      "alignment_cos": 3.0673295259464606e-05,
+      "params_ratio": 1.30775230176408
+    },
+    "confidence_hard_lite": {
+      "pesq": 2.0951032638549805e-05,
+      "estoi": 5.470122390160981e-06,
+      "sdr": 0.004963323473930359,
+      "phase_rmse": 0.00015851855278015137,
+      "alignment_cos": 2.993270754814148e-05,
+      "params_ratio": 1.30775230176408
+    },
+    "confidence_topk_tiny": {
+      "pesq": -0.00044237077236175537,
+      "estoi": 4.7756697783174484e-05,
+      "sdr": -0.005709122866392136,
+      "phase_rmse": -4.864335060128511e-05,
+      "alignment_cos": -7.488802075383827e-05,
+      "params_ratio": 0.9195357475693503
+    }
+  },
+  "ranking_by_performance": [
+    "confidence_soft_lite",
+    "confidence_hard_lite",
+    "baseline_extractor",
+    "confidence_topk_tiny"
+  ]
+}

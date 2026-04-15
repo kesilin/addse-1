@@ -1,0 +1,125 @@
+{
+  "config": {
+    "seed": 42,
+    "fs": 16000,
+    "segment_length": 4.0,
+    "speech_dir": "data/chunks/bigspeech/",
+    "noise_dir": "data/chunks/bignoise/",
+    "snr_min": 0.0,
+    "snr_max": 10.0,
+    "train_steps": 300,
+    "train_batch_size": 4,
+    "eval_examples": 80,
+    "pesq_max_examples": 20,
+    "quick_eval_every_steps": 0,
+    "num_workers": 0,
+    "lr": 0.0001,
+    "phase_delta_clip": 1.2,
+    "frame_length": 512,
+    "hop_length": 256,
+    "n_fft": 512,
+    "baseline_hidden": 128,
+    "residual_hidden": 96,
+    "hard_threshold": 0.52,
+    "route_temperature": 0.16,
+    "gate_entropy_weight": 0.003,
+    "uncertainty_balance_weight": 0.02,
+    "uncertainty_target": 0.5,
+    "report_json": "experiments/archive/v4/reports/phase_residual_only_probe_report_lock3_300x4_eval80_v2.json",
+    "weights_dir": "experiments/archive/v4/weights/phase_residual_lock3_300_v2"
+  },
+  "results": {
+    "baseline_extractor": {
+      "name": "baseline_extractor",
+      "params": 151297,
+      "train_steps": 300,
+      "last_train_loss": 0.7634942531585693,
+      "eval": {
+        "pesq": 1.1698628783226013,
+        "estoi": 0.5284650423249981,
+        "sdr": 4.70400329012773,
+        "phase_rmse": 1.4604736000299454,
+        "phase_mae": 1.1276960611343383,
+        "phase_p95_abs": 2.8738786578178406,
+        "phase_large_error_ratio": 0.3145147040486336,
+        "alignment_cos": 0.32598805259913205,
+        "uncertainty_mean": 0.0,
+        "uncertainty_error_corr": 0.0,
+        "high_uncertainty_ratio": 0.0,
+        "eval_examples": 80.0,
+        "pesq_examples": 20.0
+      }
+    },
+    "phase_residual_current": {
+      "name": "phase_residual_current",
+      "params": 114819,
+      "train_steps": 300,
+      "last_train_loss": 0.7655718922615051,
+      "eval": {
+        "pesq": 1.1700805127620697,
+        "estoi": 0.5285009439664841,
+        "sdr": 4.708584011459607,
+        "phase_rmse": 1.460508407652378,
+        "phase_mae": 1.1276375509798526,
+        "phase_p95_abs": 2.8738372892141344,
+        "phase_large_error_ratio": 0.3145174149423838,
+        "alignment_cos": 0.3259928932413459,
+        "uncertainty_mean": 0.5005624175071717,
+        "uncertainty_error_corr": -0.06714858912164345,
+        "high_uncertainty_ratio": 0.5114036004990339,
+        "eval_examples": 80.0,
+        "pesq_examples": 20.0
+      }
+    },
+    "phase_residual_stability_v2": {
+      "name": "phase_residual_stability_v2",
+      "params": 115638,
+      "train_steps": 300,
+      "last_train_loss": 0.7655710577964783,
+      "eval": {
+        "pesq": 1.1700810194015503,
+        "estoi": 0.5285005963514905,
+        "sdr": 4.7089177130837925,
+        "phase_rmse": 1.4603614225983619,
+        "phase_mae": 1.127663016319275,
+        "phase_p95_abs": 2.8738463908433913,
+        "phase_large_error_ratio": 0.31452768612653015,
+        "alignment_cos": 0.325991528108716,
+        "uncertainty_mean": 0.5000028003007173,
+        "uncertainty_error_corr": 0.007437330095126526,
+        "high_uncertainty_ratio": 0.49686855673789976,
+        "eval_examples": 80.0,
+        "pesq_examples": 20.0
+      }
+    }
+  },
+  "delta_vs_baseline": {
+    "phase_residual_current": {
+      "pesq": 0.0002176344394684282,
+      "estoi": 3.5901641485924785e-05,
+      "sdr": 0.004580721331876703,
+      "phase_rmse": 3.4807622432575513e-05,
+      "phase_mae": -5.8510154485658106e-05,
+      "phase_p95_abs": -4.136860370618223e-05,
+      "phase_large_error_ratio": 2.710893750201837e-06,
+      "alignment_cos": 4.840642213843616e-06,
+      "params_ratio": 0.7588980614288453
+    },
+    "phase_residual_stability_v2": {
+      "pesq": 0.00021814107894901902,
+      "estoi": 3.555402649235706e-05,
+      "sdr": 0.004914422956062481,
+      "phase_rmse": -0.00011217743158353777,
+      "phase_mae": -3.3044815063387745e-05,
+      "phase_p95_abs": -3.226697444924653e-05,
+      "phase_large_error_ratio": 1.2982077896572797e-05,
+      "alignment_cos": 3.475509583961145e-06,
+      "params_ratio": 0.7643112553454464
+    }
+  },
+  "ranking_by_performance": [
+    "phase_residual_stability_v2",
+    "phase_residual_current",
+    "baseline_extractor"
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "config": {
+    "seed": 42,
+    "fs": 16000,
+    "segment_length": 4.0,
+    "speech_dir": "data/chunks/bigspeech/",
+    "noise_dir": "data/chunks/bignoise/",
+    "baseline_cfg": "configs/addse-s-mydata-eval-3metrics.yaml",
+    "baseline_ckpt": "logs/addse-edbase-quick/checkpoints/addse-s.ckpt",
+    "phase_cnn_ckpt": "experiments/phase_branch2/weights/phase_cnn_branch2.pt",
+    "base_adapter_ckpt": "experiments/phase_fusion_scheme1_v2/weights/adapter.pt",
+    "report_json": "experiments/archive/v4/reports/fusion_renet_no_train_report_12_pesq6_estoi.json",
+    "eval_examples": 12,
+    "pesq_max_examples": 6,
+    "use_estoi": true,
+    "num_workers": 0,
+    "fusion_scale": 0.16,
+    "phase_delta_clip": 1.2,
+    "adapter_hidden": 512,
+    "use_dilation": true,
+    "dilation_rates": [
+      1,
+      2,
+      4
+    ],
+    "snr_min": 0.0,
+    "snr_max": 10.0,
+    "frame_length": 512,
+    "hop_length": 256,
+    "n_fft": 512
+  },
+  "results": {
+    "baseline_discrete": {
+      "pesq": 1.4994332790374756,
+      "estoi": 0.603651209106439,
+      "sdr": 0.761167199719542,
+      "phase_rmse": 1.7863044142723083,
+      "eval_examples": 12.0,
+      "pesq_examples": 6.0
+    },
+    "base_fused": {
+      "pesq": 1.5538001656532288,
+      "estoi": 0.5950153445710633,
+      "sdr": 1.767918902138869,
+      "phase_rmse": 1.7860372960567474,
+      "eval_examples": 12.0,
+      "pesq_examples": 6.0
+    },
+    "renet_congruency_gate": {
+      "pesq": 1.5498941540718079,
+      "estoi": 0.5983760483668789,
+      "sdr": 1.6790463216602802,
+      "phase_rmse": 1.7856515645980835,
+      "eval_examples": 12.0,
+      "pesq_examples": 6.0
+    },
+    "renet_groupdelay_detail": {
+      "pesq": 1.5551967819531758,
+      "estoi": 0.5954454294216117,
+      "sdr": 1.768109044060111,
+      "phase_rmse": 1.7860741118590038,
+      "eval_examples": 12.0,
+      "pesq_examples": 6.0
+    },
+    "renet_harmonic_channel": {
+      "pesq": 1.5479631225268047,
+      "estoi": 0.5965933491869281,
+      "sdr": 1.7364975934227307,
+      "phase_rmse": 1.7858147819836934,
+      "eval_examples": 12.0,
+      "pesq_examples": 6.0
+    }
+  },
+  "delta_vs_baseline_discrete": {
+    "base_fused": {
+      "pesq": 0.054366886615753174,
+      "estoi": -0.008635864535375681,
+      "sdr": 1.006751702419327,
+      "phase_rmse": -0.0002671182155609131
+    },
+    "renet_congruency_gate": {
+      "pesq": 0.050460875034332275,
+      "estoi": -0.005275160739560136,
+      "sdr": 0.9178791219407382,
+      "phase_rmse": -0.0006528496742248535
+    },
+    "renet_groupdelay_detail": {
+      "pesq": 0.0557635029157002,
+      "estoi": -0.008205779684827275,
+      "sdr": 1.0069418443405689,
+      "phase_rmse": -0.0002303024133045728
+    },
+    "renet_harmonic_channel": {
+      "pesq": 0.048529843489329094,
+      "estoi": -0.0070578599195109115,
+      "sdr": 0.9753303937031886,
+      "phase_rmse": -0.0004896322886149829
+    }
+  },
+  "ranking": [
+    "renet_groupdelay_detail",
+    "base_fused",
+    "renet_harmonic_channel",
+    "renet_congruency_gate"
+  ]
+}

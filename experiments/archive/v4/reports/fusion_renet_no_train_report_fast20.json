@@ -1,0 +1,106 @@
+{
+  "config": {
+    "seed": 42,
+    "fs": 16000,
+    "segment_length": 4.0,
+    "speech_dir": "data/chunks/bigspeech/",
+    "noise_dir": "data/chunks/bignoise/",
+    "baseline_cfg": "configs/addse-s-mydata-eval-3metrics.yaml",
+    "baseline_ckpt": "logs/addse-edbase-quick/checkpoints/addse-s.ckpt",
+    "phase_cnn_ckpt": "experiments/phase_branch2/weights/phase_cnn_branch2.pt",
+    "base_adapter_ckpt": "experiments/phase_fusion_scheme1_v2/weights/adapter.pt",
+    "report_json": "experiments/archive/v4/reports/fusion_renet_no_train_report_fast20.json",
+    "eval_examples": 20,
+    "pesq_max_examples": 0,
+    "use_estoi": false,
+    "num_workers": 0,
+    "fusion_scale": 0.16,
+    "phase_delta_clip": 1.2,
+    "adapter_hidden": 512,
+    "use_dilation": true,
+    "dilation_rates": [
+      1,
+      2,
+      4
+    ],
+    "snr_min": 0.0,
+    "snr_max": 10.0,
+    "frame_length": 512,
+    "hop_length": 256,
+    "n_fft": 512
+  },
+  "results": {
+    "baseline_discrete": {
+      "pesq": 0.0,
+      "estoi": 0.0,
+      "sdr": 0.38267482235096395,
+      "phase_rmse": 1.7843336701393127,
+      "eval_examples": 20.0,
+      "pesq_examples": 0.0
+    },
+    "base_fused": {
+      "pesq": 0.0,
+      "estoi": 0.0,
+      "sdr": 1.5484719816595316,
+      "phase_rmse": 1.785072386264801,
+      "eval_examples": 20.0,
+      "pesq_examples": 0.0
+    },
+    "renet_congruency_gate": {
+      "pesq": 0.0,
+      "estoi": 0.0,
+      "sdr": 1.4202805673703551,
+      "phase_rmse": 1.7847197771072387,
+      "eval_examples": 20.0,
+      "pesq_examples": 0.0
+    },
+    "renet_groupdelay_detail": {
+      "pesq": 0.0,
+      "estoi": 0.0,
+      "sdr": 1.5502481488510966,
+      "phase_rmse": 1.785110867023468,
+      "eval_examples": 20.0,
+      "pesq_examples": 0.0
+    },
+    "renet_harmonic_channel": {
+      "pesq": 0.0,
+      "estoi": 0.0,
+      "sdr": 1.4993144059553742,
+      "phase_rmse": 1.7848554074764251,
+      "eval_examples": 20.0,
+      "pesq_examples": 0.0
+    }
+  },
+  "delta_vs_baseline_discrete": {
+    "base_fused": {
+      "pesq": 0.0,
+      "estoi": 0.0,
+      "sdr": 1.1657971593085676,
+      "phase_rmse": 0.0007387161254883701
+    },
+    "renet_congruency_gate": {
+      "pesq": 0.0,
+      "estoi": 0.0,
+      "sdr": 1.0376057450193912,
+      "phase_rmse": 0.0003861069679260698
+    },
+    "renet_groupdelay_detail": {
+      "pesq": 0.0,
+      "estoi": 0.0,
+      "sdr": 1.1675733265001327,
+      "phase_rmse": 0.0007771968841554511
+    },
+    "renet_harmonic_channel": {
+      "pesq": 0.0,
+      "estoi": 0.0,
+      "sdr": 1.1166395836044103,
+      "phase_rmse": 0.0005217373371124712
+    }
+  },
+  "ranking": [
+    "renet_groupdelay_detail",
+    "base_fused",
+    "renet_harmonic_channel",
+    "renet_congruency_gate"
+  ]
+}

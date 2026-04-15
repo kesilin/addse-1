@@ -1,0 +1,167 @@
+{
+  "config": {
+    "seed": 42,
+    "fs": 16000,
+    "segment_length": 4.0,
+    "speech_dir": "data/chunks/bigspeech/",
+    "noise_dir": "data/chunks/bignoise/",
+    "baseline_cfg": "configs/addse-s-mydata-eval-3metrics.yaml",
+    "baseline_ckpt": "logs/addse-edbase-quick/checkpoints/addse-s.ckpt",
+    "phase_cnn_ckpt": "experiments/phase_branch2/weights/phase_cnn_branch2.pt",
+    "base_adapter_ckpt": "experiments/phase_fusion_scheme1_v2/weights/adapter.pt",
+    "report_json": "experiments/archive/v4/reports/fusion_renet_no_train_report_v3_multi12.json",
+    "eval_examples": 12,
+    "pesq_max_examples": 6,
+    "use_estoi": true,
+    "num_workers": 0,
+    "fusion_scale": 0.16,
+    "phase_delta_clip": 1.2,
+    "adapter_hidden": 512,
+    "use_dilation": true,
+    "dilation_rates": [
+      1,
+      2,
+      4
+    ],
+    "snr_min": 0.0,
+    "snr_max": 10.0,
+    "frame_length": 512,
+    "hop_length": 256,
+    "n_fft": 512,
+    "solve_steps": 6
+  },
+  "results": {
+    "baseline_discrete": {
+      "pesq": 1.3919420043627422,
+      "estoi": 0.5887827383842031,
+      "sdr": 0.6005338073979752,
+      "phase_rmse": 1.7888440191745758,
+      "eval_examples": 12.0,
+      "pesq_examples": 6.0
+    },
+    "base_fused": {
+      "pesq": 1.4386326670646667,
+      "estoi": 0.5783391026557364,
+      "sdr": 1.7595697628955047,
+      "phase_rmse": 1.7888900339603424,
+      "eval_examples": 12.0,
+      "pesq_examples": 6.0
+    },
+    "renet_congruency_gate": {
+      "pesq": 1.436301012833913,
+      "estoi": 0.5822021046610275,
+      "sdr": 1.6414942902823288,
+      "phase_rmse": 1.788849453131358,
+      "eval_examples": 12.0,
+      "pesq_examples": 6.0
+    },
+    "renet_groupdelay_detail": {
+      "pesq": 1.4405438899993896,
+      "estoi": 0.5787185076126038,
+      "sdr": 1.7641732562333345,
+      "phase_rmse": 1.7888697683811188,
+      "eval_examples": 12.0,
+      "pesq_examples": 6.0
+    },
+    "renet_harmonic_channel": {
+      "pesq": 1.4424681663513184,
+      "estoi": 0.5801054075267317,
+      "sdr": 1.7150116246193647,
+      "phase_rmse": 1.7889808317025502,
+      "eval_examples": 12.0,
+      "pesq_examples": 6.0
+    },
+    "renet_compensated_stability": {
+      "pesq": 1.4395433068275452,
+      "estoi": 0.5786290845394302,
+      "sdr": 1.7545082202802103,
+      "phase_rmse": 1.7888830999533336,
+      "eval_examples": 12.0,
+      "pesq_examples": 6.0
+    },
+    "renet_groupdelay_dualrisk": {
+      "pesq": 1.4400099317232768,
+      "estoi": 0.578606613370611,
+      "sdr": 1.7629470614095528,
+      "phase_rmse": 1.7888727982838948,
+      "eval_examples": 12.0,
+      "pesq_examples": 6.0
+    },
+    "renet_groupdelay_bandwise": {
+      "pesq": 1.4297761519749959,
+      "estoi": 0.5854718365548737,
+      "sdr": 1.4599532370145123,
+      "phase_rmse": 1.7887078722318013,
+      "eval_examples": 12.0,
+      "pesq_examples": 6.0
+    },
+    "renet_groupdelay_momentum": {
+      "pesq": 1.4416529138882954,
+      "estoi": 0.5789821395140248,
+      "sdr": 1.7668191467722256,
+      "phase_rmse": 1.7889216542243958,
+      "eval_examples": 12.0,
+      "pesq_examples": 6.0
+    }
+  },
+  "delta_vs_baseline_discrete": {
+    "base_fused": {
+      "pesq": 0.04669066270192457,
+      "estoi": -0.010443635728466738,
+      "sdr": 1.1590359554975294,
+      "phase_rmse": 4.601478576660156e-05
+    },
+    "renet_congruency_gate": {
+      "pesq": 0.04435900847117091,
+      "estoi": -0.006580633723175633,
+      "sdr": 1.0409604828843535,
+      "phase_rmse": 5.433956782097127e-06
+    },
+    "renet_groupdelay_detail": {
+      "pesq": 0.04860188563664747,
+      "estoi": -0.010064230771599347,
+      "sdr": 1.1636394488353594,
+      "phase_rmse": 2.574920654296875e-05
+    },
+    "renet_harmonic_channel": {
+      "pesq": 0.05052616198857618,
+      "estoi": -0.008677330857471466,
+      "sdr": 1.1144778172213896,
+      "phase_rmse": 0.0001368125279743726
+    },
+    "renet_compensated_stability": {
+      "pesq": 0.047601302464802986,
+      "estoi": -0.010153653844772959,
+      "sdr": 1.153974412882235,
+      "phase_rmse": 3.9080778757805135e-05
+    },
+    "renet_groupdelay_dualrisk": {
+      "pesq": 0.04806792736053467,
+      "estoi": -0.010176125013592108,
+      "sdr": 1.1624132540115775,
+      "phase_rmse": 2.8779109318977092e-05
+    },
+    "renet_groupdelay_bandwise": {
+      "pesq": 0.03783414761225368,
+      "estoi": -0.003310901829329471,
+      "sdr": 0.8594194296165371,
+      "phase_rmse": -0.00013614694277452877
+    },
+    "renet_groupdelay_momentum": {
+      "pesq": 0.04971090952555324,
+      "estoi": -0.009800598870178368,
+      "sdr": 1.1662853393742503,
+      "phase_rmse": 7.763504981994629e-05
+    }
+  },
+  "ranking": [
+    "renet_groupdelay_momentum",
+    "renet_groupdelay_detail",
+    "renet_groupdelay_dualrisk",
+    "base_fused",
+    "renet_compensated_stability",
+    "renet_harmonic_channel",
+    "renet_congruency_gate",
+    "renet_groupdelay_bandwise"
+  ]
+}

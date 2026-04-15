@@ -1,0 +1,109 @@
+{
+  "config": {
+    "seed": 42,
+    "fs": 16000,
+    "segment_length": 4.0,
+    "speech_dir": "data/chunks/bigspeech/",
+    "noise_dir": "data/chunks/bignoise/",
+    "snr_min": 0.0,
+    "snr_max": 10.0,
+    "train_steps": 200,
+    "train_batch_size": 4,
+    "eval_examples": 60,
+    "pesq_max_examples": 20,
+    "quick_eval_every_steps": 20,
+    "num_workers": 0,
+    "lr": 0.0001,
+    "phase_delta_clip": 1.2,
+    "frame_length": 512,
+    "hop_length": 256,
+    "n_fft": 512,
+    "baseline_hidden": 128,
+    "residual_hidden": 96,
+    "hard_threshold": 0.52,
+    "route_temperature": 0.16,
+    "gate_entropy_weight": 0.003,
+    "uncertainty_balance_weight": 0.02,
+    "uncertainty_target": 0.5,
+    "report_json": "experiments\\archive\\v4\\reports\\phase_residual_only_probe_report_200x4_eval60_tuned_final.json"
+  },
+  "results": {
+    "baseline_extractor": {
+      "name": "baseline_extractor",
+      "params": 151297,
+      "train_steps": 200,
+      "last_train_loss": 0.09464503079652786,
+      "eval": {
+        "pesq": 1.1698921501636506,
+        "estoi": 0.5123983614110779,
+        "sdr": 4.764471322162232,
+        "phase_rmse": 1.507333187262217,
+        "alignment_cos": 0.2870904761056105,
+        "uncertainty_mean": 0.0,
+        "uncertainty_error_corr": 0.0,
+        "high_uncertainty_ratio": 0.0,
+        "eval_examples": 60.0,
+        "pesq_examples": 20.0
+      }
+    },
+    "phase_residual_current": {
+      "name": "phase_residual_current",
+      "params": 114819,
+      "train_steps": 200,
+      "last_train_loss": 0.09671524167060852,
+      "eval": {
+        "pesq": 1.1700861990451812,
+        "estoi": 0.5123856991208641,
+        "sdr": 4.767419721543168,
+        "phase_rmse": 1.5073704242706298,
+        "alignment_cos": 0.2870862066745758,
+        "uncertainty_mean": 0.5002718105912208,
+        "uncertainty_error_corr": -0.0820968714542687,
+        "high_uncertainty_ratio": 0.48532406936089195,
+        "eval_examples": 60.0,
+        "pesq_examples": 20.0
+      }
+    },
+    "phase_residual_bandaware_innov": {
+      "name": "phase_residual_bandaware_innov",
+      "params": 119671,
+      "train_steps": 200,
+      "last_train_loss": 0.09672166407108307,
+      "eval": {
+        "pesq": 1.170091062784195,
+        "estoi": 0.5123849276278202,
+        "sdr": 4.767348487609222,
+        "phase_rmse": 1.5072651624679565,
+        "alignment_cos": 0.2870861917734146,
+        "uncertainty_mean": 0.4998259529471397,
+        "uncertainty_error_corr": 0.02401450224375973,
+        "high_uncertainty_ratio": 0.4829204564293226,
+        "eval_examples": 60.0,
+        "pesq_examples": 20.0
+      }
+    }
+  },
+  "delta_vs_baseline": {
+    "phase_residual_current": {
+      "pesq": 0.0001940488815306285,
+      "estoi": -1.2662290213794059e-05,
+      "sdr": 0.002948399380935385,
+      "phase_rmse": 3.723700841273825e-05,
+      "alignment_cos": -4.269431034709115e-06,
+      "params_ratio": 0.7588980614288453
+    },
+    "phase_residual_bandaware_innov": {
+      "pesq": 0.00019891262054438918,
+      "estoi": -1.343378325768807e-05,
+      "sdr": 0.0028771654469892383,
+      "phase_rmse": -6.80247942606016e-05,
+      "alignment_cos": -4.284332195902962e-06,
+      "params_ratio": 0.7909674349127874
+    }
+  },
+  "ranking_by_performance": [
+    "phase_residual_current",
+    "phase_residual_bandaware_innov",
+    "baseline_extractor"
+  ]
+}

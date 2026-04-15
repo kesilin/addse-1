@@ -1,0 +1,92 @@
+{
+  "results": {
+    "baseline": {
+      "pesq": 1.5674872994422913,
+      "estoi": 0.5604059339667726,
+      "sdr": 1.5837039559846744,
+      "phase_rmse": 1.788700982928276,
+      "eval_examples": 8.0,
+      "pesq_examples": 4.0,
+      "params": 5774848
+    },
+    "confidence_soft_lite": {
+      "pesq": 1.524531215429306,
+      "estoi": 0.5673525891380506,
+      "sdr": 1.4741924777626991,
+      "phase_rmse": 1.78960520029068,
+      "eval_examples": 8.0,
+      "pesq_examples": 4.0,
+      "params": 1230594
+    },
+    "confidence_hard_lite": {
+      "pesq": 1.5329009294509888,
+      "estoi": 0.5936207940251575,
+      "sdr": 1.8702844972722232,
+      "phase_rmse": 1.7909839749336243,
+      "eval_examples": 8.0,
+      "pesq_examples": 4.0,
+      "params": 1230594
+    },
+    "confidence_agree_lite": {
+      "pesq": 1.6576751470565796,
+      "estoi": 0.5714714181206553,
+      "sdr": 1.797984465956688,
+      "phase_rmse": 1.7904500365257263,
+      "eval_examples": 8.0,
+      "pesq_examples": 4.0,
+      "params": 1335875
+    }
+  },
+  "baseline_variant": "baseline",
+  "delta_vs_baseline": {
+    "confidence_soft_lite": {
+      "pesq": -0.04295608401298523,
+      "estoi": 0.006946655171278016,
+      "sdr": -0.10951147822197527,
+      "phase_rmse": 0.0009042173624038696,
+      "params_ratio": 0.21309547887667346
+    },
+    "confidence_hard_lite": {
+      "pesq": -0.03458636999130249,
+      "estoi": 0.03321486005838492,
+      "sdr": 0.28658054128754884,
+      "phase_rmse": 0.0022829920053482056,
+      "params_ratio": 0.21309547887667346
+    },
+    "confidence_agree_lite": {
+      "pesq": 0.09018784761428833,
+      "estoi": 0.011065484153882643,
+      "sdr": 0.21428050997201353,
+      "phase_rmse": 0.0017490535974502563,
+      "params_ratio": 0.23132643491222626
+    }
+  },
+  "ranking_by_performance": [
+    "confidence_hard_lite",
+    "confidence_agree_lite",
+    "baseline",
+    "confidence_soft_lite"
+  ],
+  "config": {
+    "train_steps": 20,
+    "train_batch_size": 2,
+    "eval_examples": 8,
+    "train_eval_examples": 20,
+    "train_eval_every_steps": 0,
+    "pesq_max_examples": 4,
+    "lr": 0.00012,
+    "lambda_phase": 0.35,
+    "band_loss_weight": 0.45,
+    "fusion_scale_layered": 0.16,
+    "snr_min": 0.0,
+    "snr_max": 10.0,
+    "variants": [
+      "baseline",
+      "confidence_soft_lite",
+      "confidence_hard_lite",
+      "confidence_agree_lite"
+    ],
+    "mode": "quick_compare",
+    "quick_solve_steps": 4
+  }
+}

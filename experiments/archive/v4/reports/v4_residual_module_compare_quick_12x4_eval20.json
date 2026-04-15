@@ -1,0 +1,69 @@
+{
+  "results": {
+    "baseline": {
+      "pesq": 1.5178302526474,
+      "estoi": 0.6018656607140824,
+      "sdr": 1.7546518442686647,
+      "phase_rmse": 1.7831400215625763,
+      "eval_examples": 20.0,
+      "params": 5774848
+    },
+    "confidence_soft_lite": {
+      "pesq": 1.4710451304912566,
+      "estoi": 0.6100805582016559,
+      "sdr": 0.638093632645905,
+      "phase_rmse": 1.781041443347931,
+      "eval_examples": 20.0,
+      "params": 1629889
+    },
+    "confidence_hard_lite": {
+      "pesq": 1.4548666596412658,
+      "estoi": 0.6155139979209109,
+      "sdr": 0.49525033170357347,
+      "phase_rmse": 1.786104255914688,
+      "eval_examples": 20.0,
+      "params": 1629889
+    }
+  },
+  "baseline_variant": "baseline",
+  "delta_vs_baseline": {
+    "confidence_soft_lite": {
+      "pesq": -0.04678512215614328,
+      "estoi": 0.008214897487573425,
+      "sdr": -1.1165582116227597,
+      "phase_rmse": -0.00209857821464543,
+      "params_ratio": 0.2822392901077223
+    },
+    "confidence_hard_lite": {
+      "pesq": -0.06296359300613408,
+      "estoi": 0.013648337206828454,
+      "sdr": -1.2594015125650913,
+      "phase_rmse": 0.002964234352111683,
+      "params_ratio": 0.2822392901077223
+    }
+  },
+  "ranking_by_performance": [
+    "baseline",
+    "confidence_soft_lite",
+    "confidence_hard_lite"
+  ],
+  "config": {
+    "train_steps": 12,
+    "train_batch_size": 4,
+    "eval_examples": 20,
+    "train_eval_examples": 10,
+    "train_eval_every_steps": 0,
+    "lr": 0.00012,
+    "lambda_phase": 0.35,
+    "band_loss_weight": 0.45,
+    "fusion_scale_layered": 0.16,
+    "snr_min": 0.0,
+    "snr_max": 10.0,
+    "variants": [
+      "baseline",
+      "confidence_soft_lite",
+      "confidence_hard_lite"
+    ],
+    "mode": "quick_compare"
+  }
+}

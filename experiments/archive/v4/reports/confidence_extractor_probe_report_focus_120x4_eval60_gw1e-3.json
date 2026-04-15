@@ -1,0 +1,82 @@
+{
+  "config": {
+    "seed": 42,
+    "fs": 16000,
+    "segment_length": 4.0,
+    "speech_dir": "data/chunks/bigspeech/",
+    "noise_dir": "data/chunks/bignoise/",
+    "snr_min": 0.0,
+    "snr_max": 10.0,
+    "train_steps": 120,
+    "train_batch_size": 4,
+    "eval_examples": 60,
+    "pesq_max_examples": 20,
+    "quick_eval_every_steps": 60,
+    "num_workers": 0,
+    "lr": 0.0001,
+    "phase_delta_clip": 1.2,
+    "frame_length": 512,
+    "hop_length": 256,
+    "n_fft": 512,
+    "baseline_hidden": 128,
+    "confidence_hidden": 128,
+    "high_hidden_mult": 1.5,
+    "hard_threshold": 0.55,
+    "topk_ratio": 0.25,
+    "gate_entropy_weight": 0.001,
+    "report_json": "experiments/archive/v4/reports/confidence_extractor_probe_report_focus_120x4_eval60_gw1e-3.json",
+    "weights_dir": "experiments/archive/v4/weights/confidence_extractor_focus_120"
+  },
+  "results": {
+    "baseline_extractor": {
+      "name": "baseline_extractor",
+      "params": 151297,
+      "train_steps": 120,
+      "last_train_loss": 0.6907811760902405,
+      "eval": {
+        "pesq": 1.1700615167617798,
+        "estoi": 0.5123864811774766,
+        "sdr": 4.7610506188939326,
+        "phase_rmse": 1.5073440790176391,
+        "alignment_cos": 0.28705562303463616,
+        "uncertainty_mean": 0.0,
+        "uncertainty_error_corr": 0.0,
+        "high_uncertainty_ratio": 0.0,
+        "eval_examples": 60.0,
+        "pesq_examples": 20.0
+      }
+    },
+    "confidence_soft_lite": {
+      "name": "confidence_soft_lite",
+      "params": 197859,
+      "train_steps": 120,
+      "last_train_loss": 0.6914224028587341,
+      "eval": {
+        "pesq": 1.1700887441635133,
+        "estoi": 0.5123820659682606,
+        "sdr": 4.767859362298623,
+        "phase_rmse": 1.5072975516319276,
+        "alignment_cos": 0.2870858704050382,
+        "uncertainty_mean": 0.5212697555621465,
+        "uncertainty_error_corr": -0.010276889571590194,
+        "high_uncertainty_ratio": 1.0,
+        "eval_examples": 60.0,
+        "pesq_examples": 20.0
+      }
+    }
+  },
+  "delta_vs_baseline": {
+    "confidence_soft_lite": {
+      "pesq": 2.7227401733442846e-05,
+      "estoi": -4.415209216013238e-06,
+      "sdr": 0.006808743404690176,
+      "phase_rmse": -4.6527385711536695e-05,
+      "alignment_cos": 3.024737040202563e-05,
+      "params_ratio": 1.30775230176408
+    }
+  },
+  "ranking_by_performance": [
+    "confidence_soft_lite",
+    "baseline_extractor"
+  ]
+}

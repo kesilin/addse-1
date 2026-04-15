@@ -1,0 +1,61 @@
+{
+  "results": {
+    "baseline": {
+      "pesq": 1.5395051916440328,
+      "estoi": 0.6395099192618807,
+      "sdr": 2.1719959490466865,
+      "phase_rmse": 1.780061849951744,
+      "eval_examples": 200.0,
+      "pesq_examples": 30.0,
+      "trainable_params": 5774848,
+      "total_params": 5774848,
+      "trainable_ratio": 1.0
+    },
+    "renet_groupdelay_momentum": {
+      "pesq": 1.4647388815879823,
+      "estoi": 0.6336356039541695,
+      "sdr": 1.867767977924086,
+      "phase_rmse": 1.7823106092214585,
+      "eval_examples": 200.0,
+      "pesq_examples": 30.0,
+      "trainable_params": 868162,
+      "total_params": 6643010,
+      "trainable_ratio": 0.1306880465331228
+    }
+  },
+  "baseline_variant": "baseline",
+  "delta_vs_baseline": {
+    "renet_groupdelay_momentum": {
+      "pesq": -0.0747663100560505,
+      "estoi": -0.005874315307711209,
+      "sdr": -0.30422797112260036,
+      "phase_rmse": 0.002248759269714462,
+      "trainable_params_ratio": 0.150335039121376,
+      "total_params_ratio": 1.150335039121376
+    }
+  },
+  "ranking_by_performance": [
+    "baseline",
+    "renet_groupdelay_momentum"
+  ],
+  "config": {
+    "train_steps": 1200,
+    "train_batch_size": 1,
+    "eval_examples": 200,
+    "train_eval_examples": 200,
+    "train_eval_every_steps": 200,
+    "pesq_max_examples": 30,
+    "lr": 0.00012,
+    "lambda_phase": 0.35,
+    "band_loss_weight": 0.45,
+    "fusion_scale_layered": 0.16,
+    "snr_min": 0.0,
+    "snr_max": 10.0,
+    "variants": [
+      "baseline",
+      "renet_groupdelay_momentum"
+    ],
+    "mode": "quick_compare",
+    "quick_solve_steps": 8
+  }
+}

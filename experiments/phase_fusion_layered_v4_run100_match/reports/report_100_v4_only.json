@@ -1,0 +1,20 @@
+{
+  "layered_fused_v4_only": {
+    "pesq": 1.6462672698497771,
+    "estoi": 0.644189619493724,
+    "sdr": 0.6978093921963591,
+    "phase_rmse": 1.780603985786438,
+    "eval_examples": 100.0
+  },
+  "config": {
+    "train_steps": 500,
+    "train_batch_size": 4,
+    "eval_examples": 100,
+    "lr": 0.00012,
+    "lambda_phase": 0.35,
+    "band_loss_weight": 0.45,
+    "fusion_scale_layered": 0.16,
+    "snr_min": -5.0,
+    "snr_max": 15.0
+  }
+}
