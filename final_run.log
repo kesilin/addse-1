@@ -1,0 +1,2 @@
+
+[V3] Running: F:\ksl\.venv312\Scripts\python.exe experiments/archive/v3/phase_fusion_layered_v3_only.py --config configs/phase_fusion_layered_v3_vs_v4_long_300data_5x300.yaml --mode train_eval --report-json F:/ksl/addse/experiments/archive/v3/reports/v3_vs_v4_long_300data_5x300_train_eval.json
