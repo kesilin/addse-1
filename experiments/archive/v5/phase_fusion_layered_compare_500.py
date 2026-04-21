@@ -1064,7 +1064,8 @@ def fused_decode_with_phase_model(
         delta = phase_out["delta"][:, 0]
         fw = phase_out.get("fusion_weight")
         if isinstance(fw, torch.Tensor):
-            fusion_weight_latent = F.interpolate(fw, size=y_q_sum.shape[-1], mode="bilinear", align_corners=False)
+            fw_t = fw.mean(dim=2)
+            fusion_weight_latent = F.interpolate(fw_t, size=y_q_sum.shape[-1], mode="linear", align_corners=False)
             fw_min = float(getattr(cfg, "phase_fusion_weight_min", 0.05))
             fw_max = float(getattr(cfg, "phase_fusion_weight_max", 0.35))
             if fw_max < fw_min:
@@ -1114,17 +1115,26 @@ def _run_discrete_branch_v5(
     x_tok, x_q = lm.nac.encode(x_pad, no_sum=True, domain="q")
     _, z_noisy = lm.nac.encode(x_pad, domain="x")
 
-    solve_out = lm.solve(x_tok, x_q, lm.num_steps, return_step_map=need_step_proxy)
+    try:
+        solve_out = lm.solve(x_tok, x_q, lm.num_steps, return_step_map=need_step_proxy)
+    except TypeError:
+        # Compatibility path: older solve() does not expose return_step_map.
+        solve_out = lm.solve(x_tok, x_q, lm.num_steps)
     step_map: torch.Tensor | None = None
-    if need_step_proxy:
+    if need_step_proxy and isinstance(solve_out, tuple):
         if not isinstance(solve_out, tuple):
             raise TypeError("Expected solve to return tuple when return_step_map=True")
         y_tok = solve_out[0]
         step_map = solve_out[1]
     else:
-        if not isinstance(solve_out, torch.Tensor):
+        if isinstance(solve_out, tuple):
+            y_tok = solve_out[0]
+            step_map = solve_out[1] if len(solve_out) > 1 and isinstance(solve_out[1], torch.Tensor) else None
+        elif isinstance(solve_out, torch.Tensor):
+            y_tok = solve_out
+            step_map = None
+        else:
             raise TypeError("Unexpected output from solve.")
-        y_tok = solve_out
 
     y_q_books = lm.nac.quantizer.decode(y_tok, output_no_sum=True, domain="code")
     y_q_sum = y_q_books.sum(dim=2)
@@ -1350,7 +1360,8 @@ def _collect_fusion_diagnostics(
         delta = phase_out["delta"][:, 0]
         fw = phase_out.get("fusion_weight")
         if isinstance(fw, torch.Tensor):
-            fusion_weight_latent = F.interpolate(fw, size=y_q_sum.shape[-1], mode="bilinear", align_corners=False)
+            fw_t = fw.mean(dim=2)
+            fusion_weight_latent = F.interpolate(fw_t, size=y_q_sum.shape[-1], mode="linear", align_corners=False)
             fw_min = float(getattr(cfg, "phase_fusion_weight_min", 0.05))
             fw_max = float(getattr(cfg, "phase_fusion_weight_max", 0.35))
             if fw_max < fw_min:

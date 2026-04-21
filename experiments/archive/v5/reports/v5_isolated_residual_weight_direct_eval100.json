@@ -1,0 +1,68 @@
+{
+  "results": {
+    "baseline": {
+      "pesq": 1.7229103553295135,
+      "estoi": 0.6618832003503311,
+      "sdr": 2.1619457521475853,
+      "phase_rmse": 1.7809342217445374,
+      "eval_examples": 100.0,
+      "pesq_examples": 100.0,
+      "trainable_params": 0,
+      "total_params": 5774848,
+      "phase_model_total_params": 115735,
+      "phase_model_trainable_params": 0,
+      "fusion_plus_phase_total_params": 5890583,
+      "fusion_plus_phase_trainable_params": 0,
+      "trainable_ratio": 0.0,
+      "total_params_vs_baseline_ratio": 1.0,
+      "trainable_params_vs_baseline_ratio": 0.0
+    }
+  },
+  "train_diagnostics": {},
+  "system_checks": {},
+  "baseline_variant": "baseline",
+  "delta_vs_baseline": {},
+  "ranking_by_performance": [
+    "baseline"
+  ],
+  "config": {
+    "train_steps": 1,
+    "train_batch_size": 1,
+    "eval_examples": 100,
+    "train_eval_examples": 1,
+    "train_eval_every_steps": 1,
+    "pesq_max_examples": 100,
+    "lr": 0.00012,
+    "lambda_phase": 0.35,
+    "band_loss_weight": 0.45,
+    "fusion_scale_layered": 0.16,
+    "snr_min": 0.0,
+    "snr_max": 10.0,
+    "phase_model_variant": "phase_residual_v2",
+    "fusion_train_base_adapter": false,
+    "fusion_base_lr_scale": 0.2,
+    "fusion_postprocess_mode": "residual_weight_direct",
+    "fusion_soft_limit_ratio": 0.25,
+    "fusion_mag_power": 1.0,
+    "fusion_min_scale": 0.1,
+    "fusion_ortho_mix": 1.0,
+    "fusion_perturb_min": 0.9,
+    "fusion_perturb_max": 1.1,
+    "fusion_mag_proxy_weight": 0.7,
+    "fusion_step_proxy_weight": 0.3,
+    "phase_fusion_weight_init": 0.16,
+    "phase_fusion_weight_min": 0.05,
+    "phase_fusion_weight_max": 0.35,
+    "phase_train_fusion_weight_head": false,
+    "ra_gate_min": 0.95,
+    "ra_gate_max": 1.05,
+    "ra_uncertainty_threshold": 0.55,
+    "baseline_ref_total_params": 5774848,
+    "baseline_ref_trainable_params": 5774848,
+    "variants": [
+      "baseline"
+    ],
+    "mode": "eval_only",
+    "quick_solve_steps": 128
+  }
+}
