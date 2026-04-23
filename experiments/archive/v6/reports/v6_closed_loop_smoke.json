@@ -1,0 +1,348 @@
+{
+  "config": {
+    "seed": 42,
+    "fs": 16000,
+    "segment_seconds": 4.0,
+    "audio_path": "TIMIT_all_wavs/SA1.WAV",
+    "frame_length": 512,
+    "hop_length": 256,
+    "n_fft": 512,
+    "vocab_size": 1024,
+    "num_layers": 4,
+    "snr_db": 5.0,
+    "fusion_train_steps": 5,
+    "fusion_lr": 0.0002,
+    "phase_delta_clip": 1.2,
+    "module3_hidden": 96,
+    "latent_hidden": 128,
+    "harmonic_topk": 8,
+    "harmonic_bandwidth": 2,
+    "report_json": "addse/experiments/archive/v6/reports/v6_closed_loop_smoke.json"
+  },
+  "audio_path": "F:\\ksl\\TIMIT_all_wavs\\SA1.WAV",
+  "sample_rate": 16000,
+  "clean_shape": [
+    1,
+    64000
+  ],
+  "noisy_shape": [
+    1,
+    64000
+  ],
+  "clean_spec_shape": [
+    1,
+    257,
+    251
+  ],
+  "noisy_spec_shape": [
+    1,
+    257,
+    251
+  ],
+  "phase_input_shape": [
+    1,
+    5,
+    257,
+    251
+  ],
+  "module2_shared_shape": [
+    1,
+    64,
+    257,
+    251
+  ],
+  "module2_uncertainty_shape": [
+    1,
+    1,
+    257,
+    251
+  ],
+  "module2_coarse_residual_shape": [
+    1,
+    2,
+    257,
+    251
+  ],
+  "module2_fine_residual_shape": [
+    1,
+    2,
+    257,
+    251
+  ],
+  "module3_stem_shape": [
+    1,
+    96,
+    257,
+    251
+  ],
+  "module3_coarse_feat_shape": [
+    1,
+    96,
+    257,
+    251
+  ],
+  "module3_fine_feat_shape": [
+    1,
+    96,
+    257,
+    251
+  ],
+  "module3_base_lat_shape": [
+    1,
+    128,
+    251
+  ],
+  "module3_fused_lat_shape": [
+    1,
+    128,
+    251
+  ],
+  "phase_delta_vec_shape": [
+    1,
+    2,
+    257,
+    251
+  ],
+  "corrected_spec_shape": [
+    1,
+    257,
+    251
+  ],
+  "fused_wave_shape": [
+    1,
+    64000
+  ],
+  "module1_coarse_conf_stats": {
+    "shape": [
+      1,
+      251
+    ],
+    "mean": 0.22419510781764984,
+    "std": 0.18513713777065277,
+    "min": 0.0,
+    "max": 1.0,
+    "nan_ratio": 0.0,
+    "inf_ratio": 0.0
+  },
+  "module1_fine_conf_stats": {
+    "shape": [
+      1,
+      251
+    ],
+    "mean": 0.19445402920246124,
+    "std": 0.1655159890651703,
+    "min": 0.0,
+    "max": 1.0,
+    "nan_ratio": 0.0,
+    "inf_ratio": 0.0
+  },
+  "module2_uncertainty_stats": {
+    "shape": [
+      1,
+      1,
+      257,
+      251
+    ],
+    "mean": 0.5224085450172424,
+    "std": 0.10869572311639786,
+    "min": 0.17000506818294525,
+    "max": 0.8297920227050781,
+    "nan_ratio": 0.0,
+    "inf_ratio": 0.0
+  },
+  "module3_scale_s_stats": {
+    "shape": [
+      1,
+      1,
+      251
+    ],
+    "mean": 0.11654846370220184,
+    "std": 0.02539609931409359,
+    "min": 0.0,
+    "max": 0.14079999923706055,
+    "nan_ratio": 0.0,
+    "inf_ratio": 0.0
+  },
+  "module3_scale_a_stats": {
+    "shape": [
+      1,
+      1,
+      251
+    ],
+    "mean": 0.10647709667682648,
+    "std": 0.021719593554735184,
+    "min": 0.0,
+    "max": 0.1813332736492157,
+    "nan_ratio": 0.0,
+    "inf_ratio": 0.0
+  },
+  "module3_gamma_s_stats": {
+    "shape": [
+      1,
+      128,
+      251
+    ],
+    "mean": -0.0021053743548691273,
+    "std": 0.009736338630318642,
+    "min": -0.021249430254101753,
+    "max": 0.021067872643470764,
+    "nan_ratio": 0.0,
+    "inf_ratio": 0.0
+  },
+  "module3_gamma_a_stats": {
+    "shape": [
+      1,
+      128,
+      251
+    ],
+    "mean": -0.001628398196771741,
+    "std": 0.006957776844501495,
+    "min": -0.01640959456562996,
+    "max": 0.016684487462043762,
+    "nan_ratio": 0.0,
+    "inf_ratio": 0.0
+  },
+  "phase_delta_vec_stats": {
+    "shape": [
+      1,
+      2,
+      257,
+      251
+    ],
+    "mean": 0.01919112168252468,
+    "std": 0.016163313761353493,
+    "min": -0.0542573519051075,
+    "max": 0.13123440742492676,
+    "nan_ratio": 0.0,
+    "inf_ratio": 0.0
+  },
+  "fused_wave_stats": {
+    "shape": [
+      1,
+      64000
+    ],
+    "mean": 5.857149062649114e-06,
+    "std": 0.027555938810110092,
+    "min": -0.22668959200382233,
+    "max": 0.26241937279701233,
+    "nan_ratio": 0.0,
+    "inf_ratio": 0.0
+  },
+  "loss_history": [
+    {
+      "total": 0.7037139534950256,
+      "wave_l1": 0.010736730881035328,
+      "phase_l1": 1.3696471452713013,
+      "phase_if": 1.4509891271591187,
+      "harmonic_loss": 0.13851262629032135,
+      "routing_loss": 0.383811354637146,
+      "confidence_loss": 0.11800341308116913,
+      "spec_l1": 0.1459176391363144,
+      "latent_anchor": 0.5164172649383545,
+      "branch_balance": 0.007786644622683525,
+      "scale_reg": 0.22302556037902832,
+      "step": 1.0
+    },
+    {
+      "total": 0.7000673413276672,
+      "wave_l1": 0.010754506103694439,
+      "phase_l1": 1.3670425415039062,
+      "phase_if": 1.447629451751709,
+      "harmonic_loss": 0.13813066482543945,
+      "routing_loss": 0.383811354637146,
+      "confidence_loss": 0.11800341308116913,
+      "spec_l1": 0.1459176391363144,
+      "latent_anchor": 0.41930723190307617,
+      "branch_balance": 0.032901085913181305,
+      "scale_reg": 0.22302556037902832,
+      "step": 2.0
+    },
+    {
+      "total": 0.6981828212738037,
+      "wave_l1": 0.010760425589978695,
+      "phase_l1": 1.3661508560180664,
+      "phase_if": 1.446798324584961,
+      "harmonic_loss": 0.13806846737861633,
+      "routing_loss": 0.383811354637146,
+      "confidence_loss": 0.11800341308116913,
+      "spec_l1": 0.1459176391363144,
+      "latent_anchor": 0.37821197509765625,
+      "branch_balance": 0.018943756818771362,
+      "scale_reg": 0.22302556037902832,
+      "step": 3.0
+    },
+    {
+      "total": 0.6970316171646118,
+      "wave_l1": 0.010758975520730019,
+      "phase_l1": 1.3659799098968506,
+      "phase_if": 1.4465296268463135,
+      "harmonic_loss": 0.1381131410598755,
+      "routing_loss": 0.383811354637146,
+      "confidence_loss": 0.11800341308116913,
+      "spec_l1": 0.1459176391363144,
+      "latent_anchor": 0.3512958884239197,
+      "branch_balance": 0.005598659161478281,
+      "scale_reg": 0.22302556037902832,
+      "step": 4.0
+    },
+    {
+      "total": 0.696260929107666,
+      "wave_l1": 0.010756589472293854,
+      "phase_l1": 1.3658359050750732,
+      "phase_if": 1.4462220668792725,
+      "harmonic_loss": 0.1381387859582901,
+      "routing_loss": 0.383811354637146,
+      "confidence_loss": 0.11800341308116913,
+      "spec_l1": 0.1459176391363144,
+      "latent_anchor": 0.3287203907966614,
+      "branch_balance": 0.004824700765311718,
+      "scale_reg": 0.22302556037902832,
+      "step": 5.0
+    }
+  ],
+  "initial_losses": {
+    "total": 0.7037139534950256,
+    "wave_l1": 0.010736730881035328,
+    "phase_l1": 1.3696471452713013,
+    "phase_if": 1.4509891271591187,
+    "harmonic_loss": 0.13851262629032135,
+    "routing_loss": 0.383811354637146,
+    "confidence_loss": 0.11800341308116913,
+    "spec_l1": 0.1459176391363144,
+    "latent_anchor": 0.5164172649383545,
+    "branch_balance": 0.007786644622683525,
+    "scale_reg": 0.22302556037902832
+  },
+  "final_losses": {
+    "total": 0.696260929107666,
+    "wave_l1": 0.010756589472293854,
+    "phase_l1": 1.3658359050750732,
+    "phase_if": 1.4462220668792725,
+    "harmonic_loss": 0.1381387859582901,
+    "routing_loss": 0.383811354637146,
+    "confidence_loss": 0.11800341308116913,
+    "spec_l1": 0.1459176391363144,
+    "latent_anchor": 0.3287203907966614,
+    "branch_balance": 0.004824700765311718,
+    "scale_reg": 0.22302556037902832,
+    "step": 5.0
+  },
+  "baseline_metrics": {
+    "noisy_wave_l1": 0.010759109631180763,
+    "fused_wave_l1": 0.010756589472293854
+  },
+  "checks": {
+    "phase_input_matches_expected": true,
+    "module2_uncertainty_in_unit_interval": true,
+    "fused_wave_finite": true,
+    "corrected_spec_finite": true,
+    "loss_finite": true,
+    "fused_wave_length": 64000,
+    "clean_wave_length": 64000
+  },
+  "summary": {
+    "status": "closed_loop_smoke_passed",
+    "module2_interface": "[5ch phase_input -> shared -> uncertainty -> coarse/fine residuals -> phase fusion head -> ISTFT]",
+    "fusion_observation": "Module2 outputs can drive a trainable phase fusion head, and the closed-loop loss remains finite on a real audio sample."
+  }
+}

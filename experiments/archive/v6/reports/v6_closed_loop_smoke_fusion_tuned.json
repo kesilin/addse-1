@@ -1,0 +1,418 @@
+{
+  "config": {
+    "seed": 42,
+    "fs": 16000,
+    "segment_seconds": 4.0,
+    "audio_path": "TIMIT_all_wavs/SA1.WAV",
+    "frame_length": 512,
+    "hop_length": 256,
+    "n_fft": 512,
+    "vocab_size": 1024,
+    "num_layers": 4,
+    "snr_db": 5.0,
+    "fusion_train_steps": 10,
+    "fusion_lr": 5e-05,
+    "phase_delta_clip": 1.2,
+    "module3_hidden": 128,
+    "latent_hidden": 192,
+    "harmonic_topk": 8,
+    "harmonic_bandwidth": 2,
+    "report_json": "addse/experiments/archive/v6/reports/v6_closed_loop_smoke_fusion_tuned.json"
+  },
+  "audio_path": "F:\\ksl\\TIMIT_all_wavs\\SA1.WAV",
+  "sample_rate": 16000,
+  "clean_shape": [
+    1,
+    64000
+  ],
+  "noisy_shape": [
+    1,
+    64000
+  ],
+  "clean_spec_shape": [
+    1,
+    257,
+    251
+  ],
+  "noisy_spec_shape": [
+    1,
+    257,
+    251
+  ],
+  "phase_input_shape": [
+    1,
+    5,
+    257,
+    251
+  ],
+  "module2_shared_shape": [
+    1,
+    64,
+    257,
+    251
+  ],
+  "module2_uncertainty_shape": [
+    1,
+    1,
+    257,
+    251
+  ],
+  "module2_coarse_residual_shape": [
+    1,
+    2,
+    257,
+    251
+  ],
+  "module2_fine_residual_shape": [
+    1,
+    2,
+    257,
+    251
+  ],
+  "module3_stem_shape": [
+    1,
+    128,
+    257,
+    251
+  ],
+  "module3_coarse_feat_shape": [
+    1,
+    128,
+    257,
+    251
+  ],
+  "module3_fine_feat_shape": [
+    1,
+    128,
+    257,
+    251
+  ],
+  "module3_base_lat_shape": [
+    1,
+    192,
+    251
+  ],
+  "module3_fused_lat_shape": [
+    1,
+    192,
+    251
+  ],
+  "phase_delta_vec_shape": [
+    1,
+    2,
+    257,
+    251
+  ],
+  "corrected_spec_shape": [
+    1,
+    257,
+    251
+  ],
+  "fused_wave_shape": [
+    1,
+    64000
+  ],
+  "module1_coarse_conf_stats": {
+    "shape": [
+      1,
+      251
+    ],
+    "mean": 0.22419510781764984,
+    "std": 0.18513713777065277,
+    "min": 0.0,
+    "max": 1.0,
+    "nan_ratio": 0.0,
+    "inf_ratio": 0.0
+  },
+  "module1_fine_conf_stats": {
+    "shape": [
+      1,
+      251
+    ],
+    "mean": 0.19445402920246124,
+    "std": 0.1655159890651703,
+    "min": 0.0,
+    "max": 1.0,
+    "nan_ratio": 0.0,
+    "inf_ratio": 0.0
+  },
+  "module2_uncertainty_stats": {
+    "shape": [
+      1,
+      1,
+      257,
+      251
+    ],
+    "mean": 0.5224085450172424,
+    "std": 0.10869572311639786,
+    "min": 0.17000506818294525,
+    "max": 0.8297920227050781,
+    "nan_ratio": 0.0,
+    "inf_ratio": 0.0
+  },
+  "module3_scale_s_stats": {
+    "shape": [
+      1,
+      1,
+      251
+    ],
+    "mean": 0.11654846370220184,
+    "std": 0.02539609931409359,
+    "min": 0.0,
+    "max": 0.14079999923706055,
+    "nan_ratio": 0.0,
+    "inf_ratio": 0.0
+  },
+  "module3_scale_a_stats": {
+    "shape": [
+      1,
+      1,
+      251
+    ],
+    "mean": 0.10647709667682648,
+    "std": 0.021719593554735184,
+    "min": 0.0,
+    "max": 0.1813332736492157,
+    "nan_ratio": 0.0,
+    "inf_ratio": 0.0
+  },
+  "module3_gamma_s_stats": {
+    "shape": [
+      1,
+      192,
+      251
+    ],
+    "mean": 0.001762804458849132,
+    "std": 0.01009986363351345,
+    "min": -0.020339269191026688,
+    "max": 0.020795615389943123,
+    "nan_ratio": 0.0,
+    "inf_ratio": 0.0
+  },
+  "module3_gamma_a_stats": {
+    "shape": [
+      1,
+      192,
+      251
+    ],
+    "mean": -0.004013837315142155,
+    "std": 0.006835081148892641,
+    "min": -0.015196354128420353,
+    "max": 0.015054461546242237,
+    "nan_ratio": 0.0,
+    "inf_ratio": 0.0
+  },
+  "phase_delta_vec_stats": {
+    "shape": [
+      1,
+      2,
+      257,
+      251
+    ],
+    "mean": -0.002369742142036557,
+    "std": 0.02868657186627388,
+    "min": -0.1151399314403534,
+    "max": 0.16044756770133972,
+    "nan_ratio": 0.0,
+    "inf_ratio": 0.0
+  },
+  "fused_wave_stats": {
+    "shape": [
+      1,
+      64000
+    ],
+    "mean": 1.3370408851187676e-05,
+    "std": 0.027554189786314964,
+    "min": -0.22696751356124878,
+    "max": 0.26021453738212585,
+    "nan_ratio": 0.0,
+    "inf_ratio": 0.0
+  },
+  "loss_history": [
+    {
+      "total": 0.7096636295318604,
+      "wave_l1": 0.01072731614112854,
+      "phase_l1": 1.3709328174591064,
+      "phase_if": 1.450148105621338,
+      "harmonic_loss": 0.1388428509235382,
+      "routing_loss": 0.383811354637146,
+      "confidence_loss": 0.11800341308116913,
+      "spec_l1": 0.1459176391363144,
+      "latent_anchor": 0.693487286567688,
+      "branch_balance": 0.02292347326874733,
+      "scale_reg": 0.22302556037902832,
+      "step": 1.0
+    },
+    {
+      "total": 0.7066386342048645,
+      "wave_l1": 0.010741373524069786,
+      "phase_l1": 1.3690176010131836,
+      "phase_if": 1.4486374855041504,
+      "harmonic_loss": 0.13855324685573578,
+      "routing_loss": 0.383811354637146,
+      "confidence_loss": 0.11800341308116913,
+      "spec_l1": 0.1459176391363144,
+      "latent_anchor": 0.6281275749206543,
+      "branch_balance": 0.00940925907343626,
+      "scale_reg": 0.22302556037902832,
+      "step": 2.0
+    },
+    {
+      "total": 0.7043031454086304,
+      "wave_l1": 0.010755456984043121,
+      "phase_l1": 1.3671563863754272,
+      "phase_if": 1.4470982551574707,
+      "harmonic_loss": 0.13832947611808777,
+      "routing_loss": 0.383811354637146,
+      "confidence_loss": 0.11800341308116913,
+      "spec_l1": 0.1459176391363144,
+      "latent_anchor": 0.5790937542915344,
+      "branch_balance": 0.004655133001506329,
+      "scale_reg": 0.22302556037902832,
+      "step": 3.0
+    },
+    {
+      "total": 0.7029169797897339,
+      "wave_l1": 0.010759973898530006,
+      "phase_l1": 1.366363525390625,
+      "phase_if": 1.4465227127075195,
+      "harmonic_loss": 0.13827060163021088,
+      "routing_loss": 0.383811354637146,
+      "confidence_loss": 0.11800341308116913,
+      "spec_l1": 0.1459176391363144,
+      "latent_anchor": 0.5423128604888916,
+      "branch_balance": 0.006161784753203392,
+      "scale_reg": 0.22302556037902832,
+      "step": 4.0
+    },
+    {
+      "total": 0.7020671963691711,
+      "wave_l1": 0.010756795294582844,
+      "phase_l1": 1.3664435148239136,
+      "phase_if": 1.4465386867523193,
+      "harmonic_loss": 0.13830788433551788,
+      "routing_loss": 0.383811354637146,
+      "confidence_loss": 0.11800341308116913,
+      "spec_l1": 0.1459176391363144,
+      "latent_anchor": 0.5142707824707031,
+      "branch_balance": 0.0042660776525735855,
+      "scale_reg": 0.22302556037902832,
+      "step": 5.0
+    },
+    {
+      "total": 0.7014082074165344,
+      "wave_l1": 0.010753500275313854,
+      "phase_l1": 1.3665106296539307,
+      "phase_if": 1.4466036558151245,
+      "harmonic_loss": 0.13833509385585785,
+      "routing_loss": 0.383811354637146,
+      "confidence_loss": 0.11800341308116913,
+      "spec_l1": 0.1459176391363144,
+      "latent_anchor": 0.49090319871902466,
+      "branch_balance": 0.004891582764685154,
+      "scale_reg": 0.22302556037902832,
+      "step": 6.0
+    },
+    {
+      "total": 0.7007340788841248,
+      "wave_l1": 0.010752723552286625,
+      "phase_l1": 1.3663725852966309,
+      "phase_if": 1.4465364217758179,
+      "harmonic_loss": 0.13831928372383118,
+      "routing_loss": 0.383811354637146,
+      "confidence_loss": 0.11800341308116913,
+      "spec_l1": 0.1459176391363144,
+      "latent_anchor": 0.4703097641468048,
+      "branch_balance": 0.0047304220497608185,
+      "scale_reg": 0.22302556037902832,
+      "step": 7.0
+    },
+    {
+      "total": 0.7000844478607178,
+      "wave_l1": 0.010753899812698364,
+      "phase_l1": 1.3660989999771118,
+      "phase_if": 1.44633948802948,
+      "harmonic_loss": 0.1382748931646347,
+      "routing_loss": 0.383811354637146,
+      "confidence_loss": 0.11800341308116913,
+      "spec_l1": 0.1459176391363144,
+      "latent_anchor": 0.45218557119369507,
+      "branch_balance": 0.005063511896878481,
+      "scale_reg": 0.22302556037902832,
+      "step": 8.0
+    },
+    {
+      "total": 0.6994681358337402,
+      "wave_l1": 0.010756156407296658,
+      "phase_l1": 1.3658137321472168,
+      "phase_if": 1.4461209774017334,
+      "harmonic_loss": 0.13822337985038757,
+      "routing_loss": 0.383811354637146,
+      "confidence_loss": 0.11800341308116913,
+      "spec_l1": 0.1459176391363144,
+      "latent_anchor": 0.43611958622932434,
+      "branch_balance": 0.004286401439458132,
+      "scale_reg": 0.22302556037902832,
+      "step": 9.0
+    },
+    {
+      "total": 0.6989710330963135,
+      "wave_l1": 0.010757789947092533,
+      "phase_l1": 1.3656630516052246,
+      "phase_if": 1.4460246562957764,
+      "harmonic_loss": 0.13817645609378815,
+      "routing_loss": 0.383811354637146,
+      "confidence_loss": 0.11800341308116913,
+      "spec_l1": 0.1459176391363144,
+      "latent_anchor": 0.42161330580711365,
+      "branch_balance": 0.004370257258415222,
+      "scale_reg": 0.22302556037902832,
+      "step": 10.0
+    }
+  ],
+  "initial_losses": {
+    "total": 0.7096636295318604,
+    "wave_l1": 0.01072731614112854,
+    "phase_l1": 1.3709328174591064,
+    "phase_if": 1.450148105621338,
+    "harmonic_loss": 0.1388428509235382,
+    "routing_loss": 0.383811354637146,
+    "confidence_loss": 0.11800341308116913,
+    "spec_l1": 0.1459176391363144,
+    "latent_anchor": 0.693487286567688,
+    "branch_balance": 0.02292347326874733,
+    "scale_reg": 0.22302556037902832
+  },
+  "final_losses": {
+    "total": 0.6989710330963135,
+    "wave_l1": 0.010757789947092533,
+    "phase_l1": 1.3656630516052246,
+    "phase_if": 1.4460246562957764,
+    "harmonic_loss": 0.13817645609378815,
+    "routing_loss": 0.383811354637146,
+    "confidence_loss": 0.11800341308116913,
+    "spec_l1": 0.1459176391363144,
+    "latent_anchor": 0.42161330580711365,
+    "branch_balance": 0.004370257258415222,
+    "scale_reg": 0.22302556037902832,
+    "step": 10.0
+  },
+  "baseline_metrics": {
+    "noisy_wave_l1": 0.010759109631180763,
+    "fused_wave_l1": 0.010757789947092533
+  },
+  "checks": {
+    "phase_input_matches_expected": true,
+    "module2_uncertainty_in_unit_interval": true,
+    "fused_wave_finite": true,
+    "corrected_spec_finite": true,
+    "loss_finite": true,
+    "fused_wave_length": 64000,
+    "clean_wave_length": 64000
+  },
+  "summary": {
+    "status": "closed_loop_smoke_passed",
+    "module2_interface": "[5ch phase_input -> shared -> uncertainty -> coarse/fine residuals -> phase fusion head -> ISTFT]",
+    "fusion_observation": "Module2 outputs can drive a trainable phase fusion head, and the closed-loop loss remains finite on a real audio sample."
+  }
+}

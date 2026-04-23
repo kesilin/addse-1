@@ -1,0 +1,7 @@
+{
+  "fusion_train_steps": 10,
+  "fusion_lr": 5e-05,
+  "module3_hidden": 128,
+  "latent_hidden": 192,
+  "report_json": "addse/experiments/archive/v6/reports/v6_closed_loop_smoke_fusion_tuned_r2.json"
+}

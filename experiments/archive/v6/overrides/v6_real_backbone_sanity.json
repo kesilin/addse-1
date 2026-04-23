@@ -1,0 +1,9 @@
+{
+  "train_samples": 2,
+  "max_epochs": 1,
+  "eval_examples": 1,
+  "report_every_steps": 1,
+  "solve_steps": 16,
+  "save_weights": false,
+  "report_json": "addse/experiments/archive/v6/reports/v6_real_backbone_sanity.json"
+}

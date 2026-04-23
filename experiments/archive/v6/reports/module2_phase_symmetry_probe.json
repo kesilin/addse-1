@@ -1,0 +1,192 @@
+{
+  "config": {
+    "seed": 42,
+    "fs": 16000,
+    "segment_seconds": 4.0,
+    "audio_path": "TIMIT_all_wavs/SA1.WAV",
+    "frame_length": 512,
+    "hop_length": 256,
+    "n_fft": 512,
+    "vocab_size": 1024,
+    "num_layers": 4,
+    "report_json": "addse/experiments/archive/v6/reports/module2_phase_symmetry_probe.json"
+  },
+  "audio_path": "F:\\ksl\\TIMIT_all_wavs\\SA1.WAV",
+  "sample_rate": 16000,
+  "audio_shape": [
+    1,
+    64000
+  ],
+  "stft_shape": [
+    1,
+    257,
+    251
+  ],
+  "logits_shape": [
+    1,
+    251,
+    4,
+    1024
+  ],
+  "phase_input_shape": [
+    1,
+    5,
+    257,
+    251
+  ],
+  "shared_shape": [
+    1,
+    64,
+    257,
+    251
+  ],
+  "uncertainty_shape": [
+    1,
+    1,
+    257,
+    251
+  ],
+  "coarse_feat_shape": [
+    1,
+    64,
+    257,
+    251
+  ],
+  "fine_feat_shape": [
+    1,
+    64,
+    257,
+    251
+  ],
+  "coarse_residual_shape": [
+    1,
+    2,
+    257,
+    251
+  ],
+  "fine_residual_shape": [
+    1,
+    2,
+    257,
+    251
+  ],
+  "fused_residual_shape": [
+    1,
+    2,
+    257,
+    251
+  ],
+  "phase_input_stats": {
+    "shape": [
+      1,
+      5,
+      257,
+      251
+    ],
+    "mean": 0.08544796705245972,
+    "std": 0.4749879539012909,
+    "min": -1.0,
+    "max": 1.0,
+    "nan_ratio": 0.0,
+    "inf_ratio": 0.0
+  },
+  "uncertainty_stats": {
+    "shape": [
+      1,
+      1,
+      257,
+      251
+    ],
+    "mean": 0.5292006731033325,
+    "std": 0.10785754770040512,
+    "min": 0.173023983836174,
+    "max": 0.8217578530311584,
+    "nan_ratio": 0.0,
+    "inf_ratio": 0.0
+  },
+  "coarse_feat_stats": {
+    "shape": [
+      1,
+      64,
+      257,
+      251
+    ],
+    "mean": 0.8978019952774048,
+    "std": 1.1742264032363892,
+    "min": -2.412557601928711,
+    "max": 8.844347953796387,
+    "nan_ratio": 0.0,
+    "inf_ratio": 0.0
+  },
+  "fine_feat_stats": {
+    "shape": [
+      1,
+      64,
+      257,
+      251
+    ],
+    "mean": 0.2997988760471344,
+    "std": 0.6633545160293579,
+    "min": -1.224292516708374,
+    "max": 5.132493019104004,
+    "nan_ratio": 0.0,
+    "inf_ratio": 0.0
+  },
+  "coarse_residual_stats": {
+    "shape": [
+      1,
+      2,
+      257,
+      251
+    ],
+    "mean": 0.04173160716891289,
+    "std": 0.0602877214550972,
+    "min": -0.2107556313276291,
+    "max": 0.2358311116695404,
+    "nan_ratio": 0.0,
+    "inf_ratio": 0.0
+  },
+  "fine_residual_stats": {
+    "shape": [
+      1,
+      2,
+      257,
+      251
+    ],
+    "mean": 0.016047753393650055,
+    "std": 0.09161809086799622,
+    "min": -0.2174130231142044,
+    "max": 0.2168685644865036,
+    "nan_ratio": 0.0,
+    "inf_ratio": 0.0
+  },
+  "fused_residual_stats": {
+    "shape": [
+      1,
+      2,
+      257,
+      251
+    ],
+    "mean": 0.05777936428785324,
+    "std": 0.09915859252214432,
+    "min": -0.2793668210506439,
+    "max": 0.3543739914894104,
+    "nan_ratio": 0.0,
+    "inf_ratio": 0.0
+  },
+  "checks": {
+    "phase_input_channels": 5,
+    "phase_input_matches_expected": true,
+    "uncertainty_in_unit_interval": true,
+    "finite_fused_residual": true,
+    "coarse_residual_channels": 2,
+    "fine_residual_channels": 2,
+    "frequency_bins": 257,
+    "time_frames": 251
+  },
+  "summary": {
+    "module2_status": "feasible",
+    "module2_interface": "[5ch phase_input -> shared(64) -> uncertainty(1) -> coarse/fine residuals(2+2)]",
+    "core_observation": "The 5-channel module2 input can be routed into coarse/fine branches without changing the STFT frame or frequency dimensions."
+  }
+}

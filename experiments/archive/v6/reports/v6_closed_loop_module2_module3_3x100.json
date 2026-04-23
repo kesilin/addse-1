@@ -1,0 +1,85 @@
+{
+  "runs": [
+    {
+      "config": {
+        "seed": 100,
+        "fs": 16000,
+        "segment_seconds": 4.0,
+        "audio_path": "TIMIT_all_wavs\\SA1.WAV",
+        "frame_length": 512,
+        "hop_length": 256,
+        "n_fft": 512,
+        "vocab_size": 1024,
+        "num_layers": 4,
+        "snr_db": 5.0,
+        "fusion_train_steps": 100,
+        "fusion_lr": 5e-05,
+        "phase_delta_clip": 1.2,
+        "grad_clip": 1.0,
+        "module3_hidden": 96,
+        "latent_hidden": 128,
+        "harmonic_topk": 8,
+        "harmonic_bandwidth": 2,
+        "report_json": "addse\\experiments\\archive\\v6\\reports\\v6_closed_loop_SA1_s100_s100.json",
+        "train_module2_heads": true,
+        "module2_lr": 1e-05
+      },
+      "audio_file": "F:\\ksl\\TIMIT_all_wavs\\SA1.WAV",
+      "error": "RuntimeError('Trying to backward through the graph a second time (or directly access saved tensors after they have already been freed). Saved intermediate values of the graph are freed when you call .backward() or autograd.grad(). Specify retain_graph=True if you need to backward through the graph a second time or if you need to access saved tensors after calling backward.')"
+    },
+    {
+      "config": {
+        "seed": 101,
+        "fs": 16000,
+        "segment_seconds": 4.0,
+        "audio_path": "TIMIT_all_wavs\\SA1_1.WAV",
+        "frame_length": 512,
+        "hop_length": 256,
+        "n_fft": 512,
+        "vocab_size": 1024,
+        "num_layers": 4,
+        "snr_db": 5.0,
+        "fusion_train_steps": 100,
+        "fusion_lr": 5e-05,
+        "phase_delta_clip": 1.2,
+        "grad_clip": 1.0,
+        "module3_hidden": 96,
+        "latent_hidden": 128,
+        "harmonic_topk": 8,
+        "harmonic_bandwidth": 2,
+        "report_json": "addse\\experiments\\archive\\v6\\reports\\v6_closed_loop_SA1_1_s101_s100.json",
+        "train_module2_heads": true,
+        "module2_lr": 1e-05
+      },
+      "audio_file": "F:\\ksl\\TIMIT_all_wavs\\SA1_1.WAV",
+      "error": "RuntimeError('Trying to backward through the graph a second time (or directly access saved tensors after they have already been freed). Saved intermediate values of the graph are freed when you call .backward() or autograd.grad(). Specify retain_graph=True if you need to backward through the graph a second time or if you need to access saved tensors after calling backward.')"
+    },
+    {
+      "config": {
+        "seed": 102,
+        "fs": 16000,
+        "segment_seconds": 4.0,
+        "audio_path": "TIMIT_all_wavs\\SA1_10.WAV",
+        "frame_length": 512,
+        "hop_length": 256,
+        "n_fft": 512,
+        "vocab_size": 1024,
+        "num_layers": 4,
+        "snr_db": 5.0,
+        "fusion_train_steps": 100,
+        "fusion_lr": 5e-05,
+        "phase_delta_clip": 1.2,
+        "grad_clip": 1.0,
+        "module3_hidden": 96,
+        "latent_hidden": 128,
+        "harmonic_topk": 8,
+        "harmonic_bandwidth": 2,
+        "report_json": "addse\\experiments\\archive\\v6\\reports\\v6_closed_loop_SA1_10_s102_s100.json",
+        "train_module2_heads": true,
+        "module2_lr": 1e-05
+      },
+      "audio_file": "F:\\ksl\\TIMIT_all_wavs\\SA1_10.WAV",
+      "error": "RuntimeError('Trying to backward through the graph a second time (or directly access saved tensors after they have already been freed). Saved intermediate values of the graph are freed when you call .backward() or autograd.grad(). Specify retain_graph=True if you need to backward through the graph a second time or if you need to access saved tensors after calling backward.')"
+    }
+  ]
+}
